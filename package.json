@@ -49,6 +49,8 @@
   },
   "homepage": "https://gitlab.com/AndrewDongminYoo/segway-ble-manager#readme",
   "publishConfig": {
+    "access": "restricted",
+    "tag": "latest",
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
@@ -160,6 +162,9 @@
   "codegenConfig": {
     "name": "RNSegwayBleManagerSpec",
     "type": "modules",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackage": "io.gbike.segway.blemanager"
+    }
   }
 }
