@@ -84,8 +84,7 @@ yarn test
 
 To edit the Objective-C or Swift files, open `example/ios/SegwayBleManagerExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > @gbike/segway-ble-manager`.
 
-To edit the Java or Kotlin files, open `example/android` in Android studio and find the source files at `gbike-segway-ble-manager` under `Android`.
-
+To edit the Java or Kotlin files, open `example/android` in Android studio and find the source files at `segway-ble-manager` under `Android`.
 
 ### Commit message convention
 
