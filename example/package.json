@@ -1,22 +1,31 @@
 {
-  "name": "SegwayBleManagerExample",
+  "name": "gbike-segway-ble-manager",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "pods": "pod-install --quiet"
+    "run-android": "react-native run-android --mode=Debug",
+    "build-android": "react-native build-android --mode=Release",
+    "ios": "react-native run-ios --scheme SegwayBleManagerExample",
+    "run-ios": "yarn ios --mode Debug",
+    "build-ios": "yarn ios --mode Release",
+    "clear": "react-native clean --include android,metro,watchman,yarn",
+    "clear:all": "react-native clean --include android,cocoapods,metro,npm,watchman,yarn",
+    "doctor": "react-native doctor --fix",
+    "gradle": "(cd android && ./gradlew generateCodegenArtifactsFromSchema)",
+    "pods": "(cd ios && pod install --no-repo-update)",
+    "postpods": "node node_modules/react-native/scripts/generate-codegen-artifacts.js -p . -o ios",
+    "start": "react-native start --reset-cache",
+    "watch": "tsc --noEmit --watch"
   },
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.71.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@babel/preset-env": "^7.20.0",
-    "@babel/runtime": "^7.20.0",
-    "metro-react-native-babel-preset": "0.73.8",
-    "babel-plugin-module-resolver": "^4.1.0"
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/runtime": "^7.21.0",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "metro-react-native-babel-preset": "0.76.0"
   }
 }
