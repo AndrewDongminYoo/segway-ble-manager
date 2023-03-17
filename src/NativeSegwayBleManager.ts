@@ -8,7 +8,7 @@ export interface Spec extends TurboModule {
   unlock(): void;
   lock(): void;
   vehicleInfo(): void;
-  openBattebryCover(): void;
+  openBatteryCover(): void;
   openSaddle(): void;
   openTailBox(): void;
 }
