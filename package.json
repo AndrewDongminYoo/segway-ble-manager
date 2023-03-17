@@ -175,7 +175,7 @@
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {
-      "javaPackage": "io.gbike.segway.blemanager"
+      "javaPackage": "com.gbike.segwayblemanager"
     }
   }
 }
