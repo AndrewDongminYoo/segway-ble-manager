@@ -77,6 +77,7 @@ PODS:
     - hermes-engine/Pre-built (= 0.71.4)
   - hermes-engine/Pre-built (0.71.4)
   - libevent (2.1.12)
+  - NBIoTBleKit (1.1.2)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -414,6 +415,7 @@ PODS:
     - React-logger (= 0.71.4)
     - React-perflogger (= 0.71.4)
   - SegwayBleManager (0.1.0):
+    - NBIoTBleKit (~> 1.1.1)
     - React-Core
   - SocketRocket (0.6.0)
   - Yoga (1.14.0)
@@ -496,6 +498,7 @@ SPEC REPOS:
     - FlipperKit
     - fmt
     - libevent
+    - NBIoTBleKit
     - OpenSSL-Universal
     - SocketRocket
     - YogaKit
@@ -591,6 +594,7 @@ SPEC CHECKSUMS:
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: a1f157c49ea579c28b0296bda8530e980c45bdb3
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  NBIoTBleKit: 770d384b1855cfad3527354746d4551ccd11fc55
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: 5a024fdf458fa8c0d82fc262e76f982d4dcdecdd
@@ -619,7 +623,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: ad17efcfb2fa8f6bfd8ac0cf48d96668b8b28e0b
   React-runtimeexecutor: 8fa50b38df6b992c76537993a2b0553d3b088004
   ReactCommon: b49a4b00ca6d181ff74b17c12b2d59ac4add0bde
-  SegwayBleManager: f4d2fe4401025ca7f38539afe441b83c11d7ee15
+  SegwayBleManager: 4cd134e7cea917ab95c7a6c2393977286b8ef9a7
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
