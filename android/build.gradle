@@ -23,6 +23,7 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 
+//noinspection GroovyUnusedAssignment
 def appProject = rootProject.allprojects.find { it.plugins.hasPlugin('com.android.application') }
 
 if (isNewArchitectureEnabled()) {
@@ -39,13 +40,14 @@ def getExtOrIntegerDefault(name) {
 
 android {
     compileSdk getExtOrIntegerDefault("compileSdkVersion")
-    ndkVersion getExtOrIntegerDefault("ndkVersion")
+    ndkVersion getExtOrDefault("ndkVersion")
     buildToolsVersion getExtOrIntegerDefault("buildToolsVersion")
 
     defaultConfig {
         minSdkVersion getExtOrIntegerDefault("minSdkVersion")
         targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+        signingConfig signingConfigs.debug
     }
     buildTypes {
         release {
@@ -90,7 +92,6 @@ dependencies {
     // For < 0.71, this will be from the local maven repo
     // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
     implementation 'com.facebook.react:react-native:0.71.0-rc.0'
-    //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
