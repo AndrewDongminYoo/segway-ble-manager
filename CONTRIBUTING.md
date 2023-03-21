@@ -82,9 +82,9 @@ Remember to add tests for your change if possible. Run the unit tests by:
 yarn test
 ```
 
-To edit the Objective-C or Swift files, open `example/ios/SegwayBleManagerExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > @gbike/segway-ble-manager`.
+To edit the Objective-C or Swift files, open `example/ios/SegwayBleManagerExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > SegwayBleManager`.
 
-To edit the Java or Kotlin files, open `example/android` in Android studio and find the source files at `segway-ble-manager` under `Android`.
+To edit the Java or Kotlin files, open `example/android` in Android studio and find the source files at `SegwayBleManager` under `Android`.
 
 ### Commit message convention
 

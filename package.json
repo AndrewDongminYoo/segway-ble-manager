@@ -1,7 +1,8 @@
 {
   "name": "@gbike/segway-ble-manager",
   "version": "0.1.0",
-  "description": "test",
+  "summary": "React Native library for managing Bluetooth Low Energy (BLE) connections with Segway devices.",
+  "description": "`react-native-segway-ble-manager` provides an easy-to-use API for connecting to and communicating with Segway devices over BLE. The library supports both Android and iOS platforms and includes features such as device discovery, connection management, and data transfer. With `react-native-segway-ble-manager`, developers can easily integrate Segway device control into their React Native applications.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -62,8 +63,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@evilmartians/lefthook": "^1.3.6",
     "@commitlint/config-conventional": "^17.4.4",
+    "@evilmartians/lefthook": "^1.3.6",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native-community/eslint-plugin": "^1.3.0",
     "@release-it/conventional-changelog": "^5.1.1",
@@ -87,89 +88,33 @@
     "typescript": "^5.0.2"
   },
   "resolutions": {
-    "@types/react": "17.0.21"
+    "@types/react": "18.0.28"
+  },
+  "peerDependenciesMeta": {
+    "@babel/core": {
+      "optional": true
+    },
+    "@react-native/assets": {
+      "optional": true
+    },
+    "react": {
+      "optional": false
+    },
+    "react-native": {
+      "optional": false
+    }
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.1.6",
+    "@react-native/assets": "^1.0.0",
+    "react": "^18.2.0",
+    "react-native": "^0.71.4"
   },
   "engines": {
     "node": ">= 16.0.0"
   },
   "packageManager": "yarn@1.22.19",
-  "jest": {
-    "preset": "react-native",
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
-      "<rootDir>/lib/"
-    ]
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
-    },
-    "npm": {
-      "publish": true
-    },
-    "github": {
-      "release": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular"
-      }
-    }
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@react-native-community",
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "quoteProps": "consistent",
-          "singleQuote": true,
-          "tabWidth": 2,
-          "trailingComma": "es5",
-          "useTabs": false
-        }
-      ]
-    }
-  },
-  "eslintIgnore": [
-    "node_modules/",
-    "lib/"
-  ],
-  "prettier": {
-    "quoteProps": "consistent",
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5",
-    "useTabs": false
-  },
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      "module",
-      [
-        "typescript",
-        {
-          "project": "tsconfig.build.json"
-        }
-      ]
-    ]
-  },
   "codegenConfig": {
     "name": "RNSegwayBleManagerSpec",
     "type": "modules",
