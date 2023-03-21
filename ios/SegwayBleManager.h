@@ -4,9 +4,29 @@
 
 @interface SegwayBleManager : NSObject <NativeSegwayBleManagerSpec>
 #else
-#import <React/RCTBridgeModule.h>
 
-@interface SegwayBleManager : NSObject <RCTBridgeModule>
+#import <Foundation/Foundation.h>
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
+#import <NBIoTBleKit/NBIoTBleKit.h>
+
+@interface SegwayBleManager : RCTEventEmitter <RCTBridgeModule, NBIoTBleDelegate>
+@property(nonatomic, strong) NBIoTBle *iotController;
+
 #endif
+
+- (void)init:(NSString *)secretKey
+operatorCode:(NSString *)operatorCode
+     isDebug:(BOOL)isDebug;
+- (NSNumber *)connect:(NSString *)bleMac
+               bleKey:(NSString *)bleKey
+              iotImei:(NSString *)iotImei;
+- (NSNumber *)disconnect;
+- (NSNumber *)unLock;
+- (NSNumber *)lock;
+- (void)vehicleInfo;
+- (NSNumber *)openBatteryCover;
+- (NSNumber *)openSaddle;
+- (NSNumber *)openTailBox;
 
 @end
