@@ -38,6 +38,7 @@ project.xcworkspace
 .project
 .settings
 local.properties
+secrets.properties
 android.iml
 *.aab
 *.apk

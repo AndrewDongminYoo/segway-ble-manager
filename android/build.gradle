@@ -1,6 +1,6 @@
 buildscript {
     // BuildScript is evaluated before everything else so we can't use getExtOrDefault
-    def kotlin_version = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["SegwayBleManager_kotlinVersion"]
+    def kotlinVersion = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["SegwayBleManager_kotlinVersion"]
 
     repositories {
         google()
@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:7.2.2"
         // noinspection DifferentKotlinGradleVersion
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
@@ -22,10 +22,6 @@ def isNewArchitectureEnabled() {
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
-
-//noinspection GroovyUnusedAssignment
-def appProject = rootProject.allprojects.find { it.plugins.hasPlugin('com.android.application') }
-
 if (isNewArchitectureEnabled()) {
     apply plugin: "com.facebook.react"
 }
@@ -35,13 +31,13 @@ def getExtOrDefault(name) {
 }
 
 def getExtOrIntegerDefault(name) {
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["SegwayBleManager_" + name]).toInteger()
+    return getExtOrDefault(name).toInteger()
 }
 
 android {
-    compileSdk getExtOrIntegerDefault("compileSdkVersion")
+    compileSdk getExtOrDefault("compileSdkVersion")
     ndkVersion getExtOrDefault("ndkVersion")
-    buildToolsVersion getExtOrIntegerDefault("buildToolsVersion")
+    buildToolsVersion getExtOrDefault("buildToolsVersion")
 
     defaultConfig {
         minSdkVersion getExtOrIntegerDefault("minSdkVersion")
@@ -86,18 +82,14 @@ repositories {
     gradlePluginPortal()
 }
 
-def kotlin_version = getExtOrDefault("kotlinVersion")
+def kotlinVersion = getExtOrDefault("kotlinVersion")
 
 dependencies {
     // For < 0.71, this will be from the local maven repo
     // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
     implementation 'com.facebook.react:react-native:0.71.0-rc.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation files('lib/sd_ble_sdk_v1.2.0.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation files('lib/sd_ble_sdk_v1.1.2.jar')
 }
 
 if (isNewArchitectureEnabled()) {
