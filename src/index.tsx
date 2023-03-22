@@ -1,11 +1,12 @@
-import { NativeModules, Platform } from 'react-native';
+import { EmitterSubscription, NativeEventEmitter, NativeModules, Platform } from 'react-native';
+import SegwayBleManager from './NativeSegwayBleManager';
 
 const LINKING_ERROR =
   "The package '@gbike/segway-ble-manager' doesn't seem to be linked. Make sure: \n\n" +
   Platform.select({
     ios: '- You have run `pod install` in the `ios` directory and then clean, rebuild and re-run the app. You may also need to re-open Xcode to get the new pods.\n',
     android:
-      '- You have run `./gradlew generateCodegenArtifactsFromSchema` in the `android` directory and then clean, rebuild and re-run the app. You may also need to re-open Android Studio.\n',
+      '- You have run `./gradlew generateCodeGenArtifactsFromSchema` in the `android` directory and then clean, rebuild and re-run the app. You may also need to re-open Android Studio.\n',
     default: '',
   }) +
   '- Use the "npx react-native clean" command to clean up the module\'s cache and select the ' +
@@ -23,68 +24,114 @@ const SegwayBleManagerModule = isTurboModuleEnabled
   ? require('./NativeSegwayBleManager').default
   : NativeModules.SegwayBleManager;
 
-const SegwayBleManager = SegwayBleManagerModule
-  ? SegwayBleManagerModule
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
-export function init(secretKey: string, operatorCode: string, isDebug: boolean): void {
-  SegwayBleManager.init(secretKey, operatorCode, isDebug);
+const Spec = (
+  SegwayBleManagerModule
+    ? SegwayBleManagerModule
+    : new Proxy(
+        {},
+        {
+          get() {
+            throw new Error(LINKING_ERROR);
+          },
+        }
+      )
+) as typeof SegwayBleManager;
+
+const eventEmitter = new NativeEventEmitter(Spec);
+
+export interface Scooter {
+  number: string;
+  bleMac: string;
+  bleKey: string;
+  iotImei: string;
+}
+export interface IoTInformation {
+  powerPercent: number;
+  speedMode: number;
+  currentSpeed: number;
+  totalRange: number;
+  remainingRange: number;
+}
+export interface VehicleInfo {
+  voltage: string;
+  majorVersionNumber: string;
+  minorVersionNumber: string;
+  updateTimes: string;
+  isLocked: string;
 }
 
-export function connect(bleMac: string, bleKey: string, iotImei: string): void {
-  SegwayBleManager.connect(bleMac, bleKey, iotImei);
+export enum Events {
+  'ConnectResult',
+  'DisconnectResult',
+  'InitializeResult',
+  'IoTInfoResult',
+  'LockResult',
+  'OpenCoverResult',
+  'OpenSaddleResult',
+  'OpenTailBoxResult',
+  'UnlockResult',
+  'VehicleInfoResult',
 }
 
-export function disconnect(): void {
-  SegwayBleManager.disconnect();
+// Implementing a one-time listener function
+function submitOneTimeListener(eventType: string): EmitterSubscription {
+  const count = eventEmitter.listenerCount(eventType);
+  if (count > 0) {
+    eventEmitter.removeAllListeners(eventType);
+  }
+  const subscription = eventEmitter.addListener(eventType, (data) => {
+    console.log(`event received!: ${data}`);
+    eventEmitter.removeSubscription(subscription);
+  });
+  return subscription;
 }
 
-export function unLock(): void {
-  SegwayBleManager.unLock();
+export function init(secretKey: string, operatorCode: string, isDebug: boolean) {
+  Spec.init(secretKey, operatorCode, isDebug);
+  submitOneTimeListener('InitializeResult');
 }
 
-export function lock(): void {
-  SegwayBleManager.lock();
+export function connect(bleMac: string, bleKey: string, iotImei: string) {
+  Spec.connect(bleMac, bleKey, iotImei);
+  submitOneTimeListener('ConnectResult');
 }
 
-export function vehicleInfo(): void {
-  SegwayBleManager.vehicleInfo();
+export function disconnect() {
+  Spec.disconnect();
+  submitOneTimeListener('DisconnectResult');
 }
 
-export function openBatteryCover(): void {
-  SegwayBleManager.openBatteryCover();
+export function unLock() {
+  Spec.unLock();
+  submitOneTimeListener('UnlockResult');
 }
 
-export function openSaddle(): void {
-  SegwayBleManager.openSaddle();
+export function lock() {
+  Spec.lock();
+  submitOneTimeListener('LockResult');
 }
 
-export function openTailBox(): void {
-  SegwayBleManager.openTailBox();
+export function openBatteryCover() {
+  Spec.openBatteryCover();
+  submitOneTimeListener('OpenCoverResult');
 }
 
-export function queryVehicleInformation(): void {
-  SegwayBleManager.queryVehicleInformation();
+export function openSaddle() {
+  Spec.openSaddle();
+  submitOneTimeListener('OpenSaddleResult');
 }
 
-export function queryIotInformation(): void {
-  SegwayBleManager.queryIotInformation();
+export function openTailBox() {
+  Spec.openTailBox();
+  submitOneTimeListener('OpenTailBoxResult');
 }
 
-// const callback = (arg: any) => {
-//   console.log(arg);
-// };
+export function queryVehicleInformation() {
+  Spec.queryVehicleInformation();
+  submitOneTimeListener('VehicleInfoResult');
+}
 
-// const commonListener = (emitter: NativeEventEmitter) => {
-//   emitter.addListener('connectionStateChange', (state) => callback(state));
-//   emitter.addListener('connectDeviceOnError', (error) => callback(error));
-//   emitter.addListener('bluetoothStateChanged', (state) => callback(state));
-// };
-
-// const NBIoTBleRNEventEmitter = new NativeEventEmitter(SegwayBleManager);
+export function queryIotInformation() {
+  Spec.queryIotInformation();
+  submitOneTimeListener('IoTInfoResult');
+}
