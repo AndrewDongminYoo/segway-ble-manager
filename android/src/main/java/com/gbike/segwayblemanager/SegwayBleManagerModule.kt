@@ -8,6 +8,7 @@ import com.facebook.react.bridge.WritableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.segwaydiscovery.nbiot.BluetoothKit
 import com.segwaydiscovery.nbiot.NBIotBle
+import com.segwaydiscovery.nbiot.bean.QueryIoTInfomation
 import com.segwaydiscovery.nbiot.bean.QueryVehicleInformation
 import com.segwaydiscovery.nbiot.interfaces.*
 import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_CONNECTED
@@ -19,6 +20,21 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
 
     override fun getName(): String {
         return NAME
+    }
+    override fun getTypedExportedConstants(): MutableMap<String, Any> {
+        return mutableMapOf(
+            "supportedEvents" to listOf(
+                "onInitializeResult",
+                "onVehicleInfo",
+                "onConnect",
+                "onDisconnect",
+                "onUnLock",
+                "onLock",
+                "onOpenBatteryCover",
+                "onOpenSaddle",
+                "onOpenTailBox",
+            ),
+        )
     }
 
     private fun sendEvent(eventName: String, params: WritableMap) {
@@ -145,7 +161,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
     }
 
     @ReactMethod
-    override fun vehicleInfo() {
+    override fun queryVehicleInformation() {
         val eventName = "VehicleInfoResult"
         try {
             bluetoothKit!!.queryVehicleInformation(object : OnQueryVehicleInfoListener {
@@ -163,7 +179,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
                 }
 
                 override fun onQueryVehicleInfoFail(code: Int, msg: String) {
-                    Log.e(BLUETOOTH_KIT, "QueryVehicleInfoFail")
+                    Log.e(BLUETOOTH_KIT, "QueryVehicleInfoFail!--$code--$msg")
                     onFailure(eventName, msg, code)
                 }
             })
@@ -171,6 +187,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
             onError(eventName, error)
         }
     }
+
 
     @ReactMethod
     override fun openBatteryCover(): Boolean {
@@ -182,7 +199,6 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
                     onSuccess(openCoverResult, true)
                     result = true
                 }
-
                 override fun OnOpenBatteryCoverFail(code: Int, msg: String) {
                     onFailure(openCoverResult, msg, code)
                 }
@@ -203,7 +219,6 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
                     onSuccess(openSaddleResult, true)
                     result = true
                 }
-
                 override fun onOpenSaddleFail(code: Int, msg: String) {
                     onFailure(openSaddleResult, msg, code)
                 }
@@ -224,7 +239,6 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
                     onSuccess(openTailBoxResult, true)
                     result = true
                 }
-
                 override fun onOpenTailBoxFail(code: Int, msg: String) {
                     onFailure(openTailBoxResult, msg, code)
                 }
@@ -235,6 +249,31 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         return result
     }
 
+    override fun queryIotInformation() {
+        val eventName = "IoTInfoResult"
+        bluetoothKit!!.queryIoTInformation(object : OnQueryIoTInfoListener {
+            override fun onQueryIoTInfoSuccess(ioTInformation: QueryIoTInfomation) {
+                val params = Arguments.createMap().apply {
+                    putBoolean("result", true)
+                    putInt("highBatteryVoltage", ioTInformation.highBatteryVoltage)
+                    putInt("majorVersionNumber", ioTInformation.majorVersionNumber)
+                    putInt("minorVersionNumber", ioTInformation.minorVersionNumber)
+                    putInt("updateTimes", ioTInformation.updateTimes)
+                    putInt("voltage", ioTInformation.voltage)
+                    putBoolean("isLocked", ioTInformation.isLocked)
+                }
+                sendEvent(eventName, params)
+            }
+            override fun onQueryIoTInfoFail(code: Int, msg: String) {
+                Log.e(BLUETOOTH_KIT, "QueryIoTInfoFail!--$code--$msg")
+                onFailure(eventName, msg, code)
+            }
+        })
+    }
+    override fun addListener(eventType: String?) {
+    }
+    override fun removeListeners(count: Double) {
+    }
     companion object {
         const val NAME = "SegwayBleManager"
         const val BLUETOOTH_KIT = "BluetoothKit"

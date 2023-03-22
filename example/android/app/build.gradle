@@ -95,7 +95,7 @@ android {
 
     namespace "com.segwayblemanagerexample"
     defaultConfig {
-        applicationId 'com.segway.blemanager.example'
+        applicationId 'com.segwayblemanagerexample'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

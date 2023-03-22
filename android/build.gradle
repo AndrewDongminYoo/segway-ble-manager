@@ -22,6 +22,11 @@ def isNewArchitectureEnabled() {
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
+ext {
+    ndkVersion = '23.1.7779620'
+    kotlinStdlibJdk8Version = '1.8.10'
+}
+
 if (isNewArchitectureEnabled()) {
     apply plugin: "com.facebook.react"
 }
@@ -36,7 +41,7 @@ def getExtOrIntegerDefault(name) {
 
 android {
     compileSdk getExtOrDefault("compileSdkVersion")
-    ndkVersion getExtOrDefault("ndkVersion")
+    ndkVersion ndkVersion
     buildToolsVersion getExtOrDefault("buildToolsVersion")
 
     defaultConfig {
@@ -82,13 +87,11 @@ repositories {
     gradlePluginPortal()
 }
 
-def kotlinVersion = getExtOrDefault("kotlinVersion")
-
 dependencies {
     // For < 0.71, this will be from the local maven repo
     // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
     implementation 'com.facebook.react:react-native:0.71.0-rc.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinStdlibJdk8Version"
     implementation files('lib/sd_ble_sdk_v1.1.2.jar')
 }
 
