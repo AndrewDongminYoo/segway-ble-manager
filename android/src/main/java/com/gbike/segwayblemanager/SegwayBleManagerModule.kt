@@ -10,6 +10,7 @@ import com.segwaydiscovery.nbiot.BluetoothKit
 import com.segwaydiscovery.nbiot.NBIotBle
 import com.segwaydiscovery.nbiot.bean.QueryVehicleInformation
 import com.segwaydiscovery.nbiot.interfaces.*
+import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_CONNECTED
 
 class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) :
     SegwayBleManagerSpec(reactContext) {
@@ -74,25 +75,14 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         var result = false
         try {
             bluetoothKit!!.connect(bleMac, bleKey, iotImei) { state: Int ->
-                when (state) {
-                    ConnectionState.STATE_CONNECTED -> {
-                        onSuccess(connectResult, true)
-                        result = true
-                    }
-                    ConnectionState.STATE_DISCONNECTED -> {
-                        onSuccess(connectResult, false)
-                    }
-                    ConnectionState.STATE_CONNECTED_FAILED -> {
-                        onSuccess(connectResult, false)
-                    }
-                }
+                result = state == STATE_CONNECTED
+                onSuccess(connectResult, result)
             }
         } catch (error: Exception) {
             onError(connectResult, error)
         }
         return result
     }
-
 
     @ReactMethod
     override fun disconnect(): Boolean {

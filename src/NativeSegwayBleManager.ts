@@ -11,6 +11,9 @@ export interface Spec extends TurboModule {
   openBatteryCover(): boolean;
   openSaddle(): boolean;
   openTailBox(): boolean;
+  queryVehicleInformation(): void;
+  queryIotInformation(): void;
+  supportedEvents: string[];
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('SegwayBleManager');
