@@ -24,15 +24,16 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
     override fun getTypedExportedConstants(): MutableMap<String, Any> {
         return mutableMapOf(
             "supportedEvents" to listOf(
-                "onInitializeResult",
-                "onVehicleInfo",
-                "onConnect",
-                "onDisconnect",
-                "onUnLock",
-                "onLock",
-                "onOpenBatteryCover",
-                "onOpenSaddle",
-                "onOpenTailBox",
+                "InitializeResult",
+                "ConnectResult",
+                "DisconnectResult",
+                "UnlockResult",
+                "LockResult",
+                "VehicleInfoResult",
+                "OpenCoverResult",
+                "OpenSaddleResult",
+                "OpenTailBoxResult",
+                "IoTInfoResult",
             ),
         )
     }

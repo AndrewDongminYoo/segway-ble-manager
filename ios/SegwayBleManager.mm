@@ -20,6 +20,7 @@ RCT_EXPORT_MODULE();
         @"OpenCoverResult",
         @"OpenSaddleResult",
         @"OpenTailBoxResult",
+        @"IoTInfoResult",
     ];
 }
 
@@ -62,8 +63,12 @@ RCT_EXPORT_METHOD(init:(NSString *)secretKey
      }];
 };
 
-RCT_EXPORT_METHOD(vehicleInfo) {
+RCT_EXPORT_METHOD(queryVehicleInformation) {
     [self.iotController queryVehicleInformation];
+};
+
+RCT_EXPORT_METHOD(queryIoTInformation) {
+    [self.iotController queryIoTInformation];
 };
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(connect:(NSString *)bleMac
@@ -143,9 +148,9 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(openTailBox){
 }
 
 /// query IoT information
-/// @param iotInfo infomation model
+/// @param iotInfo information model
 /// @param error if error returned, the iotInfo will be nil.
-- (void)queryIoTInfomationResult: (NBIoTInfo * _Nullable) iotInfo withError: (NSError *_Nullable)error {
+- (void)queryIoTInformationResult: (NBIoTInfo * _Nullable) iotInfo withError: (NSError *_Nullable)error {
     if (error) {
         [self onFailure:@"IoTInfoResult" message:error.description code:error.code];
         return;
@@ -154,7 +159,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(openTailBox){
     [self sendEventWithName:@"IoTInfoResult" body:[self dictionaryFromIoTInfo:iotInfo]];
 }
 
-/// query scooter inforamtion finished
+/// query scooter information finished
 /// @param vehicleInfo vehicle information
 /// @param error if error returned, the scooterInfo will be nil.
 - (void)queryVehicleInformationResult: (NBVehicleInfo * _Nullable) vehicleInfo withError: (NSError *_Nullable)error {
@@ -189,7 +194,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(openTailBox){
 
 /// open tail box result
 /// @param isFinished YES/NO
-- (void)openTailboxResult: (BOOL)isFinished withError: (NSError *_Nullable)error {
+- (void)openTailBoxResult: (BOOL)isFinished withError: (NSError *_Nullable)error {
     if (error) {
         [self onFailure:@"OpenTailBoxResult" message:error.description code:error.code];
         return;
