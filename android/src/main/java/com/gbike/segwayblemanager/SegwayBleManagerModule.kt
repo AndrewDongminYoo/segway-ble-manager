@@ -8,6 +8,7 @@ import com.facebook.react.bridge.WritableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.segwaydiscovery.nbiot.BluetoothKit
 import com.segwaydiscovery.nbiot.NBIotBle
+/* cspell:disable-next-line */
 import com.segwaydiscovery.nbiot.bean.QueryIoTInfomation
 import com.segwaydiscovery.nbiot.bean.QueryVehicleInformation
 import com.segwaydiscovery.nbiot.interfaces.*
@@ -15,12 +16,43 @@ import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_CONNECTED
 
 class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) :
     SegwayBleManagerSpec(reactContext) {
+    /**
+     * This is the NINE_BOT's Bluetooth module.
+     * It starts as `null` and is initialized in the [init] method.
+     */
     private var bluetoothKit: BluetoothKit? = null
+
+    /**
+     * This is the event emitter that is used to send events to the JavaScript side.
+     * This is the same as the `DeviceEventEmitter` in the React Native.
+     * @see [RCTDeviceEventEmitter]
+     * @see [com.facebook.react.modules.core.DeviceEventManagerModule]
+     * @see [com.facebook.react.bridge.ReactContext.getJSModule]
+     * @see [com.facebook.react.bridge.ReactContext]
+     * @see [com.facebook.react.bridge.ReactApplicationContext]
+     * @see [com.facebook.react.bridge.ReactContextBaseJavaModule]
+     * @see [com.facebook.react.bridge.NativeModule]
+     */
     private val deviceEventEmitter = reactContext.getJSModule(RCTDeviceEventEmitter::class.java)
 
     override fun getName(): String {
         return NAME
     }
+
+    /**
+     * This method is called when the module is being initialized.
+     * It should return a map with the constants this module is exporting.
+     * The map is exposed as a native module's `Constants` field.
+     * The values can be any primitive that is supported by the `Map` interface.
+     * Note that boolean will be converted to number when sent to JavaScript.
+     * Use `Promise` instead if you need to pass booleans to JavaScript.
+     * @return a map with the constants this module is exporting.
+     * @see [getConstants]
+     * @see [com.facebook.react.bridge.Promise]
+     * @see [ReactMethod.isBlockingSynchronousMethod]
+     * @see [ReactMethod]
+     * @see [ReactModuleWithSpec]
+     */
     override fun getTypedExportedConstants(): MutableMap<String, Any> {
         return mutableMapOf(
             "supportedEvents" to listOf(
@@ -38,6 +70,11 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         )
     }
 
+    /**
+     * This method is sending device events to the JavaScript side.
+     * @param eventName the name of the event.
+     * @param params the parameters of the event.
+     */
     private fun sendEvent(eventName: String, params: WritableMap) {
         deviceEventEmitter.emit(eventName, params)
     }
@@ -253,6 +290,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
     override fun queryIotInformation() {
         val eventName = "IoTInfoResult"
         bluetoothKit!!.queryIoTInformation(object : OnQueryIoTInfoListener {
+            /* cspell:disable-next-line */
             override fun onQueryIoTInfoSuccess(ioTInformation: QueryIoTInfomation) {
                 val params = Arguments.createMap().apply {
                     putBoolean("result", true)
