@@ -2,12 +2,12 @@ import type { TurboModule } from 'react-native';
 import { TurboModuleRegistry } from 'react-native';
 
 export interface Spec extends TurboModule {
-  getConstants?(): {
+  getConstants(): {
     supportedEvents: string[];
     moduleName: string;
   };
   init(secretKey: string, operatorCode: string, isDebug: boolean): void;
-  connect(bleMac: string, bleKey: string, iotImei: string): boolean;
+  connect(deviceMac: string, deviceKey: string, iotImei: string): boolean;
   disconnect(): boolean;
   unLock(): boolean;
   lock(): boolean;
@@ -15,7 +15,7 @@ export interface Spec extends TurboModule {
   openSaddle(): boolean;
   openTailBox(): boolean;
   queryVehicleInformation(): void;
-  queryIotInformation(): void;
+  queryIoTInformation(): void;
   addListener(eventType: string): void;
   removeListeners(count: number): void;
 }

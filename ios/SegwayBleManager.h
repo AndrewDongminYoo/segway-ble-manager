@@ -18,8 +18,8 @@
 - (void)init:(NSString *)secretKey
 operatorCode:(NSString *)operatorCode
      isDebug:(BOOL)isDebug;
-- (NSNumber *)connect:(NSString *)bleMac
-               bleKey:(NSString *)bleKey
+- (NSNumber *)connect:(NSString *)deviceMac
+            deviceKey:(NSString *)deviceKey
               iotImei:(NSString *)iotImei;
 - (NSNumber *)disconnect;
 - (NSNumber *)unLock;

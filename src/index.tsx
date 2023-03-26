@@ -1,4 +1,4 @@
-import { EmitterSubscription, NativeEventEmitter, NativeModules, Platform } from 'react-native';
+import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import SegwayBleManager from './NativeSegwayBleManager';
 
 const LINKING_ERROR =
@@ -41,8 +41,8 @@ const eventEmitter = new NativeEventEmitter(Spec);
 
 export interface Scooter {
   number: string;
-  bleMac: string;
-  bleKey: string;
+  deviceMac: string;
+  deviceKey: string;
   iotImei: string;
 }
 export interface IoTInformation {
@@ -60,78 +60,88 @@ export interface VehicleInfo {
   isLocked: string;
 }
 
-export enum Events {
-  'ConnectResult',
-  'DisconnectResult',
-  'InitializeResult',
-  'IoTInfoResult',
-  'LockResult',
-  'OpenCoverResult',
-  'OpenSaddleResult',
-  'OpenTailBoxResult',
-  'UnlockResult',
-  'VehicleInfoResult',
+enum Events {
+  CONNECT = 'ConnectResult',
+  DISCONNECT = 'DisconnectResult',
+  INITIALIZE = 'InitializeResult',
+  IOT_INFO = 'IoTInfoResult',
+  LOCK = 'LockResult',
+  OPEN_COVER = 'OpenCoverResult',
+  OPEN_SADDLE = 'OpenSaddleResult',
+  OPEN_TAIL_BOX = 'OpenTailBoxResult',
+  UNLOCK = 'UnlockResult',
+  VEHICLE_INFO = 'VehicleInfoResult',
 }
 
-// Implementing a one-time listener function
-function submitOneTimeListener(eventType: string): EmitterSubscription {
+export const SupportedEvents = (Spec.getConstants().supportedEvents = Object.values(Events));
+
+type mListener<T extends Events> = (
+  data: T extends Events.CONNECT
+    ? Scooter
+    : T extends Events.IOT_INFO
+    ? IoTInformation
+    : T extends Events.VEHICLE_INFO
+    ? VehicleInfo
+    : unknown
+) => void;
+
+const submitListenerOnce = <T extends Events>(eventType: T, listener?: mListener<T>) => {
   const count = eventEmitter.listenerCount(eventType);
   if (count > 0) {
     eventEmitter.removeAllListeners(eventType);
   }
-  const subscription = eventEmitter.addListener(eventType, (data) => {
-    console.log(`event received!: ${data}`);
-    eventEmitter.removeSubscription(subscription);
-  });
-  return subscription;
-}
+  listener = listener ?? ((data) => console.debug(`${eventType} Event: ${data}`));
+  return eventEmitter.addListener(eventType, listener);
+};
 
 export function init(secretKey: string, operatorCode: string, isDebug: boolean) {
   Spec.init(secretKey, operatorCode, isDebug);
-  submitOneTimeListener('InitializeResult');
+  submitListenerOnce(Events.INITIALIZE);
 }
 
-export function connect(bleMac: string, bleKey: string, iotImei: string) {
-  Spec.connect(bleMac, bleKey, iotImei);
-  submitOneTimeListener('ConnectResult');
+export function connect(deviceMac: string, deviceKey: string, iotImei: string) {
+  console.debug(`🚀 connect(deviceMac: ${deviceMac}, deviceKey: ${deviceKey}, iotImei: ${iotImei}):`);
+  Spec.connect(deviceMac, deviceKey, iotImei);
+  submitListenerOnce(Events.CONNECT);
 }
 
 export function disconnect() {
   Spec.disconnect();
-  submitOneTimeListener('DisconnectResult');
+  submitListenerOnce(Events.DISCONNECT);
 }
 
 export function unLock() {
   Spec.unLock();
-  submitOneTimeListener('UnlockResult');
+  submitListenerOnce(Events.UNLOCK);
 }
 
 export function lock() {
   Spec.lock();
-  submitOneTimeListener('LockResult');
+  submitListenerOnce(Events.LOCK);
 }
 
 export function openBatteryCover() {
   Spec.openBatteryCover();
-  submitOneTimeListener('OpenCoverResult');
+  submitListenerOnce(Events.OPEN_COVER);
 }
 
 export function openSaddle() {
   Spec.openSaddle();
-  submitOneTimeListener('OpenSaddleResult');
+  submitListenerOnce(Events.OPEN_SADDLE);
 }
 
 export function openTailBox() {
   Spec.openTailBox();
-  submitOneTimeListener('OpenTailBoxResult');
+  submitListenerOnce(Events.OPEN_TAIL_BOX);
 }
 
-export function queryVehicleInformation() {
+export function queryVehicleInformation(listener: mListener<Events.VEHICLE_INFO>) {
   Spec.queryVehicleInformation();
-  submitOneTimeListener('VehicleInfoResult');
+  return submitListenerOnce(Events.VEHICLE_INFO, listener);
 }
 
-export function queryIotInformation() {
-  Spec.queryIotInformation();
-  submitOneTimeListener('IoTInfoResult');
+// Using infer to extract the listener type
+export function queryIoTInformation(listener: mListener<Events.IOT_INFO>) {
+  Spec.queryIoTInformation();
+  return submitListenerOnce(Events.IOT_INFO, listener);
 }

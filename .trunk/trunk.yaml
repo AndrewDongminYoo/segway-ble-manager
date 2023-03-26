@@ -8,18 +8,19 @@ plugins:
       uri: https://github.com/trunk-io/plugins
 lint:
   disabled:
-    - shellcheck
-    - ktlint
     - dotenv-linter
+    - git-diff-check
+    - ktlint
     - oxipng
+    - shellcheck
     - shfmt
   enabled:
     - actionlint@1.6.23
-    - git-diff-check
+    - eslint@8.36.0
     - gitleaks@8.16.1
     - markdownlint@0.33.0
-    - prettier@2.8.4
-    - yamllint@1.29.0
+    - prettier@2.8.7
+    - yamllint@1.30.0
 runtimes:
   enabled:
     - go@1.19.5

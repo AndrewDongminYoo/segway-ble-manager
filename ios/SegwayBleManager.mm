@@ -71,13 +71,13 @@ RCT_EXPORT_METHOD(queryIoTInformation) {
     [self.iotController queryIoTInformation];
 };
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(connect:(NSString *)bleMac
-                                        bleKey:(NSString *)bleKey
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(connect:(NSString *)deviceMac
+                                     deviceKey:(NSString *)deviceKey
                                        iotImei:(NSString *)iotImei) {
-    NSLog(@"invoke from RN side: %@,%@,%@", iotImei, bleMac, bleKey);
+    NSLog(@"invoke from RN side: %@,%@,%@", iotImei, deviceMac, deviceKey);
     [self.iotController connectDeviceByIMEI:iotImei
-                                 macAddress:bleMac
-                               andDeviceKey:bleKey];
+                                 macAddress:deviceMac
+                               andDeviceKey:deviceKey];
     return @(YES);
 };
 
