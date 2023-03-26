@@ -51,7 +51,6 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
      * @see [com.facebook.react.bridge.Promise]
      * @see [ReactMethod.isBlockingSynchronousMethod]
      * @see [ReactMethod]
-     * @see [ReactModuleWithSpec]
      */
     override fun getTypedExportedConstants(): MutableMap<String, Any> {
         return mutableMapOf(
@@ -66,7 +65,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
                 "OpenSaddleResult",
                 "OpenTailBoxResult",
                 "IoTInfoResult",
-            ),
+            ), "moduleName" to NAME,
         )
     }
 
@@ -124,13 +123,15 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         }
     }
 
-    override fun connect(bleMac: String?, bleKey: String?, iotImei: String?): Boolean {
+    override fun connect(deviceMac: String?, deviceKey: String?, iotImei: String?): Boolean {
         val connectResult = "ConnectResult"
         var result = false
         try {
-            bluetoothKit!!.connect(bleMac, bleKey, iotImei) { state: Int ->
-                result = state == STATE_CONNECTED
-                onSuccess(connectResult, result)
+            bluetoothKit!!.connect(deviceMac, deviceKey, iotImei) {
+                OnConnectionStateChangeListener { state ->
+                    result = state == STATE_CONNECTED
+                    onSuccess(connectResult, result)
+                }
             }
         } catch (error: Exception) {
             onError(connectResult, error)
@@ -287,7 +288,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         return result
     }
 
-    override fun queryIotInformation() {
+    override fun queryIoTInformation() {
         val eventName = "IoTInfoResult"
         bluetoothKit!!.queryIoTInformation(object : OnQueryIoTInfoListener {
             /* cspell:disable-next-line */

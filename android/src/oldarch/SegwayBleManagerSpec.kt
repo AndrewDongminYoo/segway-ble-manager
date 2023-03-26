@@ -52,7 +52,7 @@ abstract class SegwayBleManagerSpec internal constructor(context: ReactApplicati
     abstract fun init(secretKey: String?, operatorCode: String?, isDebug: Boolean)
     @ReactMethod(isBlockingSynchronousMethod = true)
     @DoNotStrip
-    abstract fun connect(bleMac: String?, bleKey: String?, iotImei: String?): Boolean
+    abstract fun connect(deviceMac: String?, deviceKey: String?, iotImei: String?): Boolean
     @ReactMethod(isBlockingSynchronousMethod = true)
     @DoNotStrip
     abstract fun disconnect(): Boolean
@@ -76,7 +76,7 @@ abstract class SegwayBleManagerSpec internal constructor(context: ReactApplicati
     abstract fun queryVehicleInformation()
     @ReactMethod
     @DoNotStrip
-    abstract fun queryIotInformation()
+    abstract fun queryIoTInformation()
     @ReactMethod
     @DoNotStrip
     abstract fun addListener(eventType: String?)
