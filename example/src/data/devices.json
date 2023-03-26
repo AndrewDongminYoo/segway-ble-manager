@@ -1,0 +1,32 @@
+[
+  {
+    "number": "356463",
+    "deviceMac": "FA:B7:08:B5:B5:46",
+    "deviceKey": "gBiKeWkd",
+    "iotImei": "861123056350117"
+  },
+  {
+    "number": "361556",
+    "deviceMac": "78:05:41:1C:37:86",
+    "deviceKey": "gBiKeWkd",
+    "iotImei": "866770052403186"
+  },
+  {
+    "number": "332884",
+    "deviceMac": "78:05:41:07:B3:51",
+    "deviceKey": "gBiKeWkd",
+    "iotImei": "860517048911822"
+  },
+  {
+    "number": "356465",
+    "deviceMac": "78:05:41:0A:1F:48",
+    "deviceKey": "gBiKeWkd",
+    "iotImei": "860517046421444"
+  },
+  {
+    "number": "356460",
+    "deviceMac": "78:05:41:0D:CE:D5",
+    "deviceKey": "4BKNwi77",
+    "iotImei": "860640056089370"
+  }
+]
