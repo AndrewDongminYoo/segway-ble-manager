@@ -13,6 +13,7 @@ import com.segwaydiscovery.nbiot.bean.QueryIoTInfomation
 import com.segwaydiscovery.nbiot.bean.QueryVehicleInformation
 import com.segwaydiscovery.nbiot.interfaces.*
 import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_CONNECTED
+import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_DISCONNECTED
 
 class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) :
     SegwayBleManagerSpec(reactContext) {
@@ -101,6 +102,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
             putBoolean("result", false)
             putString("errorMessage", error.localizedMessage)
             putString("errorName", error.javaClass.name)
+            putString("errorStack", error.stackTraceToString())
         }
         Log.e(BLUETOOTH_KIT, "$eventName: $error")
         sendEvent(eventName, params)
@@ -123,51 +125,55 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         }
     }
 
-    override fun connect(deviceMac: String?, deviceKey: String?, iotImei: String?): Boolean {
+    override fun connect(deviceMac: String?, deviceKey: String?, iotImei: String?) {
         val connectResult = "ConnectResult"
-        var result = false
         try {
             bluetoothKit!!.connect(deviceMac, deviceKey, iotImei) {
                 OnConnectionStateChangeListener { state ->
-                    result = state == STATE_CONNECTED
-                    onSuccess(connectResult, result)
+                    when (state) {
+                        STATE_CONNECTED -> {
+                            Log.d(BLUETOOTH_KIT, "STATE_CONNECTED")
+                            onSuccess(connectResult, true)
+                        }
+                        STATE_DISCONNECTED -> {
+                            Log.d(BLUETOOTH_KIT, "STATE_DISCONNECTED")
+                            onFailure(connectResult, "The connection was disconnected, please reconnect it", -1001)
+                        }
+                        else -> {  // STATE_CONNECTED_FAILED
+                            Log.d(BLUETOOTH_KIT, "STATE_CONNECTED_FAILED")
+                            onFailure(connectResult, "Connecting failed, Check again the BLE parameters", -1004)
+                        }
+                    }
                 }
             }
         } catch (error: Exception) {
             onError(connectResult, error)
         }
-        return result
     }
 
     @ReactMethod
-    override fun disconnect(): Boolean {
+    override fun disconnect() {
         val disconnectResult = "DisconnectResult"
-        return try {
+        try {
             if (bluetoothKit != null) {
                 bluetoothKit!!.disConnect()
                 onSuccess(disconnectResult, true)
-                true
             } else {
                 onSuccess(disconnectResult, false)
-                false
             }
         } catch (error: Exception) {
             onError(disconnectResult, error)
-            false
         }
     }
 
     @ReactMethod
-    override fun unLock(): Boolean {
+    override fun unLock() {
         val unlockResult = "UnlockResult"
-        var result = false
         try {
             bluetoothKit!!.unLock(object : OnUnlockListener {
                 override fun onUnlockSuccess() {
                     onSuccess(unlockResult, true)
-                    result = true
                 }
-
                 override fun onUnlockFail(code: Int, msg: String) {
                     onFailure(unlockResult, msg, code)
                 }
@@ -175,20 +181,16 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         } catch (error: Exception) {
             onError(unlockResult, error)
         }
-        return result
     }
 
     @ReactMethod
-    override fun lock(): Boolean {
+    override fun lock() {
         val lockResult = "LockResult"
-        var result = false
         try {
             bluetoothKit!!.lock(object : OnLockListener {
                 override fun onLockSuccess() {
                     onSuccess(lockResult, true)
-                    result = true
                 }
-
                 override fun onLockFail(code: Int, msg: String) {
                     onFailure(lockResult, msg, code)
                 }
@@ -196,7 +198,6 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         } catch (error: Exception) {
             onError(lockResult, error)
         }
-        return result
     }
 
     @ReactMethod
@@ -205,7 +206,6 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         try {
             bluetoothKit!!.queryVehicleInformation(object : OnQueryVehicleInfoListener {
                 override fun onQueryVehicleInfoSuccess(information: QueryVehicleInformation) {
-                    Log.d(BLUETOOTH_KIT, "QueryVehicleInfoSuccess")
                     val params = Arguments.createMap().apply {
                         putBoolean("result", true)
                         putInt("powerPercent", information.powerPercent)
@@ -216,9 +216,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
                     }
                     sendEvent(eventName, params)
                 }
-
                 override fun onQueryVehicleInfoFail(code: Int, msg: String) {
-                    Log.e(BLUETOOTH_KIT, "QueryVehicleInfoFail!--$code--$msg")
                     onFailure(eventName, msg, code)
                 }
             })
@@ -229,14 +227,12 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
 
 
     @ReactMethod
-    override fun openBatteryCover(): Boolean {
+    override fun openBatteryCover() {
         val openCoverResult = "OpenCoverResult"
-        var result = false
         try {
             bluetoothKit!!.openBatteryCover(object : OnOpenBatteryCoverListener {
                 override fun OnOpenBatteryCoverSuccess() {
                     onSuccess(openCoverResult, true)
-                    result = true
                 }
                 override fun OnOpenBatteryCoverFail(code: Int, msg: String) {
                     onFailure(openCoverResult, msg, code)
@@ -245,18 +241,15 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         } catch (error: Exception) {
             onError(openCoverResult, error)
         }
-        return result
     }
 
     @ReactMethod
-    override fun openSaddle(): Boolean {
+    override fun openSaddle() {
         val openSaddleResult = "OpenSaddleResult"
-        var result = false
         try {
             bluetoothKit!!.openSaddle(object : OnOpenSaddleListener {
                 override fun onOpenSaddleSuccess() {
                     onSuccess(openSaddleResult, true)
-                    result = true
                 }
                 override fun onOpenSaddleFail(code: Int, msg: String) {
                     onFailure(openSaddleResult, msg, code)
@@ -265,18 +258,15 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         } catch (error: Exception) {
             onError(openSaddleResult, error)
         }
-        return result
     }
 
     @ReactMethod
-    override fun openTailBox(): Boolean {
+    override fun openTailBox() {
         val openTailBoxResult = "OpenTailBoxResult"
-        var result = false
         try {
             bluetoothKit!!.openTailBox(object : OnOpenTailBoxListener {
                 override fun onOpenTailBoxSuccess() {
                     onSuccess(openTailBoxResult, true)
-                    result = true
                 }
                 override fun onOpenTailBoxFail(code: Int, msg: String) {
                     onFailure(openTailBoxResult, msg, code)
@@ -285,7 +275,6 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         } catch (error: Exception) {
             onError(openTailBoxResult, error)
         }
-        return result
     }
 
     override fun queryIoTInformation() {
@@ -305,7 +294,6 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
                 sendEvent(eventName, params)
             }
             override fun onQueryIoTInfoFail(code: Int, msg: String) {
-                Log.e(BLUETOOTH_KIT, "QueryIoTInfoFail!--$code--$msg")
                 onFailure(eventName, msg, code)
             }
         })

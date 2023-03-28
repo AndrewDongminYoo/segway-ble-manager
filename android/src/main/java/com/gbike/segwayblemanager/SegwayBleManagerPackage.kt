@@ -35,7 +35,7 @@ class SegwayBleManagerPackage : TurboReactPackage() {
              * [NativeSegwayBleManagerSpec]. If you can't find that native interfaces (built with Codegen),
              * so don't bother replacing it with something else or trying to find it,
              * just re-build it with Gradle! it'll solve it.
-             * [ReactModuleInfo] Method's last parameter is [isTurboModule] that the [BuildConfig] is for.
+             * [ReactModuleInfo] Method's last parameter is [isTurboModule][BuildConfig.IS_NEW_ARCHITECTURE_ENABLED] that the [BuildConfig] is for.
              */
             val isTurboModule: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
             moduleInfo[SegwayBleManagerModule.NAME] = ReactModuleInfo(
