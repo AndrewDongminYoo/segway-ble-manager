@@ -1,5 +1,6 @@
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import SegwayBleManager from './NativeSegwayBleManager';
+import { validateKeyCode, validateScooter } from './utils';
 
 const LINKING_ERROR =
   "The package '@gbike/segway-ble-manager' doesn't seem to be linked. Make sure: \n\n" +
@@ -37,7 +38,7 @@ const Spec = (
       )
 ) as typeof SegwayBleManager;
 
-const eventEmitter = new NativeEventEmitter(Spec);
+export const eventEmitter = new NativeEventEmitter(Spec);
 
 export interface Scooter {
   number: string;
@@ -45,22 +46,23 @@ export interface Scooter {
   deviceKey: string;
   iotImei: string;
 }
-export interface IoTInformation {
+export interface VehicleInfo {
   powerPercent: number;
   speedMode: number;
   currentSpeed: number;
   totalRange: number;
   remainingRange: number;
 }
-export interface VehicleInfo {
-  voltage: string;
-  majorVersionNumber: string;
-  minorVersionNumber: string;
-  updateTimes: string;
-  isLocked: string;
+export interface IoTInformation {
+  highBatteryVoltage: number;
+  majorVersionNumber: number;
+  minorVersionNumber: number;
+  updateTimes: number;
+  isLocked: boolean;
+  voltage: number;
 }
 
-enum Events {
+export enum Events {
   CONNECT = 'ConnectResult',
   DISCONNECT = 'DisconnectResult',
   INITIALIZE = 'InitializeResult',
@@ -85,63 +87,64 @@ type mListener<T extends Events> = (
     : unknown
 ) => void;
 
-const submitListenerOnce = <T extends Events>(eventType: T, listener?: mListener<T>) => {
+const submitListener = <T extends Events>(eventType: T, listener?: mListener<T>) => {
   const count = eventEmitter.listenerCount(eventType);
   if (count > 0) {
     eventEmitter.removeAllListeners(eventType);
   }
-  listener = listener ?? ((data) => console.debug(`${eventType} Event: ${data}`));
+  listener = listener ?? ((data) => console.debug(`${eventType} Event: ${JSON.stringify(data)}`));
   return eventEmitter.addListener(eventType, listener);
 };
 
 export function init(secretKey: string, operatorCode: string, isDebug: boolean) {
+  validateKeyCode(operatorCode, secretKey, isDebug);
   Spec.init(secretKey, operatorCode, isDebug);
-  submitListenerOnce(Events.INITIALIZE);
+  submitListener(Events.INITIALIZE);
 }
 
 export function connect(deviceMac: string, deviceKey: string, iotImei: string) {
-  console.debug(`🚀 connect(deviceMac: ${deviceMac}, deviceKey: ${deviceKey}, iotImei: ${iotImei}):`);
+  validateScooter(deviceMac, deviceKey, iotImei);
   Spec.connect(deviceMac, deviceKey, iotImei);
-  submitListenerOnce(Events.CONNECT);
+  submitListener(Events.CONNECT);
 }
 
 export function disconnect() {
   Spec.disconnect();
-  submitListenerOnce(Events.DISCONNECT);
+  submitListener(Events.DISCONNECT);
 }
 
 export function unLock() {
   Spec.unLock();
-  submitListenerOnce(Events.UNLOCK);
+  submitListener(Events.UNLOCK);
 }
 
 export function lock() {
   Spec.lock();
-  submitListenerOnce(Events.LOCK);
+  submitListener(Events.LOCK);
 }
 
 export function openBatteryCover() {
   Spec.openBatteryCover();
-  submitListenerOnce(Events.OPEN_COVER);
+  submitListener(Events.OPEN_COVER);
 }
 
 export function openSaddle() {
   Spec.openSaddle();
-  submitListenerOnce(Events.OPEN_SADDLE);
+  submitListener(Events.OPEN_SADDLE);
 }
 
 export function openTailBox() {
   Spec.openTailBox();
-  submitListenerOnce(Events.OPEN_TAIL_BOX);
+  submitListener(Events.OPEN_TAIL_BOX);
 }
 
 export function queryVehicleInformation(listener: mListener<Events.VEHICLE_INFO>) {
   Spec.queryVehicleInformation();
-  return submitListenerOnce(Events.VEHICLE_INFO, listener);
+  return submitListener(Events.VEHICLE_INFO, listener);
 }
 
 // Using infer to extract the listener type
 export function queryIoTInformation(listener: mListener<Events.IOT_INFO>) {
   Spec.queryIoTInformation();
-  return submitListenerOnce(Events.IOT_INFO, listener);
+  return submitListener(Events.IOT_INFO, listener);
 }
