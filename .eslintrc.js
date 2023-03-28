@@ -20,6 +20,7 @@ module.exports = {
     'react-native/no-color-literals': 'off',
     'react-native/no-inline-styles': 'off',
     'react-native/sort-styles': 'off',
+    'react/react-in-jsx-scope': 'off',
     'no-trailing-spaces': [
       'error',
       {

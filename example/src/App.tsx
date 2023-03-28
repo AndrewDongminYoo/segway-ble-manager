@@ -17,24 +17,15 @@ import {
 import ScooterButton from './Scooter';
 import scooters from './data/devices.json';
 import { getRequiredPermissions } from './permission';
-
-const BLE_OPERATION_CODE: string = process.env.BLE_OPERATION_CODE as string;
-const BLE_SECRET_KEY: string = process.env.BLE_SECRET_KEY as string;
+import { BLE_INIT_OPERATION_CODE, BLE_INIT_SECRET_KEY } from '@env';
 
 const App = () => {
-  const [iotInformation, setIoTInformation] = React.useState<IoTInformation>();
+  const [ioTInformation, setIoTInformation] = React.useState<IoTInformation>();
   const [vehicleInformation, setVehicleInformation] = React.useState<VehicleInfo>();
-  const [scooter, setScooter] = React.useState<Scooter>({
-    number: '356463',
-    deviceMac: 'FA:B7:08:B5:B5:46',
-    deviceKey: 'gBiKeWkd',
-    iotImei: '861123056350117',
-  });
+  const [scooter, setScooter] = React.useState<Scooter>(scooters[0] as Scooter);
 
-  // lifecycle
   React.useEffect(() => {
-    // instance 생성
-    init(BLE_SECRET_KEY, BLE_OPERATION_CODE, true);
+    init(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
     // get required permissions
     getRequiredPermissions();
   }, []);
@@ -42,7 +33,7 @@ const App = () => {
   const getVehicleInformation = () => {
     queryVehicleInformation((data) => {
       setVehicleInformation(data);
-      console.log(JSON.stringify(vehicleInformation));
+      console.log(JSON.stringify(data));
     });
   };
 
@@ -80,7 +71,8 @@ const App = () => {
         contentContainerStyle={{ flex: 1 }}
         style={styles.backgroundStyle}
       >
-        <InfoSection iotInformation={iotInformation} />
+        <InfoSection />
+        <InfoSection {...{ ioTInformation, vehicleInformation }} />
         <View style={styles.scooterGroup}>
           {scooters.map((gco, _) => {
             return (
