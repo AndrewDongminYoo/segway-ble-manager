@@ -49,6 +49,9 @@ android {
         targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         signingConfig signingConfigs.debug
+        ndk {
+            abiFilters "armeabi-v7a", "x86", "x86_64", "arm64-v8a"
+        }
     }
     buildTypes {
         release {
@@ -67,6 +70,7 @@ android {
 
     sourceSets {
         main {
+            jniLibs.srcDirs += ["lib"]
             //noinspection GroovyImplicitNullArgumentCall
             if (isNewArchitectureEnabled()) {
                 java.srcDirs += [
