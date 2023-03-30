@@ -1,3 +1,4 @@
+// @ts-nocheck
 const os = require('os');
 const path = require('path');
 const child_process = require('child_process');

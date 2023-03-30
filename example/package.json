@@ -14,6 +14,7 @@
     "gradle": "(cd android && ./gradlew generateCodegenArtifactsFromSchema)",
     "pods": "(cd ios && pod install --no-repo-update)",
     "postpods": "node node_modules/react-native/scripts/generate-codegen-artifacts.js -p . -o ios",
+    "postinstall": "react-native setup-ios-permissions",
     "start": "react-native start --reset-cache",
     "watch": "tsc --noEmit --watch"
   },
@@ -40,5 +41,10 @@
   "types": "./types/env.d.ts",
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "reactNativePermissionsIOS": [
+    "BluetoothPeripheral",
+    "LocationAlways",
+    "LocationWhenInUse"
+  ]
 }

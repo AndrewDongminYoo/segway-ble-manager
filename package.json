@@ -50,13 +50,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://gitlab.com/AndrewDongminYoo/segway-ble-manager",
-  "author": "Dongmin,Yoo <drew.yoo@gbike.io> (https://gitlab.com/AndrewDongminYoo)",
+  "repository": "https://github.com/AndrewDongminYoo/segway-ble-manager",
+  "author": "Dongmin,Yoo <drew.yoo@gbike.io> (https://github.com/AndrewDongminYoo)",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/AndrewDongminYoo/segway-ble-manager/issues"
+    "url": "https://github.com/AndrewDongminYoo/segway-ble-manager/issues"
   },
-  "homepage": "https://gitlab.com/AndrewDongminYoo/segway-ble-manager#readme",
+  "homepage": "https://github.com/AndrewDongminYoo/segway-ble-manager#readme",
   "publishConfig": {
     "access": "restricted",
     "tag": "latest",
