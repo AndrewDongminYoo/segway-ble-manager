@@ -7,8 +7,11 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
   ],
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'jsdoc'],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2018,
+  },
   rules: {
     'prettier/prettier': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
@@ -27,7 +30,30 @@ module.exports = {
         ignoreComments: true,
       },
     ],
+    // JsDoc
+    'jsdoc/check-param-names': 'error',
+    'jsdoc/check-tag-names': 'warn', // test
+    'jsdoc/check-types': 'warn', // test
+    'jsdoc/newline-after-description': 'error',
+    'jsdoc/require-description-complete-sentence': 'warn', // test
+    'jsdoc/require-example': 'warn', // test
+    'jsdoc/require-hyphen-before-param-description': 'warn', // test
+    'jsdoc/require-param': 'error',
+    'jsdoc/require-param-description': 'error',
+    'jsdoc/require-param-type': 'error',
+    'jsdoc/require-returns-description': 'warn', // test
+    'jsdoc/require-returns-type': 'error',
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'never',
+      },
+    ],
   },
-  ignorePatterns: ['node_modules/', 'lib/'],
+  ignorePatterns: ['**/node_modules/', '**/lib/', '**/scripts/'],
   env: { 'jest/globals': true },
 };
