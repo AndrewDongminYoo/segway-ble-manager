@@ -43,14 +43,19 @@ const App = () => {
     });
   };
 
+  const connectWithDevice = () => {
+    const { deviceKey, deviceMac, iotImei } = scooter;
+    connect(deviceMac, deviceKey, iotImei);
+  };
+
   // ui renderer
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <StatusBar barStyle={'dark-content'} />
       <View>
         <View style={styles.buttonGroup}>
-          <Button onPress={() => connect(scooter.deviceMac, scooter.deviceKey, scooter.iotImei)} title="Connect" />
-          <Button onPress={() => disconnect()} title="Disconnect" />
+          <Button onPress={connectWithDevice} title="Connect" />
+          <Button onPress={disconnect} title="Disconnect" />
         </View>
         <View style={styles.buttonGroup}>
           <Button onPress={unLock} title="UnLock" />
@@ -67,11 +72,10 @@ const App = () => {
         </View>
       </View>
       <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={{ flex: 1 }}
+        contentInsetAdjustmentBehavior="scrollableAxes"
+        // contentContainerStyle={{ flex: 1 }}
         style={styles.backgroundStyle}
       >
-        <InfoSection />
         <InfoSection {...{ ioTInformation, vehicleInformation }} />
         <View style={styles.scooterGroup}>
           {scooters.map((gco, _) => {
@@ -80,7 +84,6 @@ const App = () => {
                 selected={gco.number === scooter.number}
                 setScooter={setScooter}
                 scooter={gco}
-                style={undefined}
                 key={gco.number}
               />
             );
@@ -92,14 +95,6 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
   backgroundStyle: {
     backgroundColor: '#F3F3F3',
     flex: 1,
@@ -108,9 +103,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 10,
-  },
-  highlight: {
-    fontWeight: '700',
   },
   scooterGroup: {
     height: 180,

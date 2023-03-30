@@ -1,6 +1,7 @@
 import React from 'react';
-import { ColorValue, Platform, Pressable, PressableProps, StyleProp, Text, TextStyle, ViewStyle } from 'react-native';
-import { Scooter } from '@gbike/segway-ble-manager';
+import type { ColorValue, StyleProp, TextStyle, TouchableOpacityProps, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import type { Scooter } from '@gbike/segway-ble-manager';
 
 const rnColor: Record<string, ColorValue> = {
   primary: '#1292B4',
@@ -19,11 +20,11 @@ export default function ScooterButton({
   selected,
   ...props
 }: {
-  style: StyleProp<ViewStyle | TextStyle>;
+  style?: StyleProp<ViewStyle | TextStyle>;
   selected: boolean;
   scooter: Scooter;
   setScooter: React.Dispatch<React.SetStateAction<Scooter>>;
-} & Omit<PressableProps, 'children'>) {
+} & Omit<TouchableOpacityProps, 'children'>) {
   const primeColor = selected ? rnColor.primary : rnColor.dark;
   const containerStyle: StyleProp<ViewStyle | TextStyle> = [
     {
@@ -35,8 +36,22 @@ export default function ScooterButton({
   ];
 
   return (
-    <Pressable style={containerStyle} onPress={() => setScooter(scooter)} {...props}>
-      <Text>{scooter.number}</Text>
-    </Pressable>
+    <TouchableOpacity style={[containerStyle, styles.container]} onPress={() => setScooter(scooter)} {...props}>
+      <Text>SCOOTER_DEVICE_NUMBS: {scooter.number}</Text>
+      <Text>DEVICE_BLUETOOTH_KEY: {scooter.deviceKey}</Text>
+      <Text>DEVICE_MAC_ADDRESSES: {scooter.deviceMac}</Text>
+      <Text>DEVICE_IOT_IMEI_NUMB: {scooter.iotImei}</Text>
+    </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    margin: 10,
+    alignSelf: 'stretch',
+    overflow: 'scroll',
+  },
+});

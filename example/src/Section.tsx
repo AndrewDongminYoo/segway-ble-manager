@@ -1,18 +1,16 @@
 /**
- * Segway ble library example project
+ * Segway ble library example project.
  */
 
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { type ButtonProps, StyleSheet, Text, View } from 'react-native';
+import React, { type PropsWithChildren } from 'react';
 import { IoTInformation, VehicleInfo } from '@gbike/segway-ble-manager';
 
 // ui renderer
-function Section({ children, title }: { children?: React.ReactNode; title: string }) {
+function Section({ children, title }: PropsWithChildren<ButtonProps>) {
   return (
     <View style={styles.sectionContainer}>
-      <Text style={styles.sectionTitle}>{title}</Text>
+      <Text style={styles.sectionTitle}>{title.toUpperCase()}</Text>
       <Text style={styles.sectionDescription}>{children}</Text>
     </View>
   );
@@ -27,40 +25,46 @@ function InfoSection({
 }) {
   return (
     <View>
-      <View>
-        <Section title="highBatteryVoltage">{iotInformation?.highBatteryVoltage}</Section>
-        <Section title="isLocked">{iotInformation?.isLocked}</Section>
-        <Section title="majorVersionNumber">{iotInformation?.majorVersionNumber}</Section>
-        <Section title="minorVersionNumber">{iotInformation?.minorVersionNumber}</Section>
-        <Section title="updateTimes">{iotInformation?.updateTimes}</Section>
-        <Section title="voltage">{iotInformation?.voltage}</Section>
+      <View style={styles.columnStyle}>
+        <Section title={'is locked'}>{iotInformation?.isLocked}</Section>
+        <Section title={'voltage'}>{iotInformation?.voltage}</Section>
+        <Section title={'high battery voltage'}>{iotInformation?.highBatteryVoltage}</Section>
+        <Section title={'update times'}>{iotInformation?.updateTimes}</Section>
+        <Section title={'major version number'}>{iotInformation?.majorVersionNumber}</Section>
+        <Section title={'minor version number'}>{iotInformation?.minorVersionNumber}</Section>
       </View>
-      <View>
-        <Section title="powerPercent">{vehicleInformation?.powerPercent}</Section>
-        <Section title="speedMode">{vehicleInformation?.speedMode}</Section>
-        <Section title="currentSpeed">{vehicleInformation?.currentSpeed}</Section>
-        <Section title="totalRange">{vehicleInformation?.totalRange}</Section>
-        <Section title="remainingRange">{vehicleInformation?.remainingRange}</Section>
+      <View style={styles.columnStyle}>
+        <Section title={'power percent'}>{vehicleInformation?.powerPercent}</Section>
+        <Section title={'speed mode'}>{vehicleInformation?.speedMode}</Section>
+        <Section title={'current speed'}>{vehicleInformation?.currentSpeed}</Section>
+        <Section title={'total range'}>{vehicleInformation?.totalRange}</Section>
+        <Section title={'remaining range'}>{vehicleInformation?.remainingRange}</Section>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  columnStyle: {
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 12,
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: 12,
     fontWeight: '600',
-    color: Colors.black,
+    color: '#000',
+    textTransform: 'uppercase',
   },
   sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
+    fontSize: 12,
     fontWeight: '400',
-    color: Colors.black,
+    color: '#000',
   },
 });
 
