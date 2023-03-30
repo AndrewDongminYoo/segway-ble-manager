@@ -118,6 +118,10 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('~/development/release.keystore')
+            keyAlias 'my-key-release'
+        }
     }
     buildTypes {
         debug {
@@ -126,7 +130,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -168,9 +172,9 @@ dependencies {
 
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:$FRESCO_VERSION")
     if (hermesEnabled.toBoolean()) {
-        implementation("com.facebook.react:hermes-android")
+        implementation 'com.facebook.react:hermes-android:+'
     } else {
-        implementation("org.webkit:android-jsc:+")
+        implementation 'org.webkit:android-jsc-intl:+'
     }
 }
 
