@@ -128,22 +128,11 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
     override fun connect(deviceMac: String?, deviceKey: String?, iotImei: String?) {
         val connectResult = "ConnectResult"
         try {
-            bluetoothKit!!.connect(deviceMac, deviceKey, iotImei) {
-                OnConnectionStateChangeListener { state ->
-                    when (state) {
-                        STATE_CONNECTED -> {
-                            Log.d(BLUETOOTH_KIT, "STATE_CONNECTED")
-                            onSuccess(connectResult, true)
-                        }
-                        STATE_DISCONNECTED -> {
-                            Log.d(BLUETOOTH_KIT, "STATE_DISCONNECTED")
-                            onFailure(connectResult, "The connection was disconnected, please reconnect it", -1001)
-                        }
-                        else -> {  // STATE_CONNECTED_FAILED
-                            Log.d(BLUETOOTH_KIT, "STATE_CONNECTED_FAILED")
-                            onFailure(connectResult, "Connecting failed, Check again the BLE parameters", -1004)
-                        }
-                    }
+            bluetoothKit!!.connect(deviceMac, deviceKey, iotImei) { state ->
+                when (state) {
+                    STATE_CONNECTED -> onSuccess(connectResult, true)
+                    STATE_DISCONNECTED -> onFailure(connectResult, STRING_DISCONNECTED, -1001)
+                    else -> onFailure(connectResult, STRING_CONN_FAILURE, -1004)
                 }
             }
         } catch (error: Exception) {
@@ -205,14 +194,19 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         val eventName = "VehicleInfoResult"
         try {
             bluetoothKit!!.queryVehicleInformation(object : OnQueryVehicleInfoListener {
+                @Suppress("DEPRECATION")
                 override fun onQueryVehicleInfoSuccess(information: QueryVehicleInformation) {
                     val params = Arguments.createMap().apply {
                         putBoolean("result", true)
-                        putInt("powerPercent", information.powerPercent)
+                        putInt("currentBatteryLevel", information.currentBatteryLevel)
                         putInt("currentMode", information.currentMode)
+                        putInt("currentSpeed", information.currentSpeed)
+                        putInt("powerPercent", information.powerPercent)
+                        putInt("range", information.range)
+                        putInt("remainingRange", information.remainingRange)
+                        putInt("singleMileage", information.singleMileage)
                         putInt("speedMode", information.speedMode)
                         putInt("totalRange", information.totalRange)
-                        putInt("remainingRange", information.remainingRange)
                     }
                     sendEvent(eventName, params)
                 }
@@ -280,13 +274,18 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
     override fun queryIoTInformation() {
         val eventName = "IoTInfoResult"
         bluetoothKit!!.queryIoTInformation(object : OnQueryIoTInfoListener {
+            @Suppress("DEPRECATION")
             /* cspell:disable-next-line */
             override fun onQueryIoTInfoSuccess(ioTInformation: QueryIoTInfomation) {
                 val params = Arguments.createMap().apply {
                     putBoolean("result", true)
                     putInt("highBatteryVoltage", ioTInformation.highBatteryVoltage)
+                    putInt("lowBatteryVoltage", ioTInformation.lowBatteryVoltage)
+                    putInt("powerStatus", ioTInformation.powerStatus)
+                    putInt("reserve", ioTInformation.reserve)
                     putInt("majorVersionNumber", ioTInformation.majorVersionNumber)
                     putInt("minorVersionNumber", ioTInformation.minorVersionNumber)
+                    putInt("versionRevisions", ioTInformation.versionRevisions)
                     putInt("updateTimes", ioTInformation.updateTimes)
                     putInt("voltage", ioTInformation.voltage)
                     putBoolean("isLocked", ioTInformation.isLocked)
@@ -305,5 +304,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
     companion object {
         const val NAME = "SegwayBleManager"
         const val BLUETOOTH_KIT = "BluetoothKit"
+        const val STRING_DISCONNECTED = "The connection was disconnected, please reconnect it"
+        const val STRING_CONN_FAILURE = "Connecting failed, Check again the BLE parameters"
     }
 }
