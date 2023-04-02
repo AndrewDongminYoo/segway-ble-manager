@@ -118,6 +118,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
             NBIotBle.getInstance().init(secretKey, operatorCode, isDebug)
             bluetoothKit = BluetoothKit()
             bluetoothKit!!.init(reactContext)
+            bluetoothKit!!.debugEnabled(isDebug)
             onSuccess(initializeResult, true)
         } catch (error: Exception) {
             onError(initializeResult, error)

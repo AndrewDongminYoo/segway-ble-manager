@@ -1,6 +1,6 @@
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import SegwayBleManager from './NativeSegwayBleManager';
-import { validateKeyCode, validateScooter } from './utils';
+import { logger, validateKeyCode, validateScooter } from './utils';
 
 const LINKING_ERROR =
   "The package '@gbike/segway-ble-manager' doesn't seem to be linked. Make sure: \n\n" +
@@ -273,7 +273,7 @@ const submitListener = <T extends Events>(eventType: T, listener?: mListener<T>)
   if (count > 0) {
     eventEmitter.removeAllListeners(eventType);
   }
-  listener = listener ?? ((data) => console.debug(`${eventType} Event: ${JSON.stringify(data)}`));
+  listener = listener ?? ((data) => logger.debug(`${eventType} Event: ${JSON.stringify(data)}`));
   return eventEmitter.addListener(eventType, listener);
 };
 
