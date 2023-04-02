@@ -629,7 +629,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 8fa50b38df6b992c76537993a2b0553d3b088004
   ReactCommon: b49a4b00ca6d181ff74b17c12b2d59ac4add0bde
   RNPermissions: afeeeab5f8614fc0eb0dd091537e1c19d2c0476c
-  SegwayBleManager: 82d906a893da0f41e58da0a33d67715783b2f522
+  SegwayBleManager: bddc89afdaf5ebc5cae166efd72a407737f364c7
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

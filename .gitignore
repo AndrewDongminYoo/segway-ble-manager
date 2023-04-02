@@ -72,3 +72,5 @@ lib/
 # Environment
 .env
 .dccache
+
+.wakatime-project
