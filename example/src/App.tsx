@@ -23,6 +23,8 @@ const App = () => {
   const [ioTInformation, setIoTInformation] = React.useState<IoTInformation>();
   const [vehicleInformation, setVehicleInformation] = React.useState<VehicleInfo>();
   const [scooter, setScooter] = React.useState<Scooter>(scooters[0] as Scooter);
+  const [timer, setTimer] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     init(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
@@ -30,23 +32,43 @@ const App = () => {
     getRequiredPermissions();
   }, []);
 
-  const getVehicleInformation = () => {
+  React.useEffect(() => {
+    let intervalId: NodeJS.Timer;
+    if (timer > 0) {
+      intervalId = setInterval(() => {
+        setTimer(timer - 1);
+      }, 1000);
+    }
+    return () => {
+      setLoading(false);
+      return clearInterval(intervalId);
+    };
+  }, [timer]);
+
+  function getVehicleInformation() {
     queryVehicleInformation((data) => {
       setVehicleInformation(data);
       console.log(JSON.stringify(data));
     });
-  };
+  }
 
-  const getIoTInformation = () => {
+  function getIoTInformation() {
     queryIoTInformation((data) => {
       setIoTInformation(data);
+      console.log(JSON.stringify(data));
     });
-  };
+  }
 
-  const connectWithDevice = () => {
-    const { deviceKey, deviceMac, iotImei } = scooter;
-    connect(deviceMac, deviceKey, iotImei);
-  };
+  function connectWithDevice() {
+    if (timer > 0 || loading) {
+      return;
+    } else {
+      setTimer(60);
+      setLoading(true);
+      const { deviceKey, deviceMac, iotImei } = scooter;
+      connect(deviceMac, deviceKey, iotImei);
+    }
+  }
 
   // ui renderer
   return (
@@ -54,7 +76,7 @@ const App = () => {
       <StatusBar barStyle={'dark-content'} />
       <View>
         <View style={styles.buttonGroup}>
-          <Button onPress={connectWithDevice} title="Connect" />
+          <Button onPress={connectWithDevice} disabled={loading || timer > 0} title="Connect" />
           <Button onPress={disconnect} title="Disconnect" />
         </View>
         <View style={styles.buttonGroup}>
@@ -76,7 +98,7 @@ const App = () => {
         // contentContainerStyle={{ flex: 1 }}
         style={styles.backgroundStyle}
       >
-        <InfoSection {...{ ioTInformation, vehicleInformation }} />
+        <InfoSection iotInformation={ioTInformation} vehicleInformation={vehicleInformation} />
         <View style={styles.scooterGroup}>
           {scooters.map((gco, _) => {
             return (
