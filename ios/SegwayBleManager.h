@@ -18,15 +18,20 @@
 - (void)init:(NSString *)secretKey
 operatorCode:(NSString *)operatorCode
      isDebug:(BOOL)isDebug;
-- (NSNumber *)connect:(NSString *)deviceMac
-            deviceKey:(NSString *)deviceKey
-              iotImei:(NSString *)iotImei;
-- (NSNumber *)disconnect;
-- (NSNumber *)unLock;
-- (NSNumber *)lock;
-- (void)vehicleInfo;
-- (NSNumber *)openBatteryCover;
-- (NSNumber *)openSaddle;
-- (NSNumber *)openTailBox;
+- (void)connect:(NSString *)deviceMac
+      deviceKey:(NSString *)deviceKey
+        iotImei:(NSString *)iotImei;
+- (void)disconnect;
+- (void)unLock;
+- (void)lock;
+- (void)openBatteryCover;
+- (void)openSaddle;
+- (void)openTailBox;
+- (void)queryVehicleInformation;
+- (void)queryIoTInformation;
+- (void)addListener:(NSString *)eventType;
+- (void)removeListeners:(double)count;
+- (NSDictionary *)constantsToExport;
+- (NSDictionary *)getConstants;
 
 @end

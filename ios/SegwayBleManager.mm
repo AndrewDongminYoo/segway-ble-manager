@@ -24,14 +24,17 @@ RCT_EXPORT_MODULE();
     ];
 }
 
-- (void)onSuccess:(NSString *)eventName result:(BOOL)result {
+- (void)onSuccess:(NSString *)eventName
+           result:(BOOL)result {
     NSString * toBool = result ? @"true" : @"false";
     NSLog(@"BluetoothKit : %@: %@", eventName, toBool);
     [self sendEventWithName:eventName body:@{
                   @"result": [NSNumber numberWithBool:result]}];
 }
 
-- (void)onFailure:(NSString *)eventName message:(NSString *)message code:(NSInteger)code {
+- (void)onFailure:(NSString *)eventName
+          message:(NSString *)
+     message code:(NSInteger)code {
     [self sendEventWithName:eventName
                        body:@{
                   @"result": @(NO),
@@ -56,9 +59,12 @@ RCT_EXPORT_METHOD(init:(NSString *)secretKey
                                 completionHanlder:^(BOOL isSuccess, NSError * _Nullable error) {
          if (error) {
              NSLog(@"%@", error);
-             [self onFailure:@"InitializeResult" message:error.description code:error.code];
+             [self onFailure:@"InitializeResult"
+                     message:error.description
+                        code:error.code];
          } else {
-             [self onSuccess:@"InitializeResult" result:isSuccess];
+             [self onSuccess:@"InitializeResult"
+                      result:isSuccess];
          }
      }];
 };
@@ -71,154 +77,179 @@ RCT_EXPORT_METHOD(queryIoTInformation) {
     [self.iotController queryIoTInformation];
 };
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(connect:(NSString *)deviceMac
-                                     deviceKey:(NSString *)deviceKey
-                                       iotImei:(NSString *)iotImei) {
+RCT_EXPORT_METHOD(connect:(NSString *)deviceMac
+                deviceKey:(NSString *)deviceKey
+                  iotImei:(NSString *)iotImei) {
     NSLog(@"invoke from RN side: %@,%@,%@", iotImei, deviceMac, deviceKey);
     [self.iotController connectDeviceByIMEI:iotImei
                                  macAddress:deviceMac
                                andDeviceKey:deviceKey];
-    return @(YES);
 };
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(disconnect) {
+RCT_EXPORT_METHOD(disconnect) {
     [self.iotController disconnect];
-    return @(YES);
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(unLock) {
+RCT_EXPORT_METHOD(unLock) {
     [self.iotController unlock];
-    return @(YES);
 };
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(lock) {
+RCT_EXPORT_METHOD(lock) {
     [self.iotController lock];
-    return @(YES);
 };
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(openBatteryCover){
+RCT_EXPORT_METHOD(openBatteryCover){
     [self.iotController openBatteryCover];
-    return @(YES);
 };
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(openSaddle){
+RCT_EXPORT_METHOD(openSaddle){
     [self.iotController openSaddle];
-    return @(YES);
 };
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(openTailBox){
+RCT_EXPORT_METHOD(openTailBox){
     [self.iotController openTailBox];
-    return @(YES);
 };
 
 # pragma mark - NBIoTBleDelegate
 - (void)connectionStateChange:(ConnectionState)state {
     NSLog(@"connection state changed: %ld", state);
-    [self sendEventWithName:@"ConnectResult" body: @(state)];
+    [self sendEventWithName:@"ConnectResult"
+                       body:@(state)];
 }
 
 - (void)connectDeviceOnError:(NSError *)error {
     NSLog(@"connection on error: %@", error);
-    [self onFailure:@"ConnectResult" message:error.description code:error.code];
+    [self onFailure:@"ConnectResult"
+            message:error.description
+               code:error.code];
 }
 
 - (void)bluetoothStateChanged: (CBManagerState)state {
     NSLog(@"bluetooth state changed: %ld", state);
-    [self sendEventWithName:@"ConnectResult" body:@(state)];
+    [self sendEventWithName:@"ConnectResult"
+                       body:@(state)];
 }
 
 /// lock result
 /// @param isSuccess YES or NO
-- (void)lockScooterResult: (BOOL)isSuccess withError: (NSError *_Nullable)error {
+- (void)lockScooterResult:(BOOL)isSuccess
+                withError:(NSError *_Nullable)error {
     if (error) {
-        [self onFailure:@"LockResult" message:error.description code:error.code];
-        return;
+          [self onFailure:@"LockResult"
+                  message:error.description
+                     code:error.code];
+          return;
     }
-    [self sendEventWithName:@"LockResult" body:[NSNumber numberWithBool:isSuccess]];
+    [self sendEventWithName:@"LockResult"
+                       body:[NSNumber numberWithBool:isSuccess]];
 }
 
 /// unlock result
 /// @param isSuccess YES/NO
-- (void)unlockScooterResult: (BOOL)isSuccess withError: (NSError *_Nullable)error {
+- (void)unlockScooterResult:(BOOL)isSuccess
+                  withError:(NSError *_Nullable)error {
     if (error) {
-        [self onFailure:@"UnlockResult" message:error.description code:error.code];
+        [self onFailure:@"UnlockResult"
+                message:error.description
+                   code:error.code];
         return;
     }
-    [self sendEventWithName:@"UnlockResult" body:[NSNumber numberWithBool:isSuccess]];
+    [self sendEventWithName:@"UnlockResult"
+                       body:[NSNumber numberWithBool:isSuccess]];
 }
 
 /// query IoT information
 /// @param iotInfo information model
 /// @param error if error returned, the iotInfo will be nil.
-- (void)queryIoTInformationResult: (NBIoTInfo * _Nullable) iotInfo withError: (NSError *_Nullable)error {
+- (void)queryIoTInformationResult:(NBIoTInfo * _Nullable)iotInfo
+                        withError:(NSError *_Nullable)error {
     if (error) {
-        [self onFailure:@"IoTInfoResult" message:error.description code:error.code];
+        [self onFailure:@"IoTInfoResult"
+                message:error.description
+                   code:error.code];
         return;
     }
     NSLog(@"%@", iotInfo);
-    [self sendEventWithName:@"IoTInfoResult" body:[self dictionaryFromIoTInfo:iotInfo]];
+    [self sendEventWithName:@"IoTInfoResult"
+                       body:[self dictionaryFromIoTInfo:iotInfo]];
 }
 
 /// query scooter information finished
 /// @param vehicleInfo vehicle information
 /// @param error if error returned, the scooterInfo will be nil.
-- (void)queryVehicleInformationResult: (NBVehicleInfo * _Nullable) vehicleInfo withError: (NSError *_Nullable)error {
+- (void)queryVehicleInformationResult:(NBVehicleInfo * _Nullable)vehicleInfo
+                            withError:(NSError *_Nullable)error {
     if (error) {
-        [self onFailure:@"VehicleInfoResult" message:error.description code:error.code];
+        [self onFailure:@"VehicleInfoResult"
+                message:error.description
+                   code:error.code];
         return;
     }
     NSLog(@"%@", vehicleInfo);
-    [self sendEventWithName:@"VehicleInfoResult" body:[self dictionaryFromVehicleInfo:vehicleInfo]];
+    [self sendEventWithName:@"VehicleInfoResult"
+                       body:[self dictionaryFromVehicleInfo:vehicleInfo]];
 }
 
 
 /// open battery cover result
 /// @param isFinished YES/NO
-- (void)openBatteryCoverResult: (BOOL)isFinished withError: (NSError *_Nullable)error {
+- (void)openBatteryCoverResult:(BOOL)isFinished
+                     withError:(NSError *_Nullable)error {
     if (error) {
-        [self onFailure:@"OpenCoverResult" message:error.description code:error.code];
+        [self onFailure:@"OpenCoverResult"
+                message:error.description
+                   code:error.code];
         return;
     }
-    [self sendEventWithName:@"OpenCoverResult" body:[NSNumber numberWithBool:isFinished]];
+    [self sendEventWithName:@"OpenCoverResult"
+                       body:[NSNumber numberWithBool:isFinished]];
 }
 
 /// open saddle result
 /// @param isFinished YES/NO
-- (void)openSaddleResult: (BOOL)isFinished withError: (NSError *_Nullable)error {
+- (void)openSaddleResult:(BOOL)isFinished
+               withError:(NSError *_Nullable)error {
     if (error) {
-        [self onFailure:@"OpenSaddleResult" message:error.description code:error.code];
+        [self onFailure:@"OpenSaddleResult"
+                message:error.description
+                   code:error.code];
         return;
     }
-    [self sendEventWithName:@"OpenSaddleResult" body:[NSNumber numberWithBool:isFinished]];
+    [self sendEventWithName:@"OpenSaddleResult"
+                       body:[NSNumber numberWithBool:isFinished]];
 }
 
 /// open tail box result
 /// @param isFinished YES/NO
-- (void)openTailBoxResult: (BOOL)isFinished withError: (NSError *_Nullable)error {
+- (void)openTailBoxResult:(BOOL)isFinished
+                withError:(NSError *_Nullable)error {
     if (error) {
-        [self onFailure:@"OpenTailBoxResult" message:error.description code:error.code];
+        [self onFailure:@"OpenTailBoxResult"
+                message:error.description
+                   code:error.code];
         return;
     }
-    [self sendEventWithName:@"OpenTailBoxResult" body:[NSNumber numberWithBool:isFinished]];
+    [self sendEventWithName:@"OpenTailBoxResult"
+                       body:[NSNumber numberWithBool:isFinished]];
 }
 
 - (NSDictionary *)dictionaryFromIoTInfo:(NBIoTInfo * _Nullable)iotInfo {
     return @{
         @"voltage": [NSNumber numberWithInt:iotInfo.voltage],
-        @"majorVersionNumber": [NSNumber numberWithInt:iotInfo.majorVersionNumber],
-        @"minorVersionNumber": [NSNumber numberWithInt:iotInfo.minorVersionNumber],
+        @"isLocked": [NSNumber numberWithBool:iotInfo.isLocked],
         @"updateTimes": [NSNumber numberWithInt:iotInfo.updateTimes],
-        @"isLocked": [NSNumber numberWithBool:iotInfo.isLocked]
+        @"minorVersionNumber": [NSNumber numberWithInt:iotInfo.minorVersionNumber],
+        @"majorVersionNumber": [NSNumber numberWithInt:iotInfo.majorVersionNumber],
     };
 };
 
-- (NSDictionary *)dictionaryFromVehicleInfo:(NBVehicleInfo * _Nullable) vehicleInfo {
+- (NSDictionary *)dictionaryFromVehicleInfo:(NBVehicleInfo * _Nullable)vehicleInfo {
     return @{
         @"powerPercent": [NSNumber numberWithInt:vehicleInfo.powerPercent],
-        @"speedMode": @(vehicleInfo.speedMode),
-        @"currentSpeed": @(vehicleInfo.currentSpeed),
-        @"totalRange": @(vehicleInfo.totalRange),
-        @"remainingRange": @(vehicleInfo.remainingRange)
+        @"speedMode": @(vehicleInfo.speedMode), // NS_ENUM(NSUInteger, NBSpeedMode) 1|2|3
+        @"remainingRange": [NSNumber numberWithInt:vehicleInfo.remainingRange],
+        @"totalRange": [NSNumber numberWithInt:vehicleInfo.totalRange],
+        @"currentSpeed": [NSNumber numberWithInt:vehicleInfo.currentSpeed]
     };
 }
 
@@ -231,6 +262,17 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(openTailBox){
 }
 
 - (NSDictionary *)constantsToExport {
+    return [self getConstants];
+}
+
+- (NSDictionary *)getConstants {
+    return @{
+        @"supportedEvents" : [self supportedEvents],
+        @"moduleName" : @"SegwayBleManager",
+    };
+}
+
+- (NSDictionary *)typesToExport {
     return @{
         @"ConnectionStateDisconnected": @(ConnectionStateDisconnected),
         @"ConnectionStateConnected": @(ConnectionStateConnected),
@@ -241,6 +283,12 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(openTailBox){
         @"CBManagerStatePoweredOff": @(CBManagerStatePoweredOff),
         @"CBManagerStatePoweredOn": @(CBManagerStatePoweredOn)
     };
+}
+
+- (void)addListener:(NSString *)eventType {
+}
+
+- (void)removeListeners:(double)count {
 }
 
 @end

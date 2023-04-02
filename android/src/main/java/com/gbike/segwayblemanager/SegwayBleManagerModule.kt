@@ -8,8 +8,7 @@ import com.facebook.react.bridge.WritableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.segwaydiscovery.nbiot.BluetoothKit
 import com.segwaydiscovery.nbiot.NBIotBle
-/* cspell:disable-next-line */
-import com.segwaydiscovery.nbiot.bean.QueryIoTInfomation
+import com.segwaydiscovery.nbiot.bean.QueryIoTInfomation // cspell:disable-line
 import com.segwaydiscovery.nbiot.bean.QueryVehicleInformation
 import com.segwaydiscovery.nbiot.interfaces.*
 import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_CONNECTED
@@ -194,19 +193,21 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         val eventName = "VehicleInfoResult"
         try {
             bluetoothKit!!.queryVehicleInformation(object : OnQueryVehicleInfoListener {
-                @Suppress("DEPRECATION")
-                override fun onQueryVehicleInfoSuccess(information: QueryVehicleInformation) {
+                override fun onQueryVehicleInfoSuccess(vehicleInfo: QueryVehicleInformation) {
                     val params = Arguments.createMap().apply {
                         putBoolean("result", true)
-                        putInt("currentBatteryLevel", information.currentBatteryLevel)
-                        putInt("currentMode", information.currentMode)
-                        putInt("currentSpeed", information.currentSpeed)
-                        putInt("powerPercent", information.powerPercent)
-                        putInt("range", information.range)
-                        putInt("remainingRange", information.remainingRange)
-                        putInt("singleMileage", information.singleMileage)
-                        putInt("speedMode", information.speedMode)
-                        putInt("totalRange", information.totalRange)
+                        putInt("currentMode", vehicleInfo.currentMode)
+                        putInt("powerPercent", vehicleInfo.powerPercent)
+                        putInt("remainingRange", vehicleInfo.remainingRange)
+                        putInt("speedMode", vehicleInfo.speedMode)
+                        putInt("totalRange", vehicleInfo.totalRange)
+                    }
+                    @Suppress("DEPRECATION")
+                    params.apply {
+                        putInt("range", vehicleInfo.range)
+                        putInt("currentSpeed", vehicleInfo.currentSpeed)
+                        putInt("singleMileage", vehicleInfo.singleMileage)
+                        putInt("currentBatteryLevel", vehicleInfo.currentBatteryLevel)
                     }
                     sendEvent(eventName, params)
                 }
@@ -274,21 +275,23 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
     override fun queryIoTInformation() {
         val eventName = "IoTInfoResult"
         bluetoothKit!!.queryIoTInformation(object : OnQueryIoTInfoListener {
-            @Suppress("DEPRECATION")
             /* cspell:disable-next-line */
             override fun onQueryIoTInfoSuccess(ioTInformation: QueryIoTInfomation) {
                 val params = Arguments.createMap().apply {
                     putBoolean("result", true)
                     putInt("highBatteryVoltage", ioTInformation.highBatteryVoltage)
-                    putInt("lowBatteryVoltage", ioTInformation.lowBatteryVoltage)
-                    putInt("powerStatus", ioTInformation.powerStatus)
-                    putInt("reserve", ioTInformation.reserve)
                     putInt("majorVersionNumber", ioTInformation.majorVersionNumber)
                     putInt("minorVersionNumber", ioTInformation.minorVersionNumber)
-                    putInt("versionRevisions", ioTInformation.versionRevisions)
                     putInt("updateTimes", ioTInformation.updateTimes)
                     putInt("voltage", ioTInformation.voltage)
                     putBoolean("isLocked", ioTInformation.isLocked)
+                }
+                @Suppress("DEPRECATION")
+                params.apply {
+                    putInt("reserve", ioTInformation.reserve)
+                    putInt("powerStatus", ioTInformation.powerStatus)
+                    putInt("versionRevisions", ioTInformation.versionRevisions)
+                    putInt("lowBatteryVoltage", ioTInformation.lowBatteryVoltage)
                 }
                 sendEvent(eventName, params)
             }

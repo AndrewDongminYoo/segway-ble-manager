@@ -55,5 +55,10 @@ module.exports = {
     ],
   },
   ignorePatterns: ['**/node_modules/', '**/lib/', '**/scripts/'],
-  env: { 'jest/globals': true },
+  env: {
+    'jest/globals': true,
+    'jest': true,
+    'commonjs': true,
+    'node': true,
+  },
 };
