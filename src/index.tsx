@@ -1,6 +1,7 @@
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import SegwayBleManager from './NativeSegwayBleManager';
 import { logger, validateKeyCode, validateScooter } from './utils';
+import { EmitterSubscription } from 'react-native';
 
 const LINKING_ERROR =
   "The package '@gbike/segway-ble-manager' doesn't seem to be linked. Make sure: \n\n" +
@@ -55,6 +56,19 @@ const Spec = (
  * @description The event emitter of the module.
  */
 export const eventEmitter = new NativeEventEmitter(Spec);
+
+export interface OnSuccess {
+  result: true;
+}
+
+export interface OnFailure {
+  result: false;
+  code?: number;
+  message?: string;
+  errorName?: string;
+  errorStack?: string;
+  errorMessage?: string;
+}
 
 /** Scooter represents a scooter. */
 export interface Scooter {
@@ -247,14 +261,8 @@ export const SupportedEvents = (Spec.getConstants().supportedEvents = Object.val
 /**
  * EventListener type of the supported events what returns the scooter's information.
  */
-type mListener<T extends Events> = (
-  data: T extends Events.CONNECT
-    ? Scooter
-    : T extends Events.IOT_INFO
-    ? IoTInformation
-    : T extends Events.VEHICLE_INFO
-    ? VehicleInfo
-    : unknown
+type EventListener<T extends Events> = (
+  data: T extends Events.IOT_INFO ? IoTInformation : T extends Events.VEHICLE_INFO ? VehicleInfo : OnSuccess
 ) => void;
 
 /**
@@ -264,18 +272,16 @@ type mListener<T extends Events> = (
  *
  * @type EmitterSubscription {@link https://reactnative.dev/docs/emittersubscription}
  * @param {Events} eventType - The event type to listen for.
- * @param {mListener<Events>} [listener] - The function to be called when the event is emitted.
+ * @param {EventListener<Events>} [listener] - The function to be called when the event is emitted.
  * @returns {EmitterSubscription} A function that takes a single argument of type T and returns void.
  * @example `submitListener(Events.INITIALIZE, (data) => console.debug(data));`
  */
-const submitListener = <T extends Events>(eventType: T, listener?: mListener<T>) => {
-  const count = eventEmitter.listenerCount(eventType);
-  if (count > 0) {
+function submitListener<T extends Events>(eventType: T, listener: EventListener<T>): EmitterSubscription {
+  if (eventEmitter.listenerCount(eventType) > 0) {
     eventEmitter.removeAllListeners(eventType);
   }
-  listener = listener ?? ((data) => logger.debug(`${eventType} Event: ${JSON.stringify(data)}`));
   return eventEmitter.addListener(eventType, listener);
-};
+}
 
 /**
  * Function that calls the initializing method named `Spec.init` and then calls the
@@ -289,7 +295,10 @@ const submitListener = <T extends Events>(eventType: T, listener?: mListener<T>)
 export function init(secretKey: string, operatorCode: string, isDebug: boolean) {
   validateKeyCode(operatorCode, secretKey, isDebug);
   Spec.init(secretKey, operatorCode, isDebug);
-  submitListener(Events.INITIALIZE);
+  submitListener(Events.INITIALIZE, function (data) {
+    logger.debug(JSON.stringify(data));
+    return data?.result;
+  });
 }
 
 /**
@@ -305,7 +314,10 @@ export function init(secretKey: string, operatorCode: string, isDebug: boolean) 
 export function connect(deviceMac: string, deviceKey: string, iotImei: string) {
   validateScooter(deviceMac, deviceKey, iotImei);
   Spec.connect(deviceMac, deviceKey, iotImei);
-  submitListener(Events.CONNECT);
+  submitListener(Events.CONNECT, function (data) {
+    logger.debug(JSON.stringify(data));
+    return data?.result;
+  });
 }
 
 /**
@@ -316,7 +328,10 @@ export function connect(deviceMac: string, deviceKey: string, iotImei: string) {
  */
 export function disconnect() {
   Spec.disconnect();
-  submitListener(Events.DISCONNECT);
+  submitListener(Events.DISCONNECT, function (data) {
+    logger.debug(JSON.stringify(data));
+    return data?.result;
+  });
 }
 
 /**
@@ -327,7 +342,10 @@ export function disconnect() {
  */
 export function unLock() {
   Spec.unLock();
-  submitListener(Events.UNLOCK);
+  submitListener(Events.UNLOCK, function (data) {
+    logger.debug(JSON.stringify(data));
+    return data?.result;
+  });
 }
 
 /**
@@ -338,7 +356,10 @@ export function unLock() {
  */
 export function lock() {
   Spec.lock();
-  submitListener(Events.LOCK);
+  submitListener(Events.LOCK, function (data) {
+    logger.debug(JSON.stringify(data));
+    return data?.result;
+  });
 }
 
 /**
@@ -349,7 +370,10 @@ export function lock() {
  */
 export function openBatteryCover() {
   Spec.openBatteryCover();
-  submitListener(Events.OPEN_COVER);
+  submitListener(Events.OPEN_COVER, function (data) {
+    logger.debug(JSON.stringify(data));
+    return data?.result;
+  });
 }
 
 /**
@@ -360,7 +384,10 @@ export function openBatteryCover() {
  */
 export function openSaddle() {
   Spec.openSaddle();
-  submitListener(Events.OPEN_SADDLE);
+  submitListener(Events.OPEN_SADDLE, function (data) {
+    logger.debug(JSON.stringify(data));
+    return data?.result;
+  });
 }
 
 /**
@@ -371,17 +398,20 @@ export function openSaddle() {
  */
 export function openTailBox() {
   Spec.openTailBox();
-  submitListener(Events.OPEN_TAIL_BOX);
+  submitListener(Events.OPEN_TAIL_BOX, function (data) {
+    logger.debug(JSON.stringify(data));
+    return data?.result;
+  });
 }
 
 /**
  * Function that calls the `Spec.queryVehicleInformation` function and then calls the
  * `submitListener` function with the `Events.VEHICLE_INFO` parameter.
  *
- * @param {mListener<Events.VEHICLE_INFO>} listener - The function to be called when the event is emitted.
+ * @param {EventListener<Events.VEHICLE_INFO>} listener - The function to be called when the event is emitted.
  * @example `queryVehicleInformation((data) => console.debug(data));`
  */
-export function queryVehicleInformation(listener: mListener<Events.VEHICLE_INFO>) {
+export function queryVehicleInformation(listener: EventListener<Events.VEHICLE_INFO>) {
   Spec.queryVehicleInformation();
   return submitListener(Events.VEHICLE_INFO, listener);
 }
@@ -390,10 +420,10 @@ export function queryVehicleInformation(listener: mListener<Events.VEHICLE_INFO>
  * Function that calls the `Spec.queryIoTInformation` function and then calls the
  * `submitListener` function with the `Events.IOT_INFO` parameter.
  *
- * @param {mListener<Events.IOT_INFO>} listener - The function to be called when the event is emitted.
+ * @param {EventListener<Events.IOT_INFO>} listener - The function to be called when the event is emitted.
  * @example `queryIoTInformation((data) => console.debug(data));`
  */
-export function queryIoTInformation(listener: mListener<Events.IOT_INFO>) {
+export function queryIoTInformation(listener: EventListener<Events.IOT_INFO>) {
   Spec.queryIoTInformation();
   return submitListener(Events.IOT_INFO, listener);
 }
