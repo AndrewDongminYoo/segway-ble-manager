@@ -1,4 +1,4 @@
-# @gbike/segway-ble-manager
+# @dongminyu/segway-ble-manager
 
 `react-native-segway-ble-manager` is a React Native library for managing Bluetooth Low Energy (BLE) connections with Segway devices.
 `react-native-segway-ble-manager` provides an easy-to-use API for connecting to and communicating with Segway devices over BLE.
@@ -8,7 +8,7 @@ With `react-native-segway-ble-manager`, developers can easily integrate Segway d
 ## Installation
 
 ```sh
-npm install @gbike/segway-ble-manager
+npm install @dongminyu/segway-ble-manager
 ```
 
 ## Usage

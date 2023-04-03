@@ -1,7 +1,7 @@
 import { Button, SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import React from 'react';
 import InfoSection from './Section';
-import type { IoTInformation, Scooter, VehicleInfo } from '@gbike/segway-ble-manager';
+import type { IoTInformation, Scooter, VehicleInfo } from '@dongminyu/segway-ble-manager';
 import {
   connect,
   disconnect,
@@ -13,7 +13,7 @@ import {
   openTailBox,
   queryVehicleInformation,
   queryIoTInformation,
-} from '@gbike/segway-ble-manager';
+} from '@dongminyu/segway-ble-manager';
 import ScooterButton from './Scooter';
 import scooters from './data/devices.json';
 import { getRequiredPermissions } from './permission';

@@ -4,7 +4,7 @@ import { logger, validateKeyCode, validateScooter } from './utils';
 import { EmitterSubscription } from 'react-native';
 
 const LINKING_ERROR =
-  "The package '@gbike/segway-ble-manager' doesn't seem to be linked. Make sure: \n\n" +
+  "The package '@dongminyu/segway-ble-manager' doesn't seem to be linked. Make sure: \n\n" +
   Platform.select({
     ios: '- You have run `pod install` in the `ios` directory and then clean, rebuild and re-run the app. You may also need to re-open Xcode to get the new pods.\n',
     android:
