@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ColorValue, StyleProp, TextStyle, TouchableOpacityProps, ViewStyle } from 'react-native';
 import { Platform, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import type { Scooter } from '@gbike/segway-ble-manager';
+import type { Scooter } from '@dongminyu/segway-ble-manager';
 
 const rnColor: Record<string, ColorValue> = {
   primary: '#1292B4',

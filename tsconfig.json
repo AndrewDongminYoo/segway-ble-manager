@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@gbike/segway-ble-manager": ["./src/index"]
+      "@dongminyu/segway-ble-manager": ["./src/index"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,

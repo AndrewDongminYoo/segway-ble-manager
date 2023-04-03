@@ -4,7 +4,7 @@
 
 import { type ButtonProps, StyleSheet, Text, View } from 'react-native';
 import React, { type PropsWithChildren } from 'react';
-import { IoTInformation, VehicleInfo } from '@gbike/segway-ble-manager';
+import { IoTInformation, VehicleInfo } from '@dongminyu/segway-ble-manager';
 
 // ui renderer
 function Section({ children, title }: PropsWithChildren<ButtonProps>) {
