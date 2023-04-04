@@ -10,11 +10,20 @@ import { Events, SupportedEvents, eventEmitter } from './.';
  * uses these objects to display the current status of the scooter.
  * @example
  * import React, { useContext } from 'react';
- * import { EventContext } from 'react-native-segway-ble-manager';
- * const { scooter, ioTInformation, vehicleInfo } = useContext(EventContext);
- * console.log(scooter);
- * console.log(ioTInformation);
- * console.log(vehicleInfo);
+ * import { View, Text } from 'react-native';
+ * import { EventContext } from './ContextProvider';
+ *
+ * function ScooterInfo() {
+ *   const { scooter, ioTInformation, vehicleInformation } = useContext(EventContext);
+ *   return (
+ *     <View>
+ *       <Text>Scooter Info</Text>
+ *       <Text>ScooterNumber {scooter.number}</Text>
+ *       <Text>IoT Device is Locked {ioTInformation.isLocked}</Text>
+ *       <Text>Vehicle Battery Level {vehicleInformation.powerPercent}</Text>
+ *     </View>
+ *   );
+ * }
  */
 export const EventContext = createContext<{
   scooter: Scooter;
@@ -36,7 +45,21 @@ export const EventContext = createContext<{
  * @property emitter - The event emitter is used to communicate with the native code.
  * @property mEvents - The list of events is used to update the context when those events are triggered.
  * @property BLEContext - The context is used to store information that is shared between components.
- * @example <BLEProvider> <App /> </BLEProvider>
+ * @example
+ * import React from 'react';
+ * import { View, Text } from 'react-native';
+ * import { BLEProvider } from './ContextProvider';
+ *
+ * export default function App() {
+ *   return (
+ *     <BLEProvider>
+ *       <View>
+ *         <Text>Hello, world!</Text>
+ *         <ScooterInfo />
+ *       </View>
+ *     </BLEProvider>
+ *   );
+ * }
  */
 export function BLEProvider({ children }: { children: ReactNode }) {
   const [emitter] = useState(eventEmitter);
