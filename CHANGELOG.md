@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.3](https://github.com/AndrewDongminYoo/segway-ble-manager/compare/v0.1.2...v0.1.3) (2023-04-04)
+
+### Performance Improvements
+
+- **application:** ⚡️ reverted to asynchrocous functions ([3f626eb](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/3f626eb56a0704beea9cfb3dd3bf46afe427a4df))
+
+### Documentation
+
+- **application:** 📝 build auto-generated postman document with jsdoc ([e00e1f2](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/e00e1f2acc2555ad4cf0a9e9de92660e85ce752d))
+- **application:** 📝 the module interface has been slightly modified ([07a8998](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/07a89981add6bb9b6e85da34c6638417f346e242))
+
 ## [0.1.2](https://github.com/AndrewDongminYoo/segway-ble-manager/compare/v0.1.0-beta.0...v0.1.2) (2023-04-04)
 
 ## [0.1.1](https://github.com/AndrewDongminYoo/segway-ble-manager/compare/v0.1.0-beta.0...v0.1.1) (2023-04-04)
