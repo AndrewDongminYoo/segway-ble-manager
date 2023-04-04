@@ -17,16 +17,24 @@
 
 - (void)init:(NSString *)secretKey
 operatorCode:(NSString *)operatorCode
-     isDebug:(BOOL)isDebug;
+     isDebug:(BOOL)isDebug
+     resolve:(RCTPromiseResolveBlock)resolve
+      reject:(RCTPromiseRejectBlock)reject;
 - (void)connect:(NSString *)deviceMac
       deviceKey:(NSString *)deviceKey
         iotImei:(NSString *)iotImei;
-- (void)disconnect;
-- (void)unLock;
-- (void)lock;
-- (void)openBatteryCover;
-- (void)openSaddle;
-- (void)openTailBox;
+- (void)disconnect:(RCTPromiseResolveBlock)resolve
+            reject:(RCTPromiseRejectBlock)reject;
+- (void)unLock:(RCTPromiseResolveBlock)resolve
+        reject:(RCTPromiseRejectBlock)reject;
+- (void)lock:(RCTPromiseResolveBlock)resolve
+      reject:(RCTPromiseRejectBlock)reject;
+- (void)openBatteryCover:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject;
+- (void)openSaddle:(RCTPromiseResolveBlock)resolve
+            reject:(RCTPromiseRejectBlock)reject;
+- (void)openTailBox:(RCTPromiseResolveBlock)resolve
+             reject:(RCTPromiseRejectBlock)reject;
 - (void)queryVehicleInformation;
 - (void)queryIoTInformation;
 - (void)addListener:(NSString *)eventType;
