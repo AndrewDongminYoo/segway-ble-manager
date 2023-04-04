@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>commonjs/utils.js - Postman Documentation</title>
+    <title>utils.js - Postman Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -25,13 +25,11 @@
       <h2><a href="index.html">Home</a></h2>
       <h3>Global</h3>
       <ul>
-        <li><a href="global.html#%2560OPEN_TAIL_BOX%2560:">`OPEN_TAIL_BOX`:</a></li>
         <li><a href="global.html#BLEProvider">BLEProvider</a></li>
         <li><a href="global.html#connect">connect</a></li>
         <li><a href="global.html#disconnect">disconnect</a></li>
         <li><a href="global.html#EventContext">EventContext</a></li>
         <li><a href="global.html#eventEmitter">eventEmitter</a></li>
-        <li><a href="global.html#Events">Events</a></li>
         <li><a href="global.html#init">init</a></li>
         <li><a href="global.html#lock">lock</a></li>
         <li><a href="global.html#logger">logger</a></li>
@@ -43,7 +41,6 @@
         <li><a href="global.html#SegwayBleManagerModule">SegwayBleManagerModule</a></li>
         <li><a href="global.html#Spec">Spec</a></li>
         <li><a href="global.html#submitListener">submitListener</a></li>
-        <li><a href="global.html#SupportedEvents">SupportedEvents</a></li>
         <li><a href="global.html#unLock">unLock</a></li>
         <li><a href="global.html#validateKeyCode">validateKeyCode</a></li>
         <li><a href="global.html#validateRegex">validateRegex</a></li>
@@ -52,20 +49,11 @@
     </nav>
 
     <div id="main">
-      <h1 class="page-title">commonjs/utils.js</h1>
+      <h1 class="page-title">utils.js</h1>
 
       <section>
         <article>
-          <pre class="prettyprint source linenums"><code>"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.logger = void 0;
-exports.validateKeyCode = validateKeyCode;
-exports.validateRegex = validateRegex;
-exports.validateScooter = validateScooter;
-const VALIDATION_TYPES = {
+          <pre class="prettyprint source linenums"><code>const VALIDATION_TYPES = {
   'mac-address': /^([A-Z0-9]{2}:){5}[A-Z0-9]{2}$/,
   // mac address of scooter.
   /**
@@ -86,7 +74,7 @@ const VALIDATION_TYPES = {
  * React native applications do not support secondary logging such as assert, timestamp, and so on, rather than just logging levels such as error, warn, info, etc. On the console.
  * So I've only implemented some extensions for easy debugging.
  */
-const logger = {
+export const logger = {
   /**
    * React-native doesn't support console.assert for debugging, So I did.
    *
@@ -119,7 +107,6 @@ const logger = {
     console.debug(`${timestamp} ${message}`, ...optionalArgs);
   }
 };
-exports.logger = logger;
 /**
  * @description Validate a string with a regex.
  * @param {string} target - String to validate.
@@ -127,7 +114,7 @@ exports.logger = logger;
  * @returns {boolean} - True if string is valid, otherwise false.
  * @example validateRegex('00:11:22:33:44:55', 'mac-address');
  */
-function validateRegex(target, type) {
+export function validateRegex(target, type) {
   const re = VALIDATION_TYPES[type];
   const isValid = RegExp(re, 'gm').test(target);
   logger.debug(`${type} ${target} is matching with ${re}gm:`, isValid);
@@ -146,7 +133,7 @@ function validateRegex(target, type) {
  * const IOT_IMEI = '000000000000000';
  * validateScooter(MAC_ADDRESS, DEV_BLE_KEY, IOT_IMEI); // will return true.
  */
-function validateScooter(MAC_ADDRESS, DEV_BLE_KEY, IOT_IMEI) {
+export function validateScooter(MAC_ADDRESS, DEV_BLE_KEY, IOT_IMEI) {
   logger.debug('checking key code...', {
     MAC_ADDRESS,
     DEV_BLE_KEY,
@@ -173,7 +160,7 @@ function validateScooter(MAC_ADDRESS, DEV_BLE_KEY, IOT_IMEI) {
  * const isDebug = true;
  * validateKeyCode(operatorCode, secretKey, isDebug); // will return true;
  */
-function validateKeyCode(operatorCode, secretKey, isDebug) {
+export function validateKeyCode(operatorCode, secretKey, isDebug) {
   logger.debug('checking key code...', {
     operatorCode,
     secretKey,
@@ -193,7 +180,7 @@ function validateKeyCode(operatorCode, secretKey, isDebug) {
 
     <br class="clear" />
 
-    <footer>Documentation generated at Tue Apr 04 2023 12:21:51 GMT+0900 (Korean Standard Time)</footer>
+    <footer>Documentation generated at Tue Apr 04 2023 14:26:47 GMT+0900 (Korean Standard Time)</footer>
 
     <script>
       prettyPrint();

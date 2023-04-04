@@ -5,7 +5,7 @@
   },
   "source": {
     "include": ["lib"],
-    "exclude": ["lib/typescript"],
+    "exclude": ["lib/commonjs", "lib/typescript"],
     "includePattern": ".+\\.(j|t)s(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_",
     "type": "module"

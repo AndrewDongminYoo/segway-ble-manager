@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>module/ContextProvider.js - Postman Documentation</title>
+    <title>ContextProvider.js - Postman Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -25,13 +25,11 @@
       <h2><a href="index.html">Home</a></h2>
       <h3>Global</h3>
       <ul>
-        <li><a href="global.html#%2560OPEN_TAIL_BOX%2560:">`OPEN_TAIL_BOX`:</a></li>
         <li><a href="global.html#BLEProvider">BLEProvider</a></li>
         <li><a href="global.html#connect">connect</a></li>
         <li><a href="global.html#disconnect">disconnect</a></li>
         <li><a href="global.html#EventContext">EventContext</a></li>
         <li><a href="global.html#eventEmitter">eventEmitter</a></li>
-        <li><a href="global.html#Events">Events</a></li>
         <li><a href="global.html#init">init</a></li>
         <li><a href="global.html#lock">lock</a></li>
         <li><a href="global.html#logger">logger</a></li>
@@ -43,7 +41,6 @@
         <li><a href="global.html#SegwayBleManagerModule">SegwayBleManagerModule</a></li>
         <li><a href="global.html#Spec">Spec</a></li>
         <li><a href="global.html#submitListener">submitListener</a></li>
-        <li><a href="global.html#SupportedEvents">SupportedEvents</a></li>
         <li><a href="global.html#unLock">unLock</a></li>
         <li><a href="global.html#validateKeyCode">validateKeyCode</a></li>
         <li><a href="global.html#validateRegex">validateRegex</a></li>
@@ -52,7 +49,7 @@
     </nav>
 
     <div id="main">
-      <h1 class="page-title">module/ContextProvider.js</h1>
+      <h1 class="page-title">ContextProvider.js</h1>
 
       <section>
         <article>
@@ -66,11 +63,20 @@ import { Events, SupportedEvents, eventEmitter } from './.';
  * uses these objects to display the current status of the scooter.
  * @example
  * import React, { useContext } from 'react';
- * import { EventContext } from 'react-native-segway-ble-manager';
- * const { scooter, ioTInformation, vehicleInfo } = useContext(EventContext);
- * console.log(scooter);
- * console.log(ioTInformation);
- * console.log(vehicleInfo);
+ * import { View, Text } from 'react-native';
+ * import { EventContext } from './ContextProvider';
+ *
+ * function ScooterInfo() {
+ *   const { scooter, ioTInformation, vehicleInformation } = useContext(EventContext);
+ *   return (
+ *     &lt;View>
+ *       &lt;Text>Scooter Info&lt;/Text>
+ *       &lt;Text>ScooterNumber {scooter.number}&lt;/Text>
+ *       &lt;Text>IoT Device is Locked {ioTInformation.isLocked}&lt;/Text>
+ *       &lt;Text>Vehicle Battery Level {vehicleInformation.powerPercent}&lt;/Text>
+ *     &lt;/View>
+ *   );
+ * }
  */
 export const EventContext = /*#__PURE__*/createContext({
   scooter: {},
@@ -88,7 +94,21 @@ export const EventContext = /*#__PURE__*/createContext({
  * @property emitter - The event emitter is used to communicate with the native code.
  * @property mEvents - The list of events is used to update the context when those events are triggered.
  * @property BLEContext - The context is used to store information that is shared between components.
- * @example &lt;BLEProvider> &lt;App /> &lt;/BLEProvider>
+ * @example
+ * import React from 'react';
+ * import { View, Text } from 'react-native';
+ * import { BLEProvider } from './ContextProvider';
+ *
+ * export default function App() {
+ *   return (
+ *     &lt;BLEProvider>
+ *       &lt;View>
+ *         &lt;Text>Hello, world!&lt;/Text>
+ *         &lt;ScooterInfo />
+ *       &lt;/View>
+ *     &lt;/BLEProvider>
+ *   );
+ * }
  */
 export function BLEProvider(_ref) {
   let {
@@ -140,7 +160,7 @@ export function BLEProvider(_ref) {
 
     <br class="clear" />
 
-    <footer>Documentation generated at Tue Apr 04 2023 12:21:51 GMT+0900 (Korean Standard Time)</footer>
+    <footer>Documentation generated at Tue Apr 04 2023 14:26:47 GMT+0900 (Korean Standard Time)</footer>
 
     <script>
       prettyPrint();

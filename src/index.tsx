@@ -229,16 +229,18 @@ export interface IoTInformation {
  * NOTE: It has to be same with native module's event names.
  * @see [Exporting Constants](https://reactnative.dev/docs/native-modules-ios#exporting-constants)
  * @see [Sending Events to JavaScript](https://reactnative.dev/docs/native-modules-ios#sending-events-to-javascript)
- * @member `CONNECT`: The event that returns whether the scooter is connected.
- * @member `DISCONNECT`: The event that returns whether the scooter is disconnected.
- * @member `INITIALIZE`: The event that returns whether the scooter is initialized.
- * @member `IOT_INFO`: The event that contains condition about the scooter's IoT information.
- * @member `VEHICLE_INFO`: The event that contains condition about the scooter's vehicle information.
- * @member `LOCK`: The event that returns whether the scooter is locked.
- * @member `UNLOCK`: The event that returns whether the scooter is unlocked.
- * @member `OPEN_COVER`: The event that returns whether the scooter's cover is opened.
- * @member `OPEN_SADDLE`: The event that returns whether the scooter's saddle is opened.
- * @member `OPEN_TAIL_BOX`: The event that returns whether the scooter's tail box is opened.
+ * @typedef {Record<string, string>} Events
+ * @property {string} name
+ * @property {string} CONNECT The event that returns whether the scooter is connected.
+ * @property {string} DISCONNECT The event that returns whether the scooter is disconnected.
+ * @property {string} INITIALIZE The event that returns whether the scooter is initialized.
+ * @property {string} IOT_INFO The event that contains condition about the scooter's IoT information.
+ * @property {string} VEHICLE_INFO The event that contains condition about the scooter's vehicle information.
+ * @property {string} LOCK The event that returns whether the scooter is locked.
+ * @property {string} UNLOCK The event that returns whether the scooter is unlocked.
+ * @property {string} OPEN_COVER The event that returns whether the scooter's cover is opened.
+ * @property {string} OPEN_SADDLE The event that returns whether the scooter's saddle is opened.
+ * @property {string} OPEN_TAIL_BOX The event that returns whether the scooter's tail box is opened.
  */
 export enum Events {
   CONNECT = 'ConnectResult',
@@ -255,6 +257,8 @@ export enum Events {
 
 /**
  * The enumeration values of supported event names.
+ *
+ * @typedef {Events[]} SupportedEvents
  */
 export const SupportedEvents = Object.values(Events);
 
@@ -272,9 +276,12 @@ type EventListener<T extends Events> = (
  *
  * @see EmitterSubscription {@link https://reactnative.dev/docs/emittersubscription}
  * @param {Events} eventType - The event type to listen for.
- * @param {EventListener<Events>} [listener] - The function to be called when the event is emitted.
+ * @param {EventListener<Events>} listener - The function to be called when the event is emitted.
  * @returns {EmitterSubscription} A function that takes a single argument of type T and returns void.
- * @example `submitListener(Events.INITIALIZE, (data) => console.debug(data));`
+ * @example
+ *     submitListener(Events.INITIALIZE, (data) => {
+ *        console.debug(data)
+ *     })
  */
 function submitListener<T extends Events>(eventType: T, listener: EventListener<T>): EmitterSubscription {
   if (eventEmitter.listenerCount(eventType) > 0) {
@@ -290,7 +297,8 @@ function submitListener<T extends Events>(eventType: T, listener: EventListener<
  * @param {string} secretKey - The secret key you received from the Spec.ai team.
  * @param {string} operatorCode - The operator code you received from the Spec team.
  * @param {boolean} isDebug - If true, the SDK will log all the events to the console.
- * @example `init(e0382c1944874be7a1ed7f4546e0f412, B40006, true)
+ * @example
+ *     init(e0382c1944874be7a1ed7f4546e0f412, B40006, true);
  */
 export function init(secretKey: string, operatorCode: string, isDebug: boolean) {
   validateKeyCode(operatorCode, secretKey, isDebug);
@@ -309,7 +317,8 @@ export function init(secretKey: string, operatorCode: string, isDebug: boolean) 
  * @param {string} deviceKey - The device key is a unique identifier for the scooter.
  * It is a 16-character string.
  * @param {string} iotImei - The IMEI number of the scooter.
- * @example `connect('FA:B7:08:B5:B5:46', 'gBiKeWkd', '861123056350117');`
+ * @example
+ *     connect('FA:B7:08:B5:B5:46', 'gBiKeWkd', '861123056350117')
  */
 export function connect(deviceMac: string, deviceKey: string, iotImei: string) {
   validateScooter(deviceMac, deviceKey, iotImei);
@@ -324,7 +333,8 @@ export function connect(deviceMac: string, deviceKey: string, iotImei: string) {
  * Function that calls the `Spec.disconnect` function and then calls the
  * `submitListener` function with the `Events.DISCONNECT` parameter.
  *
- * @example `disconnect();`
+ * @example
+ *     disconnect();
  */
 export function disconnect() {
   Spec.disconnect();
@@ -338,7 +348,8 @@ export function disconnect() {
  * Function that calls the `Spec.unLock` function and then calls the
  * `submitListener` function with the `Events.UNLOCK` parameter.
  *
- * @example `unLock();`
+ * @example
+ *     unLock();
  */
 export function unLock() {
   Spec.unLock();
@@ -352,7 +363,8 @@ export function unLock() {
  * Function that calls the `Spec.lock` function and then calls the
  * `submitListener` function with the `Events.LOCK` parameter.
  *
- * @example `lock();`
+ * @example
+ *     lock();
  */
 export function lock() {
   Spec.lock();
@@ -366,7 +378,8 @@ export function lock() {
  * Function that calls the `Spec.openBatteryCover` function and then calls the
  * `submitListener` function with the `Events.OPEN_COVER` parameter.
  *
- * @example `onBatteryCover();`
+ * @example
+ *     onBatteryCover();
  */
 export function openBatteryCover() {
   Spec.openBatteryCover();
@@ -380,7 +393,8 @@ export function openBatteryCover() {
  * Function that calls the `Spec.openSaddle` function and then calls the
  * `submitListener` function with the `Events.OPEN_SADDLE` parameter.
  *
- * @example `openSaddle()`
+ * @example
+ *     openSaddle()`
  */
 export function openSaddle() {
   Spec.openSaddle();
@@ -394,7 +408,8 @@ export function openSaddle() {
  * Function that calls the `Spec.openTailBox` function and then calls the
  * `submitListener` function with the `Events.OPEN_TAIL_BOX` parameter.
  *
- * @example `openTailBox();`
+ * @example
+ *     openTailBox();
  */
 export function openTailBox() {
   Spec.openTailBox();
@@ -409,7 +424,8 @@ export function openTailBox() {
  * `submitListener` function with the `Events.VEHICLE_INFO` parameter.
  *
  * @param {EventListener<Events.VEHICLE_INFO>} listener - The function to be called when the event is emitted.
- * @example `queryVehicleInformation((data) => console.debug(data));`
+ * @example
+ *     queryVehicleInformation((data) => console.debug(data));
  */
 export function queryVehicleInformation(listener: EventListener<Events.VEHICLE_INFO>) {
   Spec.queryVehicleInformation();
@@ -421,7 +437,8 @@ export function queryVehicleInformation(listener: EventListener<Events.VEHICLE_I
  * `submitListener` function with the `Events.IOT_INFO` parameter.
  *
  * @param {EventListener<Events.IOT_INFO>} listener - The function to be called when the event is emitted.
- * @example `queryIoTInformation((data) => console.debug(data));`
+ * @example
+ *     queryIoTInformation((data) => console.debug(data));
  */
 export function queryIoTInformation(listener: EventListener<Events.IOT_INFO>) {
   Spec.queryIoTInformation();

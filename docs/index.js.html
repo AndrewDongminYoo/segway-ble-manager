@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>commonjs/index.js - Postman Documentation</title>
+    <title>index.js - Postman Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -25,13 +25,11 @@
       <h2><a href="index.html">Home</a></h2>
       <h3>Global</h3>
       <ul>
-        <li><a href="global.html#%2560OPEN_TAIL_BOX%2560:">`OPEN_TAIL_BOX`:</a></li>
         <li><a href="global.html#BLEProvider">BLEProvider</a></li>
         <li><a href="global.html#connect">connect</a></li>
         <li><a href="global.html#disconnect">disconnect</a></li>
         <li><a href="global.html#EventContext">EventContext</a></li>
         <li><a href="global.html#eventEmitter">eventEmitter</a></li>
-        <li><a href="global.html#Events">Events</a></li>
         <li><a href="global.html#init">init</a></li>
         <li><a href="global.html#lock">lock</a></li>
         <li><a href="global.html#logger">logger</a></li>
@@ -43,7 +41,6 @@
         <li><a href="global.html#SegwayBleManagerModule">SegwayBleManagerModule</a></li>
         <li><a href="global.html#Spec">Spec</a></li>
         <li><a href="global.html#submitListener">submitListener</a></li>
-        <li><a href="global.html#SupportedEvents">SupportedEvents</a></li>
         <li><a href="global.html#unLock">unLock</a></li>
         <li><a href="global.html#validateKeyCode">validateKeyCode</a></li>
         <li><a href="global.html#validateRegex">validateRegex</a></li>
@@ -52,30 +49,15 @@
     </nav>
 
     <div id="main">
-      <h1 class="page-title">commonjs/index.js</h1>
+      <h1 class="page-title">index.js</h1>
 
       <section>
         <article>
-          <pre class="prettyprint source linenums"><code>"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SupportedEvents = exports.Events = void 0;
-exports.connect = connect;
-exports.disconnect = disconnect;
-exports.eventEmitter = void 0;
-exports.init = init;
-exports.lock = lock;
-exports.openBatteryCover = openBatteryCover;
-exports.openSaddle = openSaddle;
-exports.openTailBox = openTailBox;
-exports.queryIoTInformation = queryIoTInformation;
-exports.queryVehicleInformation = queryVehicleInformation;
-exports.unLock = unLock;
-var _reactNative = require("react-native");
-var _utils = require("./utils");
-const LINKING_ERROR = "The package '@dongminyu/segway-ble-manager' doesn't seem to be linked. Make sure: \n\n" + _reactNative.Platform.select({
+          <pre
+            class="prettyprint source linenums"
+          ><code>import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
+import { logger, validateKeyCode, validateScooter } from './utils';
+const LINKING_ERROR = "The package '@dongminyu/segway-ble-manager' doesn't seem to be linked. Make sure: \n\n" + Platform.select({
   ios: '- You have run `pod install` in the `ios` directory and then clean, rebuild and re-run the app. You may also need to re-open Xcode to get the new pods.\n',
   android: '- You have run `./gradlew generateCodeGenArtifactsFromSchema` in the `android` directory and then clean, rebuild and re-run the app. You may also need to re-open Android Studio.\n',
   default: ''
@@ -91,7 +73,7 @@ const isTurboModuleEnabled = global.__turboModuleProxy != null;
  *
  * @see [NativeModule](../example/node_modules/react-native/Libraries/EventEmitter/NativeEventEmitter.d.ts)
  */
-const SegwayBleManagerModule = isTurboModuleEnabled ? require('./NativeSegwayBleManager').default : _reactNative.NativeModules.SegwayBleManager;
+const SegwayBleManagerModule = isTurboModuleEnabled ? require('./NativeSegwayBleManager').default : NativeModules.SegwayBleManager;
 
 /**
  * @description This is a proxy that throws an error when SegwayBleManagerModule is accessed.
@@ -108,25 +90,26 @@ const Spec = SegwayBleManagerModule ? SegwayBleManagerModule : new Proxy({}, {
 /**
  * @description The event emitter of the module.
  */
-const eventEmitter = new _reactNative.NativeEventEmitter(Spec);
-exports.eventEmitter = eventEmitter;
+export const eventEmitter = new NativeEventEmitter(Spec);
 /**
  * @description The enumeration values of supported event names.
  * NOTE: It has to be same with native module's event names.
  * @see [Exporting Constants](https://reactnative.dev/docs/native-modules-ios#exporting-constants)
  * @see [Sending Events to JavaScript](https://reactnative.dev/docs/native-modules-ios#sending-events-to-javascript)
- * @member `CONNECT`: The event that returns whether the scooter is connected.
- * @member `DISCONNECT`: The event that returns whether the scooter is disconnected.
- * @member `INITIALIZE`: The event that returns whether the scooter is initialized.
- * @member `IOT_INFO`: The event that contains condition about the scooter's IoT information.
- * @member `VEHICLE_INFO`: The event that contains condition about the scooter's vehicle information.
- * @member `LOCK`: The event that returns whether the scooter is locked.
- * @member `UNLOCK`: The event that returns whether the scooter is unlocked.
- * @member `OPEN_COVER`: The event that returns whether the scooter's cover is opened.
- * @member `OPEN_SADDLE`: The event that returns whether the scooter's saddle is opened.
- * @member `OPEN_TAIL_BOX`: The event that returns whether the scooter's tail box is opened.
+ * @typedef {Record&lt;string, string>} Events
+ * @property {string} name
+ * @property {string} CONNECT The event that returns whether the scooter is connected.
+ * @property {string} DISCONNECT The event that returns whether the scooter is disconnected.
+ * @property {string} INITIALIZE The event that returns whether the scooter is initialized.
+ * @property {string} IOT_INFO The event that contains condition about the scooter's IoT information.
+ * @property {string} VEHICLE_INFO The event that contains condition about the scooter's vehicle information.
+ * @property {string} LOCK The event that returns whether the scooter is locked.
+ * @property {string} UNLOCK The event that returns whether the scooter is unlocked.
+ * @property {string} OPEN_COVER The event that returns whether the scooter's cover is opened.
+ * @property {string} OPEN_SADDLE The event that returns whether the scooter's saddle is opened.
+ * @property {string} OPEN_TAIL_BOX The event that returns whether the scooter's tail box is opened.
  */
-let Events = /*#__PURE__*/function (Events) {
+export let Events = /*#__PURE__*/function (Events) {
   Events["CONNECT"] = "ConnectResult";
   Events["DISCONNECT"] = "DisconnectResult";
   Events["INITIALIZE"] = "InitializeResult";
@@ -139,16 +122,18 @@ let Events = /*#__PURE__*/function (Events) {
   Events["VEHICLE_INFO"] = "VehicleInfoResult";
   return Events;
 }({});
+
 /**
  * The enumeration values of supported event names.
+ *
+ * @typedef {Events[]} SupportedEvents
  */
-exports.Events = Events;
-const SupportedEvents = Object.values(Events);
+export const SupportedEvents = Object.values(Events);
 
 /**
  * EventListener type of the supported events what returns the scooter's information.
  */
-exports.SupportedEvents = SupportedEvents;
+
 /**
  * Function that takes an event type and a listener,
  * check the listener count to have only single subscription,
@@ -156,9 +141,12 @@ exports.SupportedEvents = SupportedEvents;
  *
  * @see EmitterSubscription {@link https://reactnative.dev/docs/emittersubscription}
  * @param {Events} eventType - The event type to listen for.
- * @param {EventListener&lt;Events>} [listener] - The function to be called when the event is emitted.
+ * @param {EventListener&lt;Events>} listener - The function to be called when the event is emitted.
  * @returns {EmitterSubscription} A function that takes a single argument of type T and returns void.
- * @example `submitListener(Events.INITIALIZE, (data) => console.debug(data));`
+ * @example
+ *     submitListener(Events.INITIALIZE, (data) => {
+ *        console.debug(data)
+ *     })
  */
 function submitListener(eventType, listener) {
   if (eventEmitter.listenerCount(eventType) > 0) {
@@ -174,13 +162,14 @@ function submitListener(eventType, listener) {
  * @param {string} secretKey - The secret key you received from the Spec.ai team.
  * @param {string} operatorCode - The operator code you received from the Spec team.
  * @param {boolean} isDebug - If true, the SDK will log all the events to the console.
- * @example `init(e0382c1944874be7a1ed7f4546e0f412, B40006, true)
+ * @example
+ *     init(e0382c1944874be7a1ed7f4546e0f412, B40006, true);
  */
-function init(secretKey, operatorCode, isDebug) {
-  (0, _utils.validateKeyCode)(operatorCode, secretKey, isDebug);
+export function init(secretKey, operatorCode, isDebug) {
+  validateKeyCode(operatorCode, secretKey, isDebug);
   Spec.init(secretKey, operatorCode, isDebug);
   submitListener(Events.INITIALIZE, function (data) {
-    _utils.logger.debug(JSON.stringify(data));
+    logger.debug(JSON.stringify(data));
     return data === null || data === void 0 ? void 0 : data.result;
   });
 }
@@ -193,13 +182,14 @@ function init(secretKey, operatorCode, isDebug) {
  * @param {string} deviceKey - The device key is a unique identifier for the scooter.
  * It is a 16-character string.
  * @param {string} iotImei - The IMEI number of the scooter.
- * @example `connect('FA:B7:08:B5:B5:46', 'gBiKeWkd', '861123056350117');`
+ * @example
+ *     connect('FA:B7:08:B5:B5:46', 'gBiKeWkd', '861123056350117')
  */
-function connect(deviceMac, deviceKey, iotImei) {
-  (0, _utils.validateScooter)(deviceMac, deviceKey, iotImei);
+export function connect(deviceMac, deviceKey, iotImei) {
+  validateScooter(deviceMac, deviceKey, iotImei);
   Spec.connect(deviceMac, deviceKey, iotImei);
   submitListener(Events.CONNECT, function (data) {
-    _utils.logger.debug(JSON.stringify(data));
+    logger.debug(JSON.stringify(data));
     return data === null || data === void 0 ? void 0 : data.result;
   });
 }
@@ -208,12 +198,13 @@ function connect(deviceMac, deviceKey, iotImei) {
  * Function that calls the `Spec.disconnect` function and then calls the
  * `submitListener` function with the `Events.DISCONNECT` parameter.
  *
- * @example `disconnect();`
+ * @example
+ *     disconnect();
  */
-function disconnect() {
+export function disconnect() {
   Spec.disconnect();
   submitListener(Events.DISCONNECT, function (data) {
-    _utils.logger.debug(JSON.stringify(data));
+    logger.debug(JSON.stringify(data));
     return data === null || data === void 0 ? void 0 : data.result;
   });
 }
@@ -222,12 +213,13 @@ function disconnect() {
  * Function that calls the `Spec.unLock` function and then calls the
  * `submitListener` function with the `Events.UNLOCK` parameter.
  *
- * @example `unLock();`
+ * @example
+ *     unLock();
  */
-function unLock() {
+export function unLock() {
   Spec.unLock();
   submitListener(Events.UNLOCK, function (data) {
-    _utils.logger.debug(JSON.stringify(data));
+    logger.debug(JSON.stringify(data));
     return data === null || data === void 0 ? void 0 : data.result;
   });
 }
@@ -236,12 +228,13 @@ function unLock() {
  * Function that calls the `Spec.lock` function and then calls the
  * `submitListener` function with the `Events.LOCK` parameter.
  *
- * @example `lock();`
+ * @example
+ *     lock();
  */
-function lock() {
+export function lock() {
   Spec.lock();
   submitListener(Events.LOCK, function (data) {
-    _utils.logger.debug(JSON.stringify(data));
+    logger.debug(JSON.stringify(data));
     return data === null || data === void 0 ? void 0 : data.result;
   });
 }
@@ -250,12 +243,13 @@ function lock() {
  * Function that calls the `Spec.openBatteryCover` function and then calls the
  * `submitListener` function with the `Events.OPEN_COVER` parameter.
  *
- * @example `onBatteryCover();`
+ * @example
+ *     onBatteryCover();
  */
-function openBatteryCover() {
+export function openBatteryCover() {
   Spec.openBatteryCover();
   submitListener(Events.OPEN_COVER, function (data) {
-    _utils.logger.debug(JSON.stringify(data));
+    logger.debug(JSON.stringify(data));
     return data === null || data === void 0 ? void 0 : data.result;
   });
 }
@@ -264,12 +258,13 @@ function openBatteryCover() {
  * Function that calls the `Spec.openSaddle` function and then calls the
  * `submitListener` function with the `Events.OPEN_SADDLE` parameter.
  *
- * @example `openSaddle()`
+ * @example
+ *     openSaddle()`
  */
-function openSaddle() {
+export function openSaddle() {
   Spec.openSaddle();
   submitListener(Events.OPEN_SADDLE, function (data) {
-    _utils.logger.debug(JSON.stringify(data));
+    logger.debug(JSON.stringify(data));
     return data === null || data === void 0 ? void 0 : data.result;
   });
 }
@@ -278,12 +273,13 @@ function openSaddle() {
  * Function that calls the `Spec.openTailBox` function and then calls the
  * `submitListener` function with the `Events.OPEN_TAIL_BOX` parameter.
  *
- * @example `openTailBox();`
+ * @example
+ *     openTailBox();
  */
-function openTailBox() {
+export function openTailBox() {
   Spec.openTailBox();
   submitListener(Events.OPEN_TAIL_BOX, function (data) {
-    _utils.logger.debug(JSON.stringify(data));
+    logger.debug(JSON.stringify(data));
     return data === null || data === void 0 ? void 0 : data.result;
   });
 }
@@ -293,9 +289,10 @@ function openTailBox() {
  * `submitListener` function with the `Events.VEHICLE_INFO` parameter.
  *
  * @param {EventListener&lt;Events.VEHICLE_INFO>} listener - The function to be called when the event is emitted.
- * @example `queryVehicleInformation((data) => console.debug(data));`
+ * @example
+ *     queryVehicleInformation((data) => console.debug(data));
  */
-function queryVehicleInformation(listener) {
+export function queryVehicleInformation(listener) {
   Spec.queryVehicleInformation();
   return submitListener(Events.VEHICLE_INFO, listener);
 }
@@ -305,9 +302,10 @@ function queryVehicleInformation(listener) {
  * `submitListener` function with the `Events.IOT_INFO` parameter.
  *
  * @param {EventListener&lt;Events.IOT_INFO>} listener - The function to be called when the event is emitted.
- * @example `queryIoTInformation((data) => console.debug(data));`
+ * @example
+ *     queryIoTInformation((data) => console.debug(data));
  */
-function queryIoTInformation(listener) {
+export function queryIoTInformation(listener) {
   Spec.queryIoTInformation();
   return submitListener(Events.IOT_INFO, listener);
 }
@@ -318,7 +316,7 @@ function queryIoTInformation(listener) {
 
     <br class="clear" />
 
-    <footer>Documentation generated at Tue Apr 04 2023 12:21:51 GMT+0900 (Korean Standard Time)</footer>
+    <footer>Documentation generated at Tue Apr 04 2023 14:26:47 GMT+0900 (Korean Standard Time)</footer>
 
     <script>
       prettyPrint();
