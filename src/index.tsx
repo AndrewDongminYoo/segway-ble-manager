@@ -256,7 +256,7 @@ export enum Events {
 /**
  * The enumeration values of supported event names.
  */
-export const SupportedEvents = (Spec.getConstants().supportedEvents = Object.values(Events));
+export const SupportedEvents = Object.values(Events);
 
 /**
  * EventListener type of the supported events what returns the scooter's information.
@@ -270,7 +270,7 @@ type EventListener<T extends Events> = (
  * check the listener count to have only single subscription,
  * and returns a event emitter subscription.
  *
- * @type EmitterSubscription {@link https://reactnative.dev/docs/emittersubscription}
+ * @see EmitterSubscription {@link https://reactnative.dev/docs/emittersubscription}
  * @param {Events} eventType - The event type to listen for.
  * @param {EventListener<Events>} [listener] - The function to be called when the event is emitted.
  * @returns {EmitterSubscription} A function that takes a single argument of type T and returns void.
