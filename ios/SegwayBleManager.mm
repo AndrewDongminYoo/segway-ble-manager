@@ -1,7 +1,28 @@
 #import "SegwayBleManager.h"
 #import <NBIoTBleKit/NBIoTBleKit.h>
 
-@implementation SegwayBleManager
+@interface SegwayBleManager() <NBIoTBleDelegate>
+
+@property(nonatomic, copy) RCTPromiseResolveBlock unlockResolve;
+@property(nonatomic, copy) RCTPromiseRejectBlock unlockReject;
+
+@property(nonatomic, copy) RCTPromiseResolveBlock lockResolve;
+@property(nonatomic, copy) RCTPromiseRejectBlock lockReject;
+
+@property(nonatomic, copy) RCTPromiseResolveBlock batteryCoverResolve;
+@property(nonatomic, copy) RCTPromiseRejectBlock batteryCoverReject;
+
+@property(nonatomic, copy) RCTPromiseResolveBlock saddleResolve;
+@property(nonatomic, copy) RCTPromiseRejectBlock saddleReject;
+
+@property(nonatomic, copy) RCTPromiseResolveBlock tailBoxResolve;
+@property(nonatomic, copy) RCTPromiseRejectBlock tailBoxReject;
+
+@end
+
+@implementation SegwayBleManager {
+    bool hasListeners;
+}
 
 RCT_EXPORT_MODULE();
 
@@ -22,6 +43,14 @@ RCT_EXPORT_MODULE();
         @"OpenTailBoxResult",
         @"IoTInfoResult",
     ];
+}
+
+- (void)startObserving {
+    hasListeners = YES;
+}
+
+- (void)stopObserving {
+    hasListeners = NO;
 }
 
 - (void)onSuccess:(NSString *)eventName
@@ -50,23 +79,26 @@ RCT_EXPORT_MODULE();
 /// @param completionHandler called when the register is finished.
 RCT_EXPORT_METHOD(init:(NSString *)secretKey
           operatorCode:(NSString *)operatorCode
-               isDebug:(BOOL)isDebug) {
+               isDebug:(BOOL)isDebug
+               resolve:(RCTPromiseResolveBlock)resolve
+                reject:(RCTPromiseRejectBlock)reject) {
     if (isDebug) {
         [NBIoTBleService.shared setIsDebugEnabled:isDebug];
     }
     [NBIoTBleService.shared startWithOperatorCode:operatorCode
                                         andSecret:secretKey
+                                /// cSpell:ignoreWord: Hanlder
                                 completionHanlder:^(BOOL isSuccess, NSError * _Nullable error) {
-         if (error) {
+        if (error) {
              NSLog(@"%@", error);
-             [self onFailure:@"InitializeResult"
-                     message:error.description
-                        code:error.code];
-         } else {
-             [self onSuccess:@"InitializeResult"
-                      result:isSuccess];
-         }
-     }];
+            [self onFailure:@"InitializeResult"
+                    message:error.description
+                       code:error.code];
+        } else {
+            [self onSuccess:@"InitializeResult"
+                     result:isSuccess];
+        }
+    }];
 };
 
 RCT_EXPORT_METHOD(queryVehicleInformation) {
@@ -77,6 +109,10 @@ RCT_EXPORT_METHOD(queryIoTInformation) {
     [self.iotController queryIoTInformation];
 };
 
+/// try to connect bluetooth equipment
+/// @param iotImei imei
+/// @param deviceMac mac address
+/// @param deviceKey device key
 RCT_EXPORT_METHOD(connect:(NSString *)deviceMac
                 deviceKey:(NSString *)deviceKey
                   iotImei:(NSString *)iotImei) {
@@ -86,27 +122,43 @@ RCT_EXPORT_METHOD(connect:(NSString *)deviceMac
                                andDeviceKey:deviceKey];
 };
 
-RCT_EXPORT_METHOD(disconnect) {
+RCT_EXPORT_METHOD(disconnect:(RCTPromiseResolveBlock)resolve
+                      reject:(RCTPromiseRejectBlock)reject) {
     [self.iotController disconnect];
 }
 
-RCT_EXPORT_METHOD(unLock) {
+RCT_EXPORT_METHOD(unLock:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject) {
+    self.unlockResolve = resolve;
+    self.unlockReject = reject;
     [self.iotController unlock];
 };
 
-RCT_EXPORT_METHOD(lock) {
+RCT_EXPORT_METHOD(lock:(RCTPromiseResolveBlock)resolve
+                reject:(RCTPromiseRejectBlock)reject) {
+    self.lockResolve = resolve;
+    self.lockReject = reject;
     [self.iotController lock];
 };
 
-RCT_EXPORT_METHOD(openBatteryCover){
+RCT_EXPORT_METHOD(openBatteryCover:(RCTPromiseResolveBlock)resolve
+                            reject:(RCTPromiseRejectBlock)reject){
+    self.batteryCoverResolve = resolve;
+    self.batteryCoverReject = reject;
     [self.iotController openBatteryCover];
 };
 
-RCT_EXPORT_METHOD(openSaddle){
+RCT_EXPORT_METHOD(openSaddle:(RCTPromiseResolveBlock)resolve
+                      reject:(RCTPromiseRejectBlock)reject){
+    self.saddleResolve = resolve;
+    self.saddleReject = reject;
     [self.iotController openSaddle];
 };
 
-RCT_EXPORT_METHOD(openTailBox){
+RCT_EXPORT_METHOD(openTailBox:(RCTPromiseResolveBlock)resolve
+                       reject:(RCTPromiseRejectBlock)reject){
+    self.tailBoxResolve = resolve;
+    self.tailBoxReject = reject;
     [self.iotController openTailBox];
 };
 
