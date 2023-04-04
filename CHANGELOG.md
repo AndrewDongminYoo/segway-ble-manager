@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.2](https://github.com/AndrewDongminYoo/segway-ble-manager/compare/v0.1.0-beta.0...v0.1.2) (2023-04-04)
+
+## [0.1.1](https://github.com/AndrewDongminYoo/segway-ble-manager/compare/v0.1.0-beta.0...v0.1.1) (2023-04-04)
+
 ## 0.1.0-beta.0 (2023-04-03)
 
 ### Features
