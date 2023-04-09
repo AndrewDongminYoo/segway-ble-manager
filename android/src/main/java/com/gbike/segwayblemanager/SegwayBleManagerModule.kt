@@ -1,15 +1,11 @@
 package com.gbike.segwayblemanager
 
 import android.util.Log
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.Promise
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.WritableMap
+import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.segwaydiscovery.nbiot.BluetoothKit
 import com.segwaydiscovery.nbiot.NBIotBle
-import com.segwaydiscovery.nbiot.bean.QueryIoTInfomation // cspell:disable-line
+import com.segwaydiscovery.nbiot.bean.QueryIoTInfomation
 import com.segwaydiscovery.nbiot.bean.QueryVehicleInformation
 import com.segwaydiscovery.nbiot.interfaces.*
 import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_CONNECTED
@@ -53,17 +49,16 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
      * @see [ReactMethod.isBlockingSynchronousMethod]
      * @see [ReactMethod]
      */
-    override val typedExportedConstants: MutableMap<String, Any>
-        = mutableMapOf(
-            "supportedEvents" to listOf(
-                "InitializeResult",
-                "ConnectResult",
-                "DisconnectResult",
-                "UnlockResult",
-                "LockResult",
-                "VehicleInfoResult",
-                "OpenCoverResult",
-                "OpenSaddleResult",
+    override fun getTypedExportedConstants(): MutableMap<String, Any> = mutableMapOf(
+        "supportedEvents" to listOf(
+            "InitializeResult",
+            "ConnectResult",
+            "DisconnectResult",
+            "UnlockResult",
+            "LockResult",
+            "VehicleInfoResult",
+            "OpenCoverResult",
+            "OpenSaddleResult",
                 "OpenTailBoxResult",
                 "IoTInfoResult",
             ), "moduleName" to NAME,

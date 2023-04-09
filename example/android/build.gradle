@@ -5,7 +5,6 @@ buildscript {
         minSdkVersion = 21
         compileSdkVersion = 33
         targetSdkVersion = 33
-        agpVersion = '7.4.2'
         // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
         ndkVersion = "23.1.7779620"
     }
@@ -15,7 +14,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$agpVersion"
+        classpath "com.android.tools.build:gradle:7.4.2"
         classpath "com.facebook.react:react-native-gradle-plugin"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
     }
