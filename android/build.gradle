@@ -103,7 +103,6 @@ repositories {
 dependencies {
     //noinspection GradleDependency
     implementation 'com.facebook.react:react-android:0.72.0-rc.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-Beta'
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation files('lib/sd_ble_sdk_v1.1.2.jar')
 }
