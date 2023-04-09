@@ -6,15 +6,15 @@ folly_compiler_flags = '-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 
 Pod::Spec.new do |s|
   s.name         = "SegwayBleManager"
   s.version      = package["version"]
-  s.summary      = package["description"]
+  s.summary      = package["summary"]
   s.homepage     = package["homepage"]
   s.license      = package["license"]
   s.authors      = package["author"]
-
+  s.description  = package["description"]
   s.platforms    = { :ios => "11.0" }
   s.source       = { :git => "https://github.com/AndrewDongminYoo/segway-ble-manager.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,m,mm}"
+  s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
   s.dependency "NBIoTBleKit", "~> 1.1.1"
