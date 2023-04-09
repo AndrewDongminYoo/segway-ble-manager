@@ -156,7 +156,6 @@ android {
                 output.versionCodeOverride =
                     defaultConfig.versionCode * 1000 + versionCodes.get(abi)
             }
-
         }
     }
 }
@@ -166,6 +165,7 @@ dependencies {
     implementation('com.facebook.react:react-android:0.71.4')
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     debugImplementation("com.facebook.flipper:flipper:$FLIPPER_VERSION")
+    //noinspection GradleDependency
     debugImplementation("com.facebook.flipper:flipper-network-plugin:$FLIPPER_VERSION") {
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
