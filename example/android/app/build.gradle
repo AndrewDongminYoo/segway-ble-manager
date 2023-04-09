@@ -92,6 +92,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.segwayblemanagerexample"
     defaultConfig {
@@ -162,7 +163,7 @@ android {
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
-    implementation('com.facebook.react:react-android:0.71.4')
+    implementation('com.facebook.react:react-android:0.72.0-rc.1')
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     debugImplementation("com.facebook.flipper:flipper:$FLIPPER_VERSION")
     //noinspection GradleDependency

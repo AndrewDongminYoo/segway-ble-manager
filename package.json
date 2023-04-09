@@ -30,7 +30,6 @@
   "scripts": {
     "bootstrap": "yarn install && yarn example install && yarn example pods && yarn example gradle",
     "clean": "node ./scripts/clean.js",
-    "clear": "react-native clean --include watchman,yarn,metro,android",
     "android": "yarn example run-android",
     "ios": "yarn example run-ios",
     "example": "yarn --cwd example",
