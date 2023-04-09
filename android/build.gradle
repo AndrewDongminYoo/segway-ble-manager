@@ -1,7 +1,4 @@
 buildscript {
-    // BuildScript is evaluated before everything else so we can't use getExtOrDefault
-    def kotlinVersion = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["SegwayBleManager_kotlinVersion"]
-
     repositories {
         google()
         mavenCentral()
@@ -9,9 +6,9 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:7.2.2"
+        classpath 'com.android.tools.build:gradle:7.4.2'
         // noinspection DifferentKotlinGradleVersion
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
     }
 }
 
@@ -20,19 +17,16 @@ def isNewArchitectureEnabled() {
 }
 
 apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
-
-ext {
-    ndkVersion = '23.1.7779620'
-    kotlinStdlibJdk8Version = '1.8.10'
-}
+apply plugin: "org.jetbrains.kotlin.android"
 
 if (isNewArchitectureEnabled()) {
     apply plugin: "com.facebook.react"
 }
 
 def getExtOrDefault(name) {
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties["SegwayBleManager_" + name]
+    return rootProject.ext.has(name)
+        ? rootProject.ext.get(name)
+        : project.properties["SegwayBleManager_" + name]
 }
 
 def getExtOrIntegerDefault(name) {
@@ -40,13 +34,15 @@ def getExtOrIntegerDefault(name) {
 }
 
 android {
-    compileSdk getExtOrDefault("compileSdkVersion")
-    ndkVersion ndkVersion
+    namespace "com.gbike.segwayblemanager"
+    testNamespace 'com.gbike.segwayblemanager.test'
+    compileSdk getExtOrIntegerDefault("compileSdk")
+    ndkVersion getExtOrDefault("ndkVersion")
     buildToolsVersion getExtOrDefault("buildToolsVersion")
 
     defaultConfig {
         minSdkVersion getExtOrIntegerDefault("minSdkVersion")
-        targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+        targetSdk getExtOrIntegerDefault("targetSdkVersion")
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         signingConfig signingConfigs.debug
         ndk {
@@ -55,12 +51,19 @@ android {
     }
     buildTypes {
         release {
+            // signingConfig signingConfigs.release
             minifyEnabled false
+            versionNameSuffix 'prod'
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            versionNameSuffix 'dev'
         }
     }
 
     lintOptions {
         disable "GradleCompatible"
+        disable "DeprecatedAndroidGradlePlugin"
     }
 
     compileOptions {
@@ -85,6 +88,12 @@ android {
     }
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
 repositories {
     mavenCentral()
     google()
@@ -92,10 +101,10 @@ repositories {
 }
 
 dependencies {
-    // For < 0.71, this will be from the local maven repo
-    // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
-    implementation 'com.facebook.react:react-native:0.71.0-rc.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinStdlibJdk8Version"
+    //noinspection GradleDependency
+    implementation 'com.facebook.react:react-android:0.71.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation files('lib/sd_ble_sdk_v1.1.2.jar')
 }
 
