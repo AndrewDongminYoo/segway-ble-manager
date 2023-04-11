@@ -11,8 +11,19 @@ This project is an extreme enhancement of a previously existing native module at
 
 ## Installation
 
-```sh
-npm install @dongminyu/segway-ble-manager
+```shell
+# if you use pure npm (what a classic!),
+npm install @dongminyu/react-native-segway-ble-manager
+```
+
+```shell
+# or if you prefer to use Yarn (I love it's parallel install feature),
+yarn add @dongminyu/react-native-segway-ble-manager
+```
+
+```shell
+# or if you use pnpm (it's fast and efficient),
+pnpm add @dongminyu/react-native-segway-ble-manager
 ```
 
 ## Permission Setting
@@ -22,15 +33,15 @@ npm install @dongminyu/segway-ble-manager
   ```xml
       <!-- iOS 13 and newer, include the `NSBluetoothAlwaysUsageDescription` -->
       <key>NSBluetoothAlwaysUsageDescription</key>
-      <string>스쿠터 조작을 위해 블루투스를 사용합니다</string>
+      <string>Use Bluetooth when it needs to control the scooter</string>
       <!-- iOS 12 and earlier, include `NSBluetoothPeripheralUsageDescription` -->
       <key>NSBluetoothPeripheralUsageDescription</key>
-      <string>스쿠터 조작을 위해 블루투스를 사용합니다</string>
+      <string>Use Bluetooth peripherals to control the scooter</string>
       <key>NSLocationWhenInUseUsageDescription</key>
-      <string>스쿠터 조작을 위해 위치데이터를 접근합니다</string>
+      <string>Accesses location data to measure the distance</string>
   ```
 
-- in Android
+- Android 설정
 
   ```xml
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
