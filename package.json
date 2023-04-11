@@ -1,6 +1,6 @@
 {
   "name": "@dongminyu/segway-ble-manager",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "summary": "React Native library for managing Bluetooth Low Energy (BLE) connections with Segway devices.",
   "description": "`react-native-segway-ble-manager` provides an easy-to-use API for connecting to and communicating with Segway devices over BLE. The library supports both Android and iOS platforms and includes features such as device discovery, connection management, and data transfer. With `react-native-segway-ble-manager`, developers can easily integrate Segway device control into their React Native applications.",
   "main": "lib/commonjs/index",
