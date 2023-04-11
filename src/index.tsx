@@ -302,11 +302,11 @@ function submitListener<T extends Events>(eventType: T, listener: EventListener<
  */
 export function init(secretKey: string, operatorCode: string, isDebug: boolean) {
   validateKeyCode(operatorCode, secretKey, isDebug);
-  Spec.init(secretKey, operatorCode, isDebug);
   submitListener(Events.INITIALIZE, function (data) {
     logger.debug(JSON.stringify(data));
     return data?.result;
   });
+  Spec.init(secretKey, operatorCode, isDebug);
 }
 
 /**
@@ -322,11 +322,11 @@ export function init(secretKey: string, operatorCode: string, isDebug: boolean) 
  */
 export function connect(deviceMac: string, deviceKey: string, iotImei: string) {
   validateScooter(deviceMac, deviceKey, iotImei);
-  Spec.connect(deviceMac, deviceKey, iotImei);
   submitListener(Events.CONNECT, function (data) {
     logger.debug(JSON.stringify(data));
     return data?.result;
   });
+  Spec.connect(deviceMac, deviceKey, iotImei);
 }
 
 /**
@@ -337,11 +337,11 @@ export function connect(deviceMac: string, deviceKey: string, iotImei: string) {
  *     disconnect();
  */
 export function disconnect() {
-  Spec.disconnect();
   submitListener(Events.DISCONNECT, function (data) {
     logger.debug(JSON.stringify(data));
     return data?.result;
   });
+  Spec.disconnect();
 }
 
 /**
@@ -352,11 +352,11 @@ export function disconnect() {
  *     unLock();
  */
 export function unLock() {
-  Spec.unLock();
   submitListener(Events.UNLOCK, function (data) {
     logger.debug(JSON.stringify(data));
     return data?.result;
   });
+  Spec.unLock();
 }
 
 /**
@@ -367,11 +367,11 @@ export function unLock() {
  *     lock();
  */
 export function lock() {
-  Spec.lock();
   submitListener(Events.LOCK, function (data) {
     logger.debug(JSON.stringify(data));
     return data?.result;
   });
+  Spec.lock();
 }
 
 /**
@@ -382,11 +382,11 @@ export function lock() {
  *     onBatteryCover();
  */
 export function openBatteryCover() {
-  Spec.openBatteryCover();
   submitListener(Events.OPEN_COVER, function (data) {
     logger.debug(JSON.stringify(data));
     return data?.result;
   });
+  Spec.openBatteryCover();
 }
 
 /**
@@ -397,11 +397,11 @@ export function openBatteryCover() {
  *     openSaddle()`
  */
 export function openSaddle() {
-  Spec.openSaddle();
   submitListener(Events.OPEN_SADDLE, function (data) {
     logger.debug(JSON.stringify(data));
     return data?.result;
   });
+  Spec.openSaddle();
 }
 
 /**
@@ -412,11 +412,11 @@ export function openSaddle() {
  *     openTailBox();
  */
 export function openTailBox() {
-  Spec.openTailBox();
   submitListener(Events.OPEN_TAIL_BOX, function (data) {
     logger.debug(JSON.stringify(data));
     return data?.result;
   });
+  Spec.openTailBox();
 }
 
 /**

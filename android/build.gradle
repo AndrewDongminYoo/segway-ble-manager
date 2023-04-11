@@ -73,7 +73,7 @@ android {
 
     sourceSets {
         main {
-            jniLibs.srcDirs += ["lib"]
+            jniLibs.srcDirs += ["libs"]
             //noinspection GroovyImplicitNullArgumentCall
             if (isNewArchitectureEnabled()) {
                 java.srcDirs += [
