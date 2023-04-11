@@ -1,4 +1,6 @@
 # @dongminyu/segway-ble-manager
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager?ref=badge_shield)
+
 
 `react-native-segway-ble-manager` is a React Native library for managing Bluetooth Low Energy (BLE) connections with Segway devices.
 `react-native-segway-ble-manager` provides an easy-to-use API for connecting to and communicating with Segway devices over BLE.
@@ -291,3 +293,6 @@ MIT
 ---
 
 Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager?ref=badge_large)
