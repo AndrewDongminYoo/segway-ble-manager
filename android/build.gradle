@@ -104,7 +104,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.facebook.react:react-android:0.72.0-rc.1'
     implementation 'androidx.core:core-ktx:1.10.0'
-    implementation files('lib/sd_ble_sdk_v1.1.2.jar')
+    implementation files('libs/sd_ble_sdk_v1.1.2.jar')
 }
 
 if (isNewArchitectureEnabled()) {

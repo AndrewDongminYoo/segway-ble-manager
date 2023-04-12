@@ -1,39 +1,9 @@
-import { createContext, useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { type EmitterSubscription } from 'react-native';
-import type { IoTInformation, Scooter, VehicleInfo } from './.';
-import { Events, SupportedEvents, eventEmitter } from './.';
-
-/**
- * @description The `React Context` that is used to pass data from the App component
- * to the children components. The `EventContext` is used to provide the `Scooter`,
- * `IoTInformation`, and `VehicleInfo` objects to the event component. The event component
- * uses these objects to display the current status of the scooter.
- * @example
- * import React, { useContext } from 'react';
- * import { View, Text } from 'react-native';
- * import { EventContext } from './ContextProvider';
- *
- * function ScooterInfo() {
- *   const { scooter, ioTInformation, vehicleInformation } = useContext(EventContext);
- *   return (
- *     <View>
- *       <Text>Scooter Info</Text>
- *       <Text>ScooterNumber {scooter.number}</Text>
- *       <Text>IoT Device is Locked {ioTInformation.isLocked}</Text>
- *       <Text>Vehicle Battery Level {vehicleInformation.powerPercent}</Text>
- *     </View>
- *   );
- * }
- */
-export const EventContext = createContext<{
-  scooter: Scooter;
-  ioTInformation: IoTInformation;
-  vehicleInformation: VehicleInfo;
-}>({
-  scooter: {} as Scooter,
-  ioTInformation: {} as IoTInformation,
-  vehicleInformation: {} as VehicleInfo,
-});
+import type { IoTInfo, Scooter, VehicleInfo } from './BleResType';
+import { SubEventList, eventReceiver } from './BleModule';
+import { EventType } from './BleResType';
+import { EventContext } from './BleContext';
 
 /**
  * Function that connects to a scooter and stores the connection information in the scooter state.
@@ -62,22 +32,20 @@ export const EventContext = createContext<{
  * }
  */
 export function BLEProvider({ children }: { children: ReactNode }) {
-  const [emitter] = useState(eventEmitter);
-  const [mEvents] = useState(SupportedEvents);
   const [subList, setSubscriptions] = useState<EmitterSubscription[]>([]);
   const [scooter, setScooter] = useState({} as Scooter);
-  const [iotInfo, setIoTInformation] = useState({} as IoTInformation);
+  const [iotInfo, setIoTInformation] = useState({} as IoTInfo);
   const [vehicle, setVehicleInformation] = useState({} as VehicleInfo);
   useEffect(() => {
-    const temp = mEvents.map((event) => {
-      return emitter.addListener(event, (data) => {
-        console.debug(`${event} Event: ${data}`);
-        switch (event) {
-          case Events.CONNECT:
+    const temp = SubEventList.map((eventType) => {
+      return eventReceiver.addListener(eventType, (data) => {
+        console.debug(`${eventType} Event: ${data}`);
+        switch (eventType) {
+          case EventType.CONNECT:
             return setScooter(data);
-          case Events.IOT_INFO:
+          case EventType.IOT_INFO:
             return setIoTInformation(data);
-          case Events.VEHICLE_INFO:
+          case EventType.VEHICLE_INFO:
             return setVehicleInformation(data);
           default:
             if ('result' in data) {
