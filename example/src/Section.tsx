@@ -4,7 +4,7 @@
 
 import { type ButtonProps, StyleSheet, Text, View } from 'react-native';
 import React, { type PropsWithChildren } from 'react';
-import { IoTInformation, VehicleInfo } from '@dongminyu/segway-ble-manager';
+import { IoTInfo, VehicleInfo } from '@dongminyu/segway-ble-manager';
 
 // ui renderer
 function Section({ children, title }: PropsWithChildren<ButtonProps>) {
@@ -16,13 +16,7 @@ function Section({ children, title }: PropsWithChildren<ButtonProps>) {
   );
 }
 
-function InfoSection({
-  iotInformation,
-  vehicleInformation,
-}: {
-  iotInformation?: IoTInformation;
-  vehicleInformation?: VehicleInfo;
-}) {
+function InfoSection({ iotInformation, vehicleInfo }: { iotInformation?: IoTInfo; vehicleInfo?: VehicleInfo }) {
   return (
     <View>
       <View style={styles.columnStyle}>
@@ -34,11 +28,11 @@ function InfoSection({
         <Section title={'minor version number'}>{iotInformation?.minorVersionNumber}</Section>
       </View>
       <View style={styles.columnStyle}>
-        <Section title={'power percent'}>{vehicleInformation?.powerPercent}</Section>
-        <Section title={'speed mode'}>{vehicleInformation?.speedMode}</Section>
-        <Section title={'current speed'}>{vehicleInformation?.currentSpeed}</Section>
-        <Section title={'total range'}>{vehicleInformation?.totalRange}</Section>
-        <Section title={'remaining range'}>{vehicleInformation?.remainingRange}</Section>
+        <Section title={'power percent'}>{vehicleInfo?.powerPercent}</Section>
+        <Section title={'speed mode'}>{vehicleInfo?.speedMode}</Section>
+        <Section title={'current speed'}>{vehicleInfo?.currentSpeed}</Section>
+        <Section title={'total range'}>{vehicleInfo?.totalRange}</Section>
+        <Section title={'remaining range'}>{vehicleInfo?.remainingRange}</Section>
       </View>
     </View>
   );

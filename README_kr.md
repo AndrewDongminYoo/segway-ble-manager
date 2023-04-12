@@ -3,7 +3,7 @@
 `react-native-segway-ble-manager`는 세그웨이 기기와 블루투스 저에너지(BLE) 연결을 관리하기 위한 리액트 네이티브 라이브러리입니다.
 `react-native-segway-ble-manager`는 세그웨이 기기와 BLE를 통해 연결하고 통신하기 위한 사용하기 쉬운 API를 제공합니다.
 이 라이브러리는 안드로이드와 iOS 플랫폼을 모두 지원하며 디바이스 검색, 연결 관리, 데이터 전송과 같은 기능을 포함하고 있습니다.
-개발자는 `react-native-segway-ble-manager`를 사용하여 나인봇 세그웨이 디바이스 제어  기능을 React Native 애플리케이션에 쉽게 통합할 수 있습니다.
+개발자는 `react-native-segway-ble-manager`를 사용하여 나인봇 세그웨이 디바이스 제어 기능을 React Native 애플리케이션에 쉽게 통합할 수 있습니다.
 
 ## 프로젝트 개요
 
@@ -127,6 +127,7 @@ const SegwayBleManagerModule = isTurboModuleEnabled
 ```
 
 위의 타입스크립트 코드는 자바스크립트 애플리케이션에 브릿지 역할을 하는 코드의 일부입니다. 이 코드는 Global 변수의 프로퍼티로 터보모듈프록시가 선언되어 있는지 확인하고 (자바스크립트에서 명시적으로 선언하지 않는 더블 언더바 변수이며, C++ 모듈에서 주입됨), 애플리케이션에 New Architecture가 활성화되어 있는지 확인한 후, 활성화되어 있다면 NativeModules에서 인덱스로 보통의 리액트네이티브로 구현된 세그웨이 모듈을 가져오는 형태를 취하고, (이 부분은 타입 세이프하지 않습니다.) 그렇지 않다면 터보모듈을 구현하는 세그웨이 모듈을 가져오는 형태를 취하고 있습니다. 두 아키텍쳐의 성능에는 차이가 있지만 다른 모든 동작과 데이터 유형은 일치합니다.
+
 ```groovy
 android {
    sourceSets {

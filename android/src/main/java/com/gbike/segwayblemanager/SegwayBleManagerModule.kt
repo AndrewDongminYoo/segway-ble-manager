@@ -59,8 +59,8 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
             "VehicleInfoResult",
             "OpenCoverResult",
             "OpenSaddleResult",
-                "OpenTailBoxResult",
-                "IoTInfoResult",
+            "OpenTailBoxResult",
+            "IoTInfoResult",
             ), "moduleName" to NAME,
         )
 

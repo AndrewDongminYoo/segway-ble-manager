@@ -1,18 +1,18 @@
 import { Button, SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import React from 'react';
 import InfoSection from './Section';
-import type { IoTInformation, Scooter, VehicleInfo } from '@dongminyu/segway-ble-manager';
+import type { IoTInfo, Scooter, VehicleInfo } from '@dongminyu/segway-ble-manager';
 import {
-  connect,
-  disconnect,
-  init,
-  unLock,
-  lock,
+  ioTConnect,
+  ioTDisconnect,
+  initialize,
+  unLockScooter,
+  lockScooter,
   openBatteryCover,
   openSaddle,
   openTailBox,
-  queryVehicleInformation,
-  queryIoTInformation,
+  queryVehicleInfo,
+  queryIoTInfo,
 } from '@dongminyu/segway-ble-manager';
 import ScooterButton from './Scooter';
 import scooters from './data/devices.json';
@@ -20,14 +20,14 @@ import { getRequiredPermissions } from './permission';
 import { BLE_INIT_OPERATION_CODE, BLE_INIT_SECRET_KEY } from '@env';
 
 const App = () => {
-  const [ioTInformation, setIoTInformation] = React.useState<IoTInformation>();
-  const [vehicleInformation, setVehicleInformation] = React.useState<VehicleInfo>();
+  const [ioTInformation, setIoTInformation] = React.useState<IoTInfo>();
+  const [vehicleInformation, setVehicleInfo] = React.useState<VehicleInfo>();
   const [scooter, setScooter] = React.useState<Scooter>(scooters[0] as Scooter);
   const [timer, setTimer] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    init(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
+    initialize(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
     // get required permissions
     getRequiredPermissions();
   }, []);
@@ -46,16 +46,16 @@ const App = () => {
   }, [timer]);
 
   function getVehicleInformation() {
-    queryVehicleInformation((data) => {
-      setVehicleInformation(data);
-      console.log(JSON.stringify(data));
+    queryVehicleInfo((info) => {
+      setVehicleInfo(info);
+      console.log(JSON.stringify(info));
     });
   }
 
   function getIoTInformation() {
-    queryIoTInformation((data) => {
-      setIoTInformation(data);
-      console.log(JSON.stringify(data));
+    queryIoTInfo((info) => {
+      setIoTInformation(info);
+      console.log(JSON.stringify(info));
     });
   }
 
@@ -66,7 +66,7 @@ const App = () => {
       setTimer(60);
       setLoading(true);
       const { deviceKey, deviceMac, iotImei } = scooter;
-      connect(deviceMac, deviceKey, iotImei);
+      ioTConnect(deviceMac, deviceKey, iotImei);
     }
   }
 
@@ -77,11 +77,11 @@ const App = () => {
       <View>
         <View style={styles.buttonGroup}>
           <Button onPress={connectWithDevice} disabled={loading || timer > 0} title="Connect" />
-          <Button onPress={disconnect} title="Disconnect" />
+          <Button onPress={ioTDisconnect} title="Disconnect" />
         </View>
         <View style={styles.buttonGroup}>
-          <Button onPress={unLock} title="UnLock" />
-          <Button onPress={lock} title="Lock" />
+          <Button onPress={unLockScooter} title="UnLock" />
+          <Button onPress={lockScooter} title="Lock" />
           <Button onPress={openBatteryCover} title="Open Battery Cover" />
         </View>
         <View style={styles.buttonGroup}>
@@ -93,12 +93,8 @@ const App = () => {
           <Button onPress={getIoTInformation} title="IoT Info" />
         </View>
       </View>
-      <ScrollView
-        contentInsetAdjustmentBehavior="scrollableAxes"
-        // contentContainerStyle={{ flex: 1 }}
-        style={styles.backgroundStyle}
-      >
-        <InfoSection iotInformation={ioTInformation} vehicleInformation={vehicleInformation} />
+      <ScrollView contentInsetAdjustmentBehavior="scrollableAxes" style={styles.backgroundStyle}>
+        <InfoSection iotInformation={ioTInformation} vehicleInfo={vehicleInformation} />
         <View style={styles.scooterGroup}>
           {scooters.map((gco, _) => {
             return (

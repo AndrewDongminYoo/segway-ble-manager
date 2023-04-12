@@ -2,23 +2,20 @@
 
 ## [0.2.0](https://github.com/AndrewDongminYoo/segway-ble-manager/compare/v0.1.3...v0.2.0) (2023-04-11)
 
-
 ### Features
 
-* **android:** ⬆️ sd_ble_sdk restroed ([1401513](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/1401513855a1b67f0f705c02b72a3a371f91734c))
-
+- **android:** ⬆️ sd_ble_sdk restroed ([1401513](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/1401513855a1b67f0f705c02b72a3a371f91734c))
 
 ### Bug Fixes
 
-* **android:** 🐛 kt-gradle version downgrade ([f2b653a](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/f2b653a249f8d2ff1751c6732043402629129f7e))
-* **android:** dynamic version error resolved ([0e709a4](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/0e709a4a339da11b88f32cdbe8b3184c0b467f6b))
-* **react:** 🚑️ vulnerabilities found - `jsdoc > taffydb` ([f598c80](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/f598c80bb9f6e25443d116d642c72fe6407fd150))
-
+- **android:** 🐛 kt-gradle version downgrade ([f2b653a](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/f2b653a249f8d2ff1751c6732043402629129f7e))
+- **android:** dynamic version error resolved ([0e709a4](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/0e709a4a339da11b88f32cdbe8b3184c0b467f6b))
+- **react:** 🚑️ vulnerabilities found - `jsdoc > taffydb` ([f598c80](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/f598c80bb9f6e25443d116d642c72fe6407fd150))
 
 ### Documentation
 
-* 📝 module's interface consists ([bd19729](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/bd197291aab53c5079e36fbf1e8fb47a7b4c48d8))
-* **react:** 📝 finish documentation ([f6789d4](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/f6789d4d872a2b8970fd8fdfffa3a99f53ee3cba))
+- 📝 module's interface consists ([bd19729](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/bd197291aab53c5079e36fbf1e8fb47a7b4c48d8))
+- **react:** 📝 finish documentation ([f6789d4](https://github.com/AndrewDongminYoo/segway-ble-manager/commit/f6789d4d872a2b8970fd8fdfffa3a99f53ee3cba))
 
 ## [0.1.3](https://github.com/AndrewDongminYoo/segway-ble-manager/compare/v0.1.2...v0.1.3) (2023-04-04)
 
