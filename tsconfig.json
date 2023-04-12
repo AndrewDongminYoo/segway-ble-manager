@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@dongminyu/segway-ble-manager": ["./src/index"]
+      "@dongminyu/segway-ble-manager": ["./src/index"],
+      "@dongminyu/turbo-module-spec": ["./src/NativeSegwayBleManager"],
+      "@components": ["./example/src/*.tsx"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,

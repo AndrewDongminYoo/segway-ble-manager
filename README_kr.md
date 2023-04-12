@@ -63,14 +63,16 @@ $ pnpm add @dongminyu/react-native-step-counter
 
 ```typescript
 import {
-  connect,
-  disconnect,
-  init,
+  ioTConnect,
+  ioTDisconnect,
+  initialize,
+  unLockScooter,
+  lockScooter,
   openBatteryCover,
   openSaddle,
   openTailBox,
-  queryVehicleInformation,
-  queryIoTInformation,
+  queryVehicleInfo,
+  queryIoTInfo,
 } from '@dongminyu/segway-ble-manager';
 
 const BLE_INIT_SECRET_KEY = 'MY_SECRET_KEY';
@@ -80,32 +82,44 @@ const deviceKey = 'DEVICE_KEY';
 const iotImei = 'IOT_IMEI';
 
 React.useEffect(() => {
-  init(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
+  initialize(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
   // get required permissions
   getRequiredPermissions();
 }, []);
 
-React.useEffect(() => {
-  let intervalId: number;
-  if (timer > 0) {
-    intervalId = setInterval(() => {
-      setTimer(timer - 1);
-    }, 1000);
+function connectWithDevice() {
+  if (timer > 0 || loading) {
+    return;
+  } else {
+    setTimer(60);
+    setLoading(true);
+    const { deviceKey, deviceMac, iotImei } = scooter;
+    ioTConnect(deviceMac, deviceKey, iotImei);
   }
-  return () => {
-    setLoading(false);
-    return clearInterval(intervalId);
-  };
-}, [timer]);
+}
+
+function getVehicleInformation() {
+  queryVehicleInfo((info) => {
+    setVehicleInfo(info);
+    console.log(JSON.stringify(info));
+  });
+}
+
+function getIoTInformation() {
+  queryIoTInfo((info) => {
+    setIoTInformation(info);
+    console.log(JSON.stringify(info));
+  });
+}
 ```
 
 이 예제에서는 먼저 `react-native-segway-ble-manager` 모듈에서 `Spec` 인터페이스를 포함한 필요한 모듈을 임포트합니다. 그런 다음 `NativeEventEmitter` 클래스의 새 인스턴스를 생성하고 `BleManager` 모듈을 인수로 전달합니다.
 
 다음으로, `secretKey`, `operatorCode`, `deviceMac`, `deviceKey` 및 `iotImei`와 같은 몇 가지 구성 변수를 정의합니다. 그런 다음 `BleManager` 모듈을 초기화하여 `secretKey`, `operatorCode` 및 디버그 모드 사용 여부를 나타내는 부울 값을 전달합니다.
 
-`BleManager`가 초기화되면 `connect` 메서드를 호출하여 `deviceMac`, `deviceKey`, `iotImei`를 전달합니다. 그런 다음 세그웨이 차량이 연결될 때(`onConnected`)와 연결이 끊어질 때(`onDisconnected`)에 대한 두 개의 이벤트 리스너를 정의합니다.
+`BleManager`가 초기화되면 `ioTConnect` 메서드를 호출하여 `deviceMac`, `deviceKey`, `iotImei`를 전달합니다. 그런 다음 세그웨이 차량이 연결될 때(`onConnected`)와 연결이 끊어질 때(`onDisconnected`)에 대한 두 개의 이벤트 리스너를 정의합니다.
 
-세그웨이 차량이 연결되면 `unLock` 메서드를 호출하여 잠금을 해제합니다. 잠금이 해제되면 콘솔에 메시지를 기록한 다음 `disconnect` 메서드를 호출하여 차량과의 연결을 끊습니다.
+세그웨이 차량이 연결되면 `unLockScooter` 메서드를 호출하여 잠금을 해제합니다. 잠금이 해제되면 콘솔에 메시지를 기록한 다음 `ioTDisconnect` 메서드를 호출하여 차량과의 연결을 끊습니다.
 
 마지막으로 차량 연결이 해제되면 콘솔에 또 다른 메시지를 기록하고 이벤트 리스너를 제거하여 메모리 누수를 방지합니다.
 
@@ -244,23 +258,23 @@ export interface IoTInformation {
 - `supportedEvents`: 지원되는 이벤트 유형 배열
 - `moduleName`: 모듈의 이름
 
-### `init(secretKey: string, operatorCode: string, isDebug: boolean): Promise<boolean>`
+### `initialize(secretKey: string, operatorCode: string, isDebug: boolean): Promise<boolean>`
 
 이 메서드는 비밀 키, 오퍼레이터 코드, 그리고 모듈이 디버그 모드로 실행되어야 하는지의 여부를 나타내는 플래그를 파라미터로 사용하여 모듈을 초기화합니다. 초기화에 성공했는지 여부를 나타내는 부울 값으로 확인되는 프로미스를 반환합니다.
 
-### `connect(deviceMac: string, deviceKey: string, iotImei: string): void`
+### `ioTConnect(deviceMac: string, deviceKey: string, iotImei: string): void`
 
 지정된 MAC 주소, 디바이스 키, IoT IMEI로 세그웨이 차량에 연결을 설정합니다.
 
-### `disconnect(): Promise<boolean>`
+### `ioTDisconnect(): Promise<boolean>`
 
 세그웨이 차량과의 연결을 끊고 연결 끊기 성공 여부를 나타내는 부울 값으로 확인되는 프로미스로 반환합니다.
 
-### `unLock(): Promise<boolean>`
+### `unLockScooter(): Promise<boolean>`
 
 세그웨이 차량의 잠금을 해제하고 잠금 해제가 성공했는지 여부를 나타내는 부울 값으로 확인되는 프로미스로 반환합니다.
 
-### `lock(): Promise<boolean>`
+### `lockScooter(): Promise<boolean>`
 
 세그웨이 차량을 잠그고 잠금이 성공했는지 여부를 나타내는 부울 값으로 확인되는 프로미스를 반환하는 메서드입니다.
 
@@ -276,11 +290,11 @@ export interface IoTInformation {
 
 세그웨이 비히클의 테일 박스를 열고 작업 성공 여부를 나타내는 부울 값으로 해석되는 프로미스를 반환하는 메서드입니다.
 
-### `queryVehicleInformation(listener): void`
+### `queryVehicleInfo(listener): void`
 
 세그웨이 차량에 펌웨어 버전, 시리얼 번호, 배터리 잔량 등 디바이스에 대한 정보를 쿼리합니다.
 
-### `queryIoTInformation(listener): void`
+### `queryIoTInfo(listener): void`
 
 세그웨이 차량 디바이스의 네트워크 상태, 신호 세기, IMEI와 같은 IoT 정보를 조회합니다.
 

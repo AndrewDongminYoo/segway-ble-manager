@@ -1,5 +1,5 @@
 import { NativeEventEmitter, NativeModules } from 'react-native';
-import SegwayBleManager from './NativeSegwayBleManager';
+import TurboBleManager from '@dongminyu/turbo-module-spec';
 import { EventType } from './BleResType';
 import LINKING_ERROR from './LinkingError';
 
@@ -33,7 +33,7 @@ export const Spec = (
           },
         }
       )
-) as typeof SegwayBleManager;
+) as typeof TurboBleManager;
 
 /**
  * @description The event emitter of the module.

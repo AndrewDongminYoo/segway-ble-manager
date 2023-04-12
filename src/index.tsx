@@ -1,6 +1,8 @@
 export { EventType, IoTInfo, OnFailure, OnSuccess, Scooter, VehicleInfo } from './BleResType';
 export { Spec as SegwayBleManagerModule, SubEventList, eventReceiver, isTurboModuleEnabled } from './BleModule';
 export { validateKeyCode, validateRegex, validateScooter, logger } from './utils';
+export { EventContext } from './BleContext';
+export { BLEProvider } from './BleProvider';
 export {
   initialize,
   ioTDisconnect,

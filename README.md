@@ -1,6 +1,6 @@
 # @dongminyu/segway-ble-manager
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager?ref=badge_shield)
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager?ref=badge_shield)
 
 `react-native-segway-ble-manager` is a React Native library for managing Bluetooth Low Energy (BLE) connections with Segway devices.
 `react-native-segway-ble-manager` provides an easy-to-use API for connecting to and communicating with Segway devices over BLE.
@@ -61,14 +61,16 @@ Here's an example code snippet that demonstrates how to use the `react-native-se
 
 ```typescript
 import {
-  connect,
-  disconnect,
-  init,
+  ioTConnect,
+  ioTDisconnect,
+  initialize,
+  unLockScooter,
+  lockScooter,
   openBatteryCover,
   openSaddle,
   openTailBox,
-  queryVehicleInformation,
-  queryIoTInformation,
+  queryVehicleInfo,
+  queryIoTInfo,
 } from '@dongminyu/segway-ble-manager';
 
 const BLE_INIT_SECRET_KEY = 'MY_SECRET_KEY';
@@ -76,25 +78,36 @@ const BLE_INIT_OPERATION_CODE = 'MY_OPERATOR_CODE';
 const deviceMac = 'DEVICE_MAC_ADDRESS';
 const deviceKey = 'DEVICE_KEY';
 const iotImei = 'IOT_IMEI';
-
 React.useEffect(() => {
-  init(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
+  initialize(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
   // get required permissions
   getRequiredPermissions();
 }, []);
 
-React.useEffect(() => {
-  let intervalId: number;
-  if (timer > 0) {
-    intervalId = setInterval(() => {
-      setTimer(timer - 1);
-    }, 1000);
+function connectWithDevice() {
+  if (timer > 0 || loading) {
+    return;
+  } else {
+    setTimer(60);
+    setLoading(true);
+    const { deviceKey, deviceMac, iotImei } = scooter;
+    ioTConnect(deviceMac, deviceKey, iotImei);
   }
-  return () => {
-    setLoading(false);
-    return clearInterval(intervalId);
-  };
-}, [timer]);
+}
+
+function getVehicleInformation() {
+  queryVehicleInfo((info) => {
+    setVehicleInfo(info);
+    console.log(JSON.stringify(info));
+  });
+}
+
+function getIoTInformation() {
+  queryIoTInfo((info) => {
+    setIoTInformation(info);
+    console.log(JSON.stringify(info));
+  });
+}
 ```
 
 In this example, we first import the necessary modules, including the `Spec` interface from the `react-native-segway-ble-manager` module. We then create a new instance of the `NativeEventEmitter` class, passing in the `BleManager` module as an argument.
@@ -293,6 +306,5 @@ MIT
 ---
 
 Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
-
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager?ref=badge_large)
