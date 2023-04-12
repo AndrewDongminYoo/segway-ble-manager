@@ -1,8 +1,63 @@
-import { logger, validateKeyCode, validateScooter } from './utils';
-import { EmitterSubscription } from 'react-native';
-import { EventType, EventListener } from './BleResType';
-import { eventReceiver, Spec } from './BleModule';
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>module/MethodChannel.js - Postman Documentation</title>
 
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/ionicons.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css" />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+    <label for="nav-trigger" class="navicon-button x">
+      <div class="navicon"></div>
+    </label>
+
+    <label for="nav-trigger" class="overlay"></label>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#BLEProvider">BLEProvider</a></li>
+        <li><a href="global.html#EventContext">EventContext</a></li>
+        <li><a href="global.html#SegwayBleManagerModule">SegwayBleManagerModule</a></li>
+        <li><a href="global.html#Spec">Spec</a></li>
+        <li><a href="global.html#eventReceiver">eventReceiver</a></li>
+        <li><a href="global.html#initialize">initialize</a></li>
+        <li><a href="global.html#ioTConnect">ioTConnect</a></li>
+        <li><a href="global.html#ioTDisconnect">ioTDisconnect</a></li>
+        <li><a href="global.html#lockScooter">lockScooter</a></li>
+        <li><a href="global.html#logger">logger</a></li>
+        <li><a href="global.html#openBatteryCover">openBatteryCover</a></li>
+        <li><a href="global.html#openSaddle">openSaddle</a></li>
+        <li><a href="global.html#openTailBox">openTailBox</a></li>
+        <li><a href="global.html#queryIoTInfo">queryIoTInfo</a></li>
+        <li><a href="global.html#queryVehicleInfo">queryVehicleInfo</a></li>
+        <li><a href="global.html#registerListener">registerListener</a></li>
+        <li><a href="global.html#unLockScooter">unLockScooter</a></li>
+        <li><a href="global.html#validateKeyCode">validateKeyCode</a></li>
+        <li><a href="global.html#validateRegex">validateRegex</a></li>
+        <li><a href="global.html#validateScooter">validateScooter</a></li>
+      </ul>
+    </nav>
+
+    <div id="main">
+      <h1 class="page-title">module/MethodChannel.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import { logger, validateKeyCode, validateScooter } from './utils';
+import { EventType } from './BleResType';
+import { eventReceiver, Spec } from './BleModule';
 /**
  * Function that takes an event type and a listener,
  * check the listener count to have only single subscription,
@@ -10,14 +65,14 @@ import { eventReceiver, Spec } from './BleModule';
  *
  * @see EmitterSubscription {@link https://reactnative.dev/docs/emittersubscription}
  * @param {EventType} eventType - The event type to listen for.
- * @param {EventListener<EventType>} listener - The function to be called when the event is emitted.
+ * @param {EventListener&lt;EventType>} listener - The function to be called when the event is emitted.
  * @returns {EmitterSubscription} A function that takes a single argument of type T and returns void.
  * @example
  *     registerListener(EventType.INITIALIZE, (data) => {
  *        console.debug(data)
  *     })
  */
-export function registerListener<T extends EventType>(eventType: T, listener: EventListener<T>): EmitterSubscription {
+export function registerListener(eventType, listener) {
   if (eventReceiver.listenerCount(eventType) > 0) {
     eventReceiver.removeAllListeners(eventType);
   }
@@ -33,11 +88,11 @@ export function registerListener<T extends EventType>(eventType: T, listener: Ev
  * @example
  *     init(e0382c1944874be7a1ed7f4546e0f412, B40006, true);
  */
-export function initialize(secretKey: string, operatorCode: string, isDebug: boolean) {
+export function initialize(secretKey, operatorCode, isDebug) {
   validateKeyCode(operatorCode, secretKey, isDebug);
   registerListener(EventType.INITIALIZE, function (data) {
     logger.debug(JSON.stringify(data));
-    return data?.result;
+    return data === null || data === void 0 ? void 0 : data.result;
   });
   Spec.init(secretKey, operatorCode, isDebug);
 }
@@ -52,11 +107,11 @@ export function initialize(secretKey: string, operatorCode: string, isDebug: boo
  * @example
  *     ioTConnect('FA:B7:08:B5:B5:46', 'gBiKeWkd', '861123056350117')
  */
-export function ioTConnect(deviceMac: string, deviceKey: string, iotImei: string) {
+export function ioTConnect(deviceMac, deviceKey, iotImei) {
   validateScooter(deviceMac, deviceKey, iotImei);
   registerListener(EventType.CONNECT, function (data) {
     logger.debug(JSON.stringify(data));
-    return data?.result;
+    return data === null || data === void 0 ? void 0 : data.result;
   });
   Spec.connect(deviceMac, deviceKey, iotImei);
 }
@@ -70,7 +125,7 @@ export function ioTConnect(deviceMac: string, deviceKey: string, iotImei: string
 export function ioTDisconnect() {
   registerListener(EventType.DISCONNECT, function (data) {
     logger.debug(JSON.stringify(data));
-    return data?.result;
+    return data === null || data === void 0 ? void 0 : data.result;
   });
   Spec.disconnect();
 }
@@ -84,7 +139,7 @@ export function ioTDisconnect() {
 export function unLockScooter() {
   registerListener(EventType.UNLOCK, function (data) {
     logger.debug(JSON.stringify(data));
-    return data?.result;
+    return data === null || data === void 0 ? void 0 : data.result;
   });
   Spec.unLock();
 }
@@ -98,7 +153,7 @@ export function unLockScooter() {
 export function lockScooter() {
   registerListener(EventType.LOCK, function (data) {
     logger.debug(JSON.stringify(data));
-    return data?.result;
+    return data === null || data === void 0 ? void 0 : data.result;
   });
   Spec.lock();
 }
@@ -112,7 +167,7 @@ export function lockScooter() {
 export function openBatteryCover() {
   registerListener(EventType.OPEN_COVER, function (data) {
     logger.debug(JSON.stringify(data));
-    return data?.result;
+    return data === null || data === void 0 ? void 0 : data.result;
   });
   Spec.openBatteryCover();
 }
@@ -121,12 +176,12 @@ export function openBatteryCover() {
  * `registerListener` function with the `EventType.OPEN_SADDLE` parameter.
  *
  * @example
- *     openSaddle();
+ *     openSaddle()`
  */
 export function openSaddle() {
   registerListener(EventType.OPEN_SADDLE, function (data) {
     logger.debug(JSON.stringify(data));
-    return data?.result;
+    return data === null || data === void 0 ? void 0 : data.result;
   });
   Spec.openSaddle();
 }
@@ -140,7 +195,7 @@ export function openSaddle() {
 export function openTailBox() {
   registerListener(EventType.OPEN_TAIL_BOX, function (data) {
     logger.debug(JSON.stringify(data));
-    return data?.result;
+    return data === null || data === void 0 ? void 0 : data.result;
   });
   Spec.openTailBox();
 }
@@ -148,11 +203,11 @@ export function openTailBox() {
  * Function that calls the `SegwayBleManagerModule.queryVehicleInformation` function and then calls the
  * `registerListener` function with the `EventType.VEHICLE_INFO` parameter.
  *
- * @param {EventListener<EventType.VEHICLE_INFO>} listener - The function to be called when the event is emitted.
+ * @param {EventListener&lt;EventType.VEHICLE_INFO>} listener - The function to be called when the event is emitted.
  * @example
  *     queryVehicleInfo((data) => console.debug(data));
  */
-export function queryVehicleInfo(listener: EventListener<EventType.VEHICLE_INFO>) {
+export function queryVehicleInfo(listener) {
   Spec.queryVehicleInformation();
   return registerListener(EventType.VEHICLE_INFO, listener);
 }
@@ -160,11 +215,26 @@ export function queryVehicleInfo(listener: EventListener<EventType.VEHICLE_INFO>
  * Function that calls the `SegwayBleManagerModule.queryIoTInformation` function and then calls the
  * `registerListener` function with the `EventType.IOT_INFO` parameter.
  *
- * @param {EventListener<EventType.IOT_INFO>} listener - The function to be called when the event is emitted.
+ * @param {EventListener&lt;EventType.IOT_INFO>} listener - The function to be called when the event is emitted.
  * @example
  *     queryIoTInfo((data) => console.debug(data));
  */
-export function queryIoTInfo(listener: EventListener<EventType.IOT_INFO>) {
+export function queryIoTInfo(listener) {
   Spec.queryIoTInformation();
   return registerListener(EventType.IOT_INFO, listener);
 }
+//# sourceMappingURL=MethodChannel.js.map</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <br class="clear" />
+
+    <footer>Documentation generated at Wed Apr 12 2023 15:56:58 GMT+0900 (Korean Standard Time)</footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

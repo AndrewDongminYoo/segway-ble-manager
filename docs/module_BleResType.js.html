@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>module/BleResType.js - Postman Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/ionicons.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css" />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+    <label for="nav-trigger" class="navicon-button x">
+      <div class="navicon"></div>
+    </label>
+
+    <label for="nav-trigger" class="overlay"></label>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#BLEProvider">BLEProvider</a></li>
+        <li><a href="global.html#EventContext">EventContext</a></li>
+        <li><a href="global.html#SegwayBleManagerModule">SegwayBleManagerModule</a></li>
+        <li><a href="global.html#Spec">Spec</a></li>
+        <li><a href="global.html#eventReceiver">eventReceiver</a></li>
+        <li><a href="global.html#initialize">initialize</a></li>
+        <li><a href="global.html#ioTConnect">ioTConnect</a></li>
+        <li><a href="global.html#ioTDisconnect">ioTDisconnect</a></li>
+        <li><a href="global.html#lockScooter">lockScooter</a></li>
+        <li><a href="global.html#logger">logger</a></li>
+        <li><a href="global.html#openBatteryCover">openBatteryCover</a></li>
+        <li><a href="global.html#openSaddle">openSaddle</a></li>
+        <li><a href="global.html#openTailBox">openTailBox</a></li>
+        <li><a href="global.html#queryIoTInfo">queryIoTInfo</a></li>
+        <li><a href="global.html#queryVehicleInfo">queryVehicleInfo</a></li>
+        <li><a href="global.html#registerListener">registerListener</a></li>
+        <li><a href="global.html#unLockScooter">unLockScooter</a></li>
+        <li><a href="global.html#validateKeyCode">validateKeyCode</a></li>
+        <li><a href="global.html#validateRegex">validateRegex</a></li>
+        <li><a href="global.html#validateScooter">validateScooter</a></li>
+      </ul>
+    </nav>
+
+    <div id="main">
+      <h1 class="page-title">module/BleResType.js</h1>
+
+      <section>
+        <article>
+          <pre class="prettyprint source linenums"><code>/** Scooter represents a scooter. */
+
+/**
+ * @description The enumeration values of supported event names.
+ * NOTE: It has to be same with native module's event names.
+ * @see [getConstants](https://reactnative.dev/docs/native-modules-ios#exporting-constants)
+ * @see [Sending Events to JavaScript](https://reactnative.dev/docs/native-modules-ios#sending-events-to-javascript)
+ * @typedef {Record&lt;string, string>} EventType
+ * @property {string} name
+ * @property {string} CONNECT The event that returns whether the scooter is connected.
+ * @property {string} DISCONNECT The event that returns whether the scooter is disconnected.
+ * @property {string} INITIALIZE The event that returns whether the scooter is initialized.
+ * @property {string} IOT_INFO The event that contains condition about the scooter's IoT information.
+ * @property {string} VEHICLE_INFO The event that contains condition about the scooter's vehicle information.
+ * @property {string} LOCK The event that returns whether the scooter is locked.
+ * @property {string} UNLOCK The event that returns whether the scooter is unlocked.
+ * @property {string} OPEN_COVER The event that returns whether the scooter's cover is opened.
+ * @property {string} OPEN_SADDLE The event that returns whether the scooter's saddle is opened.
+ * @property {string} OPEN_TAIL_BOX The event that returns whether the scooter's tail box is opened.
+ */
+export let EventType = /*#__PURE__*/function (EventType) {
+  EventType["CONNECT"] = "ConnectResult";
+  EventType["DISCONNECT"] = "DisconnectResult";
+  EventType["INITIALIZE"] = "InitializeResult";
+  EventType["IOT_INFO"] = "IoTInfoResult";
+  EventType["LOCK"] = "LockResult";
+  EventType["OPEN_COVER"] = "OpenCoverResult";
+  EventType["OPEN_SADDLE"] = "OpenSaddleResult";
+  EventType["OPEN_TAIL_BOX"] = "OpenTailBoxResult";
+  EventType["UNLOCK"] = "UnlockResult";
+  EventType["VEHICLE_INFO"] = "VehicleInfoResult";
+  return EventType;
+}({});
+//# sourceMappingURL=BleResType.js.map</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <br class="clear" />
+
+    <footer>Documentation generated at Wed Apr 12 2023 15:56:58 GMT+0900 (Korean Standard Time)</footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>
