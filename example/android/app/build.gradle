@@ -1,6 +1,7 @@
 //file:noinspection GrDeprecatedAPIUsage
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply plugin: 'org.jetbrains.kotlin.android'
 
 import com.android.build.OutputFile
 
@@ -89,10 +90,13 @@ def reactNativeArchitectures() {
 }
 
 android {
+    namespace "com.segwayblemanager.example"
+
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
     compileSdk rootProject.ext.compileSdkVersion
+    compileSdkPreview "UpsideDownCake"
 
     namespace "com.segwayblemanagerexample"
     defaultConfig {
@@ -165,9 +169,10 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation('com.facebook.react:react-android:0.72.0-rc.1')
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    debugImplementation("com.facebook.flipper:flipper:$FLIPPER_VERSION")
+    implementation 'androidx.core:core-ktx:1.10.0'
     //noinspection GradleDependency
     debugImplementation("com.facebook.flipper:flipper-network-plugin:$FLIPPER_VERSION") {
+    debugImplementation("com.facebook.flipper:flipper:$FLIPPER_VERSION")
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
 
