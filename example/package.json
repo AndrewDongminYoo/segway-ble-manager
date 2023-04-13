@@ -11,7 +11,7 @@
     "clear": "react-native clean --include android,metro,watchman,yarn",
     "clear:all": "react-native clean --include android,cocoapods,metro,npm,watchman,yarn",
     "doctor": "react-native doctor --fix",
-    "gradle": "(cd android && ./gradlew generateCodegenArtifactsFromSchema)",
+    "gradle": "(cd android && ./gradlew prebuild)",
     "pods": "(cd ios && pod install --no-repo-update)",
     "postpods": "node node_modules/react-native/scripts/generate-codegen-artifacts.js -p . -o ios",
     "postinstall": "react-native setup-ios-permissions",
