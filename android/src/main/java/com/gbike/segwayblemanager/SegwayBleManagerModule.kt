@@ -1,4 +1,4 @@
-package com.gbike.segwayblemanager
+package com.andrew.segwayblemanager
 
 import android.util.Log
 import com.facebook.react.bridge.*

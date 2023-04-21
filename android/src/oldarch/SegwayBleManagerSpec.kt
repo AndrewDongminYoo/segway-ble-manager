@@ -1,4 +1,4 @@
-package com.gbike.segwayblemanager
+package com.andrew.segwayblemanager
 
 import com.facebook.proguard.annotations.DoNotStrip
 import com.facebook.react.bridge.Promise

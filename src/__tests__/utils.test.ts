@@ -1,7 +1,7 @@
 import { validateRegex } from '../utils';
 
-describe('test _gbike_segway_ble_manager', function () {
-  it('test @gbike/segway-ble-manager.validateRegex', function (done) {
+describe('test _andrew_segway_ble_manager', function () {
+  it('test @andrew/segway-ble-manager.validateRegex', function (done) {
     expect(validateRegex('00:1A:22:33:44:πø', 'mac-address')).toBe(false);
     expect(validateRegex('00:11:B2:33:DD:5E', 'mac-address')).toBe(true);
     expect(validateRegex('00:11:B2:33:DD:5E', 'device-ble-key')).toBe(false);

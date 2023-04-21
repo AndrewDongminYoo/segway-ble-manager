@@ -106,7 +106,7 @@
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {
-      "javaPackage": "com.gbike.segwayblemanager"
+      "javaPackage": "com.andrew.segwayblemanager"
     }
   },
   "rnx-kit": {

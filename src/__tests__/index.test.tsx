@@ -5,8 +5,8 @@ test('test validateKeyCode', () => {
   expect(mockValidateKeyCode('AE7DA0', 'abaa004743d6428aaca96c0827826c55', true)).toBe(true);
 });
 
-describe('test _gbike_segway_ble_manager', function () {
-  it('test @gbike/segway-ble-manager.validateRegex', function (done) {
+describe('test _andrew_segway_ble_manager', function () {
+  it('test @andrew/segway-ble-manager.validateRegex', function (done) {
     expect(validateKeyCode('A3D987', '9c4747dc6a6c4832bef700723a2d5da4', true)).toBe(true);
     expect(validateKeyCode('EDD50F', 'd0f7dd2ec8a4482c858bae6b9c77f3da', true)).toBe(true);
     expect(validateKeyCode('29C53F', '9d56611c457841d3802aace85d45ba4d', true)).toBe(true);

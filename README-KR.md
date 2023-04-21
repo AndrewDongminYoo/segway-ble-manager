@@ -173,7 +173,7 @@ android
    │  ├─ AndroidManifest.xml
    │  ├─ java
    │  │  └─ com
-   │  │    └─ gBike
+   │  │    └─ andrew
    │  │       └─ segwayBleManager
    │  │        ├─ SegwayBleManagerModule.kt
    │  │        └─ SegwayBleManagerPackage.kt

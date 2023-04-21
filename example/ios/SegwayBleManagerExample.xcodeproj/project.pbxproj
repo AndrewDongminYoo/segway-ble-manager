@@ -452,7 +452,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.gbike.segwayble.example;
+				PRODUCT_BUNDLE_IDENTIFIER = io.andrew.segwayble.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SegwayBleManagerExample.app/SegwayBleManagerExample";
 			};
@@ -478,7 +478,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.gbike.segwayble.example;
+				PRODUCT_BUNDLE_IDENTIFIER = io.andrew.segwayble.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SegwayBleManagerExample.app/SegwayBleManagerExample";
 			};
@@ -507,7 +507,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.gbike.segwayble.example;
+				PRODUCT_BUNDLE_IDENTIFIER = io.andrew.segwayble.example;
 				PRODUCT_NAME = SegwayBleManagerExample;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -537,7 +537,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.gbike.segwayble.example;
+				PRODUCT_BUNDLE_IDENTIFIER = io.andrew.segwayble.example;
 				PRODUCT_NAME = SegwayBleManagerExample;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
