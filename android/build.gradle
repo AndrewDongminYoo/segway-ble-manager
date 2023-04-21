@@ -34,8 +34,8 @@ def getExtOrIntegerDefault(name) {
 }
 
 android {
-    namespace "com.gbike.segwayblemanager"
-    testNamespace 'com.gbike.segwayblemanager.test'
+    namespace "com.andrew.segwayblemanager"
+    testNamespace 'com.andrew.segwayblemanager.test'
     compileSdk getExtOrIntegerDefault("compileSdk")
     ndkVersion getExtOrDefault("ndkVersion")
     buildToolsVersion getExtOrDefault("buildToolsVersion")
@@ -108,6 +108,6 @@ if (isNewArchitectureEnabled()) {
     react {
         jsRootDir = file("../src/")
         libraryName = "SegwayBleManager"
-        codegenJavaPackageName = "com.gbike.segwayblemanager"
+        codegenJavaPackageName = "com.andrew.segwayblemanager"
     }
 }
