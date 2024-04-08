@@ -11,22 +11,22 @@
 
 ## 설치 방법
 
-```shell
+```shell
 # npm을 사용한다면, (기본 패키지 매니저입니다.)
 $ npm install @dongminyu/react-native-step-counter
 ```
 
-```shell
+```shell
 # Yarn을 선호한다면, (병렬 설치를 지원해 빠른 속도를 제공하는 패키지 매니저입니다.)
 $ yarn add @dongminyu/react-native-step-counter
 ```
 
-```shell
+```shell
 # pnpm을 선호한다면, (글로벌 패키지와 하드링크로 빠른 속도를 제공하는 패키지 매니저입니다.)
 $ pnpm add @dongminyu/react-native-step-counter
 ```
 
-리액트네이티브 0.60 버전 이후 설치된 네이티브 모듈은 오토 링크됩니다. 네이티브 모듈을 수동으로 연결할 필요가 없습니다.
+리액트네이티브 0.60 버전 이후 설치된 네이티브 모듈은 오토 링크됩니다. 네이티브 모듈을 수동으로 연결할 필요가 없습니다.
 
 👣 리액트 네이티브의 새로운 아키텍쳐를 사용하기 때문에 원하지 않는 경우에도 사용할 수 있습니다.
 

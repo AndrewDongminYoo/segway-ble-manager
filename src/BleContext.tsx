@@ -17,7 +17,7 @@ import type { IoTInfo, Scooter, VehicleInfo } from './BleResType';
  *     <View>
  *       <Text>Scooter Info</Text>
  *       <Text>ScooterNumber {scooter.number}</Text>
- *       <Text>IoT Device is Locked {ioTInformation.isLocked}</Text>
+ *       <Text>IoT Device is Locked {ioTInformation.isLocked}</Text>
  *       <Text>Vehicle Battery Level {vehicleInformation.powerPercent}</Text>
  *     </View>
  *   );
