@@ -29,12 +29,29 @@ lint:
     - swiftlint@0.54.0
   ignore:
     - linters:
+        - shellcheck
+      paths:
+        - '**/gradlew'
+    - linters:
+        - gitleaks
+      paths:
+        - .yarn/plugins
+    - linters:
         - ALL
       paths:
         - '**/.trunk'
         - '**/package-lock.json'
         - '**/yarn.lock'
         - '**/vendor/**'
+    - linters:
+        - checkov
+        - osv-scanner
+        - trivy
+        - trufflehog
+      paths:
+        - yarn.lock
+        - '**/Podfile.lock'
+        - .yarn/releases
 runtimes:
   enabled:
     - go@1.21.0
