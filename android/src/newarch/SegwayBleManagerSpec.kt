@@ -1,4 +1,4 @@
-package com.andrew.segwayblemanager
+package com.dongminyu.segwayblemanager
 
 import com.facebook.react.bridge.ReactApplicationContext
 

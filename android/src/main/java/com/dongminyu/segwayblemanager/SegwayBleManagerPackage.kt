@@ -1,10 +1,11 @@
-package com.andrew.segwayblemanager
+package com.dongminyu.segwayblemanager
 
 import com.facebook.react.TurboReactPackage
-import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.module.model.ReactModuleInfo
+import com.facebook.react.bridge.NativeModule
 import com.facebook.react.module.model.ReactModuleInfoProvider
+import com.facebook.react.module.model.ReactModuleInfo
+import java.util.HashMap
 
 /**
  * This is the package that is used to register the native module with the React Native runtime.
@@ -28,7 +29,7 @@ class SegwayBleManagerPackage : TurboReactPackage() {
      */
     override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
         return ReactModuleInfoProvider {
-            val moduleInfo: MutableMap<String, ReactModuleInfo> = HashMap()
+            val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
             /**
              * Sometimes during development, you might be warned to import this
              * [BuildConfig] that is here, or you might not be able to find the
@@ -38,7 +39,7 @@ class SegwayBleManagerPackage : TurboReactPackage() {
              * [ReactModuleInfo] Method's last parameter is [isTurboModule][BuildConfig.IS_NEW_ARCHITECTURE_ENABLED] that the [BuildConfig] is for.
              */
             val isTurboModule: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
-            moduleInfo[SegwayBleManagerModule.NAME] = ReactModuleInfo(
+            moduleInfos[SegwayBleManagerModule.NAME] = ReactModuleInfo(
                 SegwayBleManagerModule.NAME,
                 SegwayBleManagerModule.NAME,
                 false,  // canOverrideExistingModule
@@ -47,7 +48,7 @@ class SegwayBleManagerPackage : TurboReactPackage() {
                 false,  // isCxxModule
                 isTurboModule // isTurboModule
             )
-            moduleInfo
+            moduleInfos
         }
     }
 }

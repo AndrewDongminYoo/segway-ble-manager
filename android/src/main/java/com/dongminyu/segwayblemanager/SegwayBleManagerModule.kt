@@ -1,4 +1,4 @@
-package com.andrew.segwayblemanager
+package com.dongminyu.segwayblemanager
 
 import android.util.Log
 import com.facebook.react.bridge.*
@@ -11,8 +11,8 @@ import com.segwaydiscovery.nbiot.interfaces.*
 import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_CONNECTED
 import com.segwaydiscovery.nbiot.interfaces.ConnectionState.STATE_DISCONNECTED
 
-class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) :
-    SegwayBleManagerSpec(reactContext) {
+class SegwayBleManagerModule(private val context: ReactApplicationContext) :
+    SegwayBleManagerSpec(context) {
     /**
      * This is the NINE_BOT's Bluetooth module.
      * It starts as `null` and is initialized in the [init] method.
@@ -30,7 +30,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
      * @see [com.facebook.react.bridge.ReactContextBaseJavaModule]
      * @see [com.facebook.react.bridge.NativeModule]
      */
-    private val deviceEventEmitter = reactContext.getJSModule(RCTDeviceEventEmitter::class.java)
+    private val deviceEventEmitter = context.getJSModule(RCTDeviceEventEmitter::class.java)
 
     override fun getName(): String {
         return NAME
@@ -122,7 +122,7 @@ class SegwayBleManagerModule(private val reactContext: ReactApplicationContext) 
         try {
             NBIotBle.getInstance().init(secretKey, operatorCode, isDebug)
             bluetoothKit = BluetoothKit()
-            bluetoothKit!!.init(reactContext)
+            bluetoothKit!!.init(context)
             bluetoothKit!!.debugEnabled(isDebug)
             onSuccess(initializeResult, true, promise)
         } catch (error: Exception) {
