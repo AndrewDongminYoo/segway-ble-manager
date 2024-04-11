@@ -3,9 +3,10 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    '@react-native-community',
+    '@react-native',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'prettier',
   ],
   plugins: ['@typescript-eslint', 'jsdoc'],
   parser: '@typescript-eslint/parser',
@@ -13,7 +14,16 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
-    'prettier/prettier': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        quoteProps: 'consistent',
+        singleQuote: true,
+        tabWidth: 2,
+        trailingComma: 'es5',
+        useTabs: false,
+      },
+    ],
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-empty-function': 'off',

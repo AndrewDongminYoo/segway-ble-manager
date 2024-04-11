@@ -1,5 +1,5 @@
 import { NativeEventEmitter, NativeModules } from 'react-native';
-import TurboBleManager from '@dongminyu/turbo-module-spec';
+import TurboBleManager from './NativeSegwayBleManager';
 import { EventType } from './BleResType';
 import LINKING_ERROR from './LinkingError';
 

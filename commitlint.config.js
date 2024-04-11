@@ -1,5 +1,6 @@
 module.exports = {
   formatter: './node_modules/@commitlint/format/lib/index.js',
+  extends: ['@commitlint/config-conventional'],
   helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
   parserPreset: 'conventional-changelog-conventionalcommits',
   rules: {

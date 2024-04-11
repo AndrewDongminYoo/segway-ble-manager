@@ -1,37 +1,28 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "rootDir": ".",
     "paths": {
-      "@dongminyu/segway-ble-manager": ["./src/index"],
-      "@dongminyu/turbo-module-spec": ["./src/NativeSegwayBleManager"],
-      "@components": ["./example/src/*.tsx"]
+      "@dongminyu/segway-ble-manager": ["./src/index"]
     },
-    "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "remove",
-    "isolatedModules": false,
-    "jsx": "preserve",
+    "jsx": "react",
     "lib": ["ESNext"],
     "module": "ESNext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noStrictGenericChecks": false,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "./lib",
-    "preserveValueImports": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext"
-  },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**/node_modules", "**/scripts/*.js"]
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
+  }
 }
