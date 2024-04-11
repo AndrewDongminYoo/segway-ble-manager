@@ -33,7 +33,7 @@ const App = () => {
   }, []);
 
   React.useEffect(() => {
-    let intervalId: NodeJS.Timer;
+    let intervalId: NodeJS.Timeout;
     if (timer > 0) {
       intervalId = setInterval(() => {
         setTimer(timer - 1);
@@ -46,14 +46,14 @@ const App = () => {
   }, [timer]);
 
   function getVehicleInformation() {
-    queryVehicleInfo((info) => {
+    queryVehicleInfo((info: React.SetStateAction<VehicleInfo | undefined>) => {
       setVehicleInfo(info);
       console.log(JSON.stringify(info));
     });
   }
 
   function getIoTInformation() {
-    queryIoTInfo((info) => {
+    queryIoTInfo((info: React.SetStateAction<IoTInfo | undefined>) => {
       setIoTInformation(info);
       console.log(JSON.stringify(info));
     });
@@ -96,13 +96,13 @@ const App = () => {
       <ScrollView contentInsetAdjustmentBehavior="scrollableAxes" style={styles.backgroundStyle}>
         <InfoSection iotInformation={ioTInformation} vehicleInfo={vehicleInformation} />
         <View style={styles.scooterGroup}>
-          {scooters.map((gco, _) => {
+          {scooters.map((sco: any) => {
             return (
               <ScooterButton
-                selected={gco.number === scooter.number}
+                selected={sco.number === scooter.number}
                 setScooter={setScooter}
-                scooter={gco}
-                key={gco.number}
+                scooter={sco}
+                key={sco.number}
               />
             );
           })}

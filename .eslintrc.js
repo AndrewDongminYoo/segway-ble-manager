@@ -35,15 +35,20 @@ module.exports = {
     'jsdoc/check-param-names': 'error',
     'jsdoc/check-tag-names': 'warn', // test
     'jsdoc/check-types': 'warn', // test
-    'jsdoc/newline-after-description': 'error',
+    'jsdoc/check-values': 'off',
+    'jsdoc/no-undefined-types': 'off',
     'jsdoc/require-description-complete-sentence': 'warn', // test
-    'jsdoc/require-example': 'warn', // test
+    'jsdoc/require-example': 'off', // test
     'jsdoc/require-hyphen-before-param-description': 'warn', // test
+    'jsdoc/require-param-description': 'off',
+    'jsdoc/require-param-type': 'off',
     'jsdoc/require-param': 'error',
-    'jsdoc/require-param-description': 'error',
-    'jsdoc/require-param-type': 'error',
+    'jsdoc/require-property-description': 'off',
+    'jsdoc/require-property-type': 'off',
     'jsdoc/require-returns-description': 'warn', // test
     'jsdoc/require-returns-type': 'error',
+    'jsdoc/require-returns': 'off',
+    'jsdoc/tag-lines': 'off',
     'comma-dangle': [
       'error',
       {

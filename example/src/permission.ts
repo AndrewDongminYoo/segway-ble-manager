@@ -5,7 +5,7 @@ import appInformation from '../package.json';
 const locationWhenIUse = PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
 const locateBackground = PERMISSIONS.ANDROID.ACCESS_BACKGROUND_LOCATION;
 const takeFineLocation = PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
-const bluetoothDevices = PERMISSIONS.IOS.BLUETOOTH_PERIPHERAL;
+const bluetoothDevices = PERMISSIONS.IOS.BLUETOOTH;
 const bluetoothEmitter = PERMISSIONS.ANDROID.BLUETOOTH_ADVERTISE;
 const bluetoothConnect = PERMISSIONS.ANDROID.BLUETOOTH_CONNECT;
 const bluetoothScanner = PERMISSIONS.ANDROID.BLUETOOTH_SCAN;

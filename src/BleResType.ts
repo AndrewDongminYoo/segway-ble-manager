@@ -28,9 +28,9 @@ export interface VehicleInfo {
   powerPercent: number;
   /**
    * @description The level of the speed.
-   * @constant 1: Low speed
-   * @constant 2: Medium speed
-   * @constant 3: High speed
+   * @enum 1: Low speed
+   * @enum 2: Medium speed
+   * @enum 3: High speed
    */
   speedMode: number;
   /**
@@ -133,12 +133,10 @@ export interface IoTInfo {
    */
   modifiedTimes: number;
   /**
-   * @since version v1.1.0.
    * @description IoT device software version update times.
    */
   updateTimes: number;
   /**
-   * @since version v1.1.0.
    * @description The state of the IoT device being locked or not.
    */
   isLocked: boolean;
@@ -155,7 +153,6 @@ export interface IoTInfo {
    */
   voltageL: number;
   /**
-   * @since version v1.1.0.
    * @description The voltage of IoT is an integer in mV.
    * It is the average of the highest and lowest voltage.
    */

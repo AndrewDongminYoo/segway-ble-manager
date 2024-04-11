@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import React, { useEffect, useState, type ReactNode } from 'react';
 import { type EmitterSubscription } from 'react-native';
 import type { IoTInfo, Scooter, VehicleInfo } from './BleResType';
 import { SubEventList, eventReceiver } from './BleModule';
