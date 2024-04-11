@@ -1,10 +1,10 @@
 version: 0.1
 cli:
-  version: 1.6.1
+  version: 1.21.0
 plugins:
   sources:
     - id: trunk
-      ref: v0.0.13
+      ref: v1.4.5
       uri: https://github.com/trunk-io/plugins
 lint:
   disabled:
@@ -15,14 +15,18 @@ lint:
     - shellcheck
     - shfmt
   enabled:
-    - actionlint@1.6.23
-    - eslint@8.36.0
-    - gitleaks@8.16.1
-    - markdownlint@0.33.0
-    - prettier@2.8.7
-    - yamllint@1.30.0
-    - swiftformat@0.51.2
-    - swiftlint@0.50.3
+    - checkov@3.2.55
+    - osv-scanner@1.7.0
+    - trivy@0.50.1
+    - trufflehog@3.71.0
+    - actionlint@1.6.27
+    - eslint@8.57.0
+    - gitleaks@8.18.2
+    - markdownlint@0.39.0
+    - prettier@3.2.5
+    - yamllint@1.35.1
+    - swiftformat@0.53.5
+    - swiftlint@0.54.0
   ignore:
     - linters:
         - ALL
@@ -33,8 +37,8 @@ lint:
         - '**/vendor/**'
 runtimes:
   enabled:
-    - go@1.19.5
-    - java@11.0.13
+    - go@1.21.0
+    - java@13.0.11
     - node@18.12.1
     - python@3.10.8
 actions:

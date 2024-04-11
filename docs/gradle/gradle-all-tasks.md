@@ -31,11 +31,11 @@
 - `dongminyu_segway-ble-manager:buildKotlinToolingMetadata` - Build metadata json file containing information about the used Kotlin tooling
 - `dongminyu_segway-ble-manager:buildNeeded` - Assembles and tests this project and all projects it depends on.
 - `dongminyu_segway-ble-manager:clean` - Deletes the build directory.
-dongminyu_segway-ble-manager:compileDebugAndroidTestSources
-dongminyu_segway-ble-manager:compileDebugSources
-dongminyu_segway-ble-manager:compileDebugUnitTestSources
-dongminyu_segway-ble-manager:compileReleaseSources
-dongminyu_segway-ble-manager:compileReleaseUnitTestSources
+  dongminyu_segway-ble-manager:compileDebugAndroidTestSources
+  dongminyu_segway-ble-manager:compileDebugSources
+  dongminyu_segway-ble-manager:compileDebugUnitTestSources
+  dongminyu_segway-ble-manager:compileReleaseSources
+  dongminyu_segway-ble-manager:compileReleaseUnitTestSources
 - `dongminyu_segway-ble-manager:extractDebugAnnotations` - Extracts Android annotations for the debug variant into the archive file
 - `dongminyu_segway-ble-manager:extractReleaseAnnotations` - Extracts Android annotations for the release variant into the archive file
 
@@ -389,188 +389,188 @@ dongminyu_segway-ble-manager:compileReleaseUnitTestSources
 - app:writeReleaseSigningConfigVersions
 - app:zipApksForDebug
 - app:zipApksForRelease
-dongminyu_segway-ble-manager:analyzeDebugAndroidTestDependencies
-dongminyu_segway-ble-manager:analyzeDebugDependencies
-dongminyu_segway-ble-manager:analyzeDebugUnitTestDependencies
-dongminyu_segway-ble-manager:analyzeReleaseDependencies
-dongminyu_segway-ble-manager:analyzeReleaseUnitTestDependencies
+  dongminyu_segway-ble-manager:analyzeDebugAndroidTestDependencies
+  dongminyu_segway-ble-manager:analyzeDebugDependencies
+  dongminyu_segway-ble-manager:analyzeDebugUnitTestDependencies
+  dongminyu_segway-ble-manager:analyzeReleaseDependencies
+  dongminyu_segway-ble-manager:analyzeReleaseUnitTestDependencies
 - `dongminyu_segway-ble-manager:assembleDebug` - Assembles main output for variant debug
 - `dongminyu_segway-ble-manager:assembleDebugAndroidTest` - Assembles main output for variant debugAndroidTest
 - `dongminyu_segway-ble-manager:assembleDebugUnitTest` - Assembles main output for variant debugUnitTest
 - `dongminyu_segway-ble-manager:assembleRelease` - Assembles main output for variant release
 - `dongminyu_segway-ble-manager:assembleReleaseUnitTest` - Assembles main output for variant releaseUnitTest
-dongminyu_segway-ble-manager:buildCodegenCLI
+  dongminyu_segway-ble-manager:buildCodegenCLI
 - `dongminyu_segway-ble-manager:bundleDebugAar` - Assembles a bundle containing the library in debug.
 - `dongminyu_segway-ble-manager:bundleDebugLocalLintAar` - Assembles a bundle containing the library in debug.
-dongminyu_segway-ble-manager:bundleLibCompileToJarDebug
-dongminyu_segway-ble-manager:bundleLibCompileToJarDebugAndroidTest
-dongminyu_segway-ble-manager:bundleLibCompileToJarDebugUnitTest
-dongminyu_segway-ble-manager:bundleLibCompileToJarRelease
-dongminyu_segway-ble-manager:bundleLibCompileToJarReleaseUnitTest
-dongminyu_segway-ble-manager:bundleLibResDebug
-dongminyu_segway-ble-manager:bundleLibResRelease
-dongminyu_segway-ble-manager:bundleLibRuntimeToDirDebug
-dongminyu_segway-ble-manager:bundleLibRuntimeToDirRelease
-dongminyu_segway-ble-manager:bundleLibRuntimeToJarDebug
-dongminyu_segway-ble-manager:bundleLibRuntimeToJarRelease
+  dongminyu_segway-ble-manager:bundleLibCompileToJarDebug
+  dongminyu_segway-ble-manager:bundleLibCompileToJarDebugAndroidTest
+  dongminyu_segway-ble-manager:bundleLibCompileToJarDebugUnitTest
+  dongminyu_segway-ble-manager:bundleLibCompileToJarRelease
+  dongminyu_segway-ble-manager:bundleLibCompileToJarReleaseUnitTest
+  dongminyu_segway-ble-manager:bundleLibResDebug
+  dongminyu_segway-ble-manager:bundleLibResRelease
+  dongminyu_segway-ble-manager:bundleLibRuntimeToDirDebug
+  dongminyu_segway-ble-manager:bundleLibRuntimeToDirRelease
+  dongminyu_segway-ble-manager:bundleLibRuntimeToJarDebug
+  dongminyu_segway-ble-manager:bundleLibRuntimeToJarRelease
 - `dongminyu_segway-ble-manager:bundleReleaseAar` - Assembles a bundle containing the library in release.
 - `dongminyu_segway-ble-manager:bundleReleaseLocalLintAar` - Assembles a bundle containing the library in release.
-dongminyu_segway-ble-manager:checkDebugAndroidTestAarMetadata
-dongminyu_segway-ble-manager:checkDebugAndroidTestDuplicateClasses
-dongminyu_segway-ble-manager:checkDebugManifest
-dongminyu_segway-ble-manager:checkReleaseManifest
-dongminyu_segway-ble-manager:compileDebugAidl
-dongminyu_segway-ble-manager:compileDebugAndroidTestAidl
-dongminyu_segway-ble-manager:compileDebugAndroidTestJavaWithJavac
+  dongminyu_segway-ble-manager:checkDebugAndroidTestAarMetadata
+  dongminyu_segway-ble-manager:checkDebugAndroidTestDuplicateClasses
+  dongminyu_segway-ble-manager:checkDebugManifest
+  dongminyu_segway-ble-manager:checkReleaseManifest
+  dongminyu_segway-ble-manager:compileDebugAidl
+  dongminyu_segway-ble-manager:compileDebugAndroidTestAidl
+  dongminyu_segway-ble-manager:compileDebugAndroidTestJavaWithJavac
 - `dongminyu_segway-ble-manager:compileDebugAndroidTestKotlin` - Compiles the debugAndroidTest kotlin.
-dongminyu_segway-ble-manager:compileDebugAndroidTestRenderscript
-dongminyu_segway-ble-manager:compileDebugAndroidTestShaders
-dongminyu_segway-ble-manager:compileDebugJavaWithJavac
+  dongminyu_segway-ble-manager:compileDebugAndroidTestRenderscript
+  dongminyu_segway-ble-manager:compileDebugAndroidTestShaders
+  dongminyu_segway-ble-manager:compileDebugJavaWithJavac
 - `dongminyu_segway-ble-manager:compileDebugKotlin` - Compiles the debug kotlin.
-dongminyu_segway-ble-manager:compileDebugLibraryResources
-dongminyu_segway-ble-manager:compileDebugRenderscript
-dongminyu_segway-ble-manager:compileDebugShaders
-dongminyu_segway-ble-manager:compileDebugUnitTestJavaWithJavac
+  dongminyu_segway-ble-manager:compileDebugLibraryResources
+  dongminyu_segway-ble-manager:compileDebugRenderscript
+  dongminyu_segway-ble-manager:compileDebugShaders
+  dongminyu_segway-ble-manager:compileDebugUnitTestJavaWithJavac
 - `dongminyu_segway-ble-manager:compileDebugUnitTestKotlin` - Compiles the debugUnitTest kotlin.
-dongminyu_segway-ble-manager:compileLint
-dongminyu_segway-ble-manager:compileLintChecks
-dongminyu_segway-ble-manager:compileReleaseAidl
-dongminyu_segway-ble-manager:compileReleaseJavaWithJavac
+  dongminyu_segway-ble-manager:compileLint
+  dongminyu_segway-ble-manager:compileLintChecks
+  dongminyu_segway-ble-manager:compileReleaseAidl
+  dongminyu_segway-ble-manager:compileReleaseJavaWithJavac
 - `dongminyu_segway-ble-manager:compileReleaseKotlin` - Compiles the release kotlin.
-dongminyu_segway-ble-manager:compileReleaseLibraryResources
-dongminyu_segway-ble-manager:compileReleaseRenderscript
-dongminyu_segway-ble-manager:compileReleaseShaders
-dongminyu_segway-ble-manager:compileReleaseUnitTestJavaWithJavac
+  dongminyu_segway-ble-manager:compileReleaseLibraryResources
+  dongminyu_segway-ble-manager:compileReleaseRenderscript
+  dongminyu_segway-ble-manager:compileReleaseShaders
+  dongminyu_segway-ble-manager:compileReleaseUnitTestJavaWithJavac
 - `dongminyu_segway-ble-manager:compileReleaseUnitTestKotlin` - Compiles the releaseUnitTest kotlin.
-dongminyu_segway-ble-manager:compressDebugAndroidTestAssets
-dongminyu_segway-ble-manager:consumeConfigAttr
-dongminyu_segway-ble-manager:copyDebugJniLibsProjectAndLocalJars
-dongminyu_segway-ble-manager:copyDebugJniLibsProjectOnly
-dongminyu_segway-ble-manager:copyReleaseJniLibsProjectAndLocalJars
-dongminyu_segway-ble-manager:copyReleaseJniLibsProjectOnly
-dongminyu_segway-ble-manager:createDebugAndroidTestApkListingFileRedirect
-dongminyu_segway-ble-manager:createDebugVariantModel
-dongminyu_segway-ble-manager:createFullJarDebug
-dongminyu_segway-ble-manager:createFullJarRelease
-dongminyu_segway-ble-manager:createMockableJar
-dongminyu_segway-ble-manager:createReleaseVariantModel
-dongminyu_segway-ble-manager:debugSourcesJar
-dongminyu_segway-ble-manager:desugarDebugAndroidTestFileDependencies
-dongminyu_segway-ble-manager:dexBuilderDebugAndroidTest
-dongminyu_segway-ble-manager:exportDebugConsumerProguardFiles
-dongminyu_segway-ble-manager:exportReleaseConsumerProguardFiles
-dongminyu_segway-ble-manager:extractDeepLinksDebug
-dongminyu_segway-ble-manager:extractDeepLinksForAarDebug
-dongminyu_segway-ble-manager:extractDeepLinksForAarRelease
-dongminyu_segway-ble-manager:extractDeepLinksRelease
-dongminyu_segway-ble-manager:extractProguardFiles
-dongminyu_segway-ble-manager:generateCodegenArtifactsFromSchema
-dongminyu_segway-ble-manager:generateCodegenSchemaFromJavaScript
-dongminyu_segway-ble-manager:generateDebugAndroidTestAssets
-dongminyu_segway-ble-manager:generateDebugAndroidTestBuildConfig
-dongminyu_segway-ble-manager:generateDebugAndroidTestResValues
-dongminyu_segway-ble-manager:generateDebugAndroidTestResources
-dongminyu_segway-ble-manager:generateDebugAndroidTestSources
-dongminyu_segway-ble-manager:generateDebugAssets
-dongminyu_segway-ble-manager:generateDebugBuildConfig
-dongminyu_segway-ble-manager:generateDebugExternalPublicTxt
-dongminyu_segway-ble-manager:generateDebugLintModel
-dongminyu_segway-ble-manager:generateDebugRFile
-dongminyu_segway-ble-manager:generateDebugResValues
-dongminyu_segway-ble-manager:generateDebugResources
-dongminyu_segway-ble-manager:generateDebugSources
-dongminyu_segway-ble-manager:generateDebugUnitTestAssets
-dongminyu_segway-ble-manager:generateDebugUnitTestResources
-dongminyu_segway-ble-manager:generateDebugUnitTestSources
-dongminyu_segway-ble-manager:generateDebugUnitTestStubRFile
-dongminyu_segway-ble-manager:generateReleaseAssets
-dongminyu_segway-ble-manager:generateReleaseBuildConfig
-dongminyu_segway-ble-manager:generateReleaseExternalPublicTxt
-dongminyu_segway-ble-manager:generateReleaseLintModel
-dongminyu_segway-ble-manager:generateReleaseRFile
-dongminyu_segway-ble-manager:generateReleaseResValues
-dongminyu_segway-ble-manager:generateReleaseResources
-dongminyu_segway-ble-manager:generateReleaseSources
-dongminyu_segway-ble-manager:generateReleaseUnitTestAssets
-dongminyu_segway-ble-manager:generateReleaseUnitTestResources
-dongminyu_segway-ble-manager:generateReleaseUnitTestSources
-dongminyu_segway-ble-manager:generateReleaseUnitTestStubRFile
-dongminyu_segway-ble-manager:javaPreCompileDebug
-dongminyu_segway-ble-manager:javaPreCompileDebugAndroidTest
-dongminyu_segway-ble-manager:javaPreCompileDebugUnitTest
-dongminyu_segway-ble-manager:javaPreCompileRelease
-dongminyu_segway-ble-manager:javaPreCompileReleaseUnitTest
-dongminyu_segway-ble-manager:mapDebugAndroidTestSourceSetPaths
-dongminyu_segway-ble-manager:mapDebugSourceSetPaths
-dongminyu_segway-ble-manager:mapReleaseSourceSetPaths
-dongminyu_segway-ble-manager:mergeDebugAndroidTestAssets
-dongminyu_segway-ble-manager:mergeDebugAndroidTestGeneratedProguardFiles
-dongminyu_segway-ble-manager:mergeDebugAndroidTestJavaResource
-dongminyu_segway-ble-manager:mergeDebugAndroidTestJniLibFolders
-dongminyu_segway-ble-manager:mergeDebugAndroidTestNativeLibs
-dongminyu_segway-ble-manager:mergeDebugAndroidTestResources
-dongminyu_segway-ble-manager:mergeDebugAndroidTestShaders
-dongminyu_segway-ble-manager:mergeDebugAssets
-dongminyu_segway-ble-manager:mergeDebugConsumerProguardFiles
-dongminyu_segway-ble-manager:mergeDebugGeneratedProguardFiles
-dongminyu_segway-ble-manager:mergeDebugJavaResource
-dongminyu_segway-ble-manager:mergeDebugJniLibFolders
-dongminyu_segway-ble-manager:mergeDebugNativeLibs
-dongminyu_segway-ble-manager:mergeDebugResources
-dongminyu_segway-ble-manager:mergeDebugShaders
-dongminyu_segway-ble-manager:mergeExtDexDebugAndroidTest
-dongminyu_segway-ble-manager:mergeLibDexDebugAndroidTest
-dongminyu_segway-ble-manager:mergeProjectDexDebugAndroidTest
-dongminyu_segway-ble-manager:mergeReleaseAssets
-dongminyu_segway-ble-manager:mergeReleaseConsumerProguardFiles
-dongminyu_segway-ble-manager:mergeReleaseGeneratedProguardFiles
-dongminyu_segway-ble-manager:mergeReleaseJavaResource
-dongminyu_segway-ble-manager:mergeReleaseJniLibFolders
-dongminyu_segway-ble-manager:mergeReleaseNativeLibs
-dongminyu_segway-ble-manager:mergeReleaseResources
-dongminyu_segway-ble-manager:mergeReleaseShaders
-dongminyu_segway-ble-manager:packageDebugAndroidTest
-dongminyu_segway-ble-manager:packageDebugAssets
-dongminyu_segway-ble-manager:packageDebugRenderscript
-dongminyu_segway-ble-manager:packageDebugResources
-dongminyu_segway-ble-manager:packageReleaseAssets
-dongminyu_segway-ble-manager:packageReleaseRenderscript
-dongminyu_segway-ble-manager:packageReleaseResources
-dongminyu_segway-ble-manager:parseDebugLocalResources
-dongminyu_segway-ble-manager:parseReleaseLocalResources
-dongminyu_segway-ble-manager:preBuild
-dongminyu_segway-ble-manager:preDebugAndroidTestBuild
-dongminyu_segway-ble-manager:preDebugBuild
-dongminyu_segway-ble-manager:preDebugUnitTestBuild
-dongminyu_segway-ble-manager:preReleaseBuild
-dongminyu_segway-ble-manager:preReleaseUnitTestBuild
-dongminyu_segway-ble-manager:prepareDebugAndroidTestArtProfile
-dongminyu_segway-ble-manager:prepareDebugArtProfile
-dongminyu_segway-ble-manager:prepareDebugUnitTestArtProfile
-dongminyu_segway-ble-manager:prepareLintJarForPublish
-dongminyu_segway-ble-manager:prepareReleaseArtProfile
-dongminyu_segway-ble-manager:prepareReleaseUnitTestArtProfile
-dongminyu_segway-ble-manager:processDebugAndroidTestJavaRes
-dongminyu_segway-ble-manager:processDebugAndroidTestManifest
-dongminyu_segway-ble-manager:processDebugAndroidTestResources
-dongminyu_segway-ble-manager:processDebugJavaRes
-dongminyu_segway-ble-manager:processDebugManifest
-dongminyu_segway-ble-manager:processDebugUnitTestJavaRes
-dongminyu_segway-ble-manager:processReleaseJavaRes
-dongminyu_segway-ble-manager:processReleaseManifest
-dongminyu_segway-ble-manager:processReleaseUnitTestJavaRes
-dongminyu_segway-ble-manager:releaseSourcesJar
-dongminyu_segway-ble-manager:resolveConfigAttr
-dongminyu_segway-ble-manager:signingConfigWriterDebugAndroidTest
-dongminyu_segway-ble-manager:stripDebugDebugSymbols
-dongminyu_segway-ble-manager:stripReleaseDebugSymbols
-dongminyu_segway-ble-manager:syncDebugLibJars
-dongminyu_segway-ble-manager:syncReleaseLibJars
-dongminyu_segway-ble-manager:validateSigningDebugAndroidTest
-dongminyu_segway-ble-manager:verifyReleaseResources
-dongminyu_segway-ble-manager:writeDebugAarMetadata
-dongminyu_segway-ble-manager:writeDebugAndroidTestSigningConfigVersions
-dongminyu_segway-ble-manager:writeDebugLintModelMetadata
-dongminyu_segway-ble-manager:writeReleaseAarMetadata
-dongminyu_segway-ble-manager:writeReleaseLintModelMetadata
-prepareKotlinBuildScriptModel
+  dongminyu_segway-ble-manager:compressDebugAndroidTestAssets
+  dongminyu_segway-ble-manager:consumeConfigAttr
+  dongminyu_segway-ble-manager:copyDebugJniLibsProjectAndLocalJars
+  dongminyu_segway-ble-manager:copyDebugJniLibsProjectOnly
+  dongminyu_segway-ble-manager:copyReleaseJniLibsProjectAndLocalJars
+  dongminyu_segway-ble-manager:copyReleaseJniLibsProjectOnly
+  dongminyu_segway-ble-manager:createDebugAndroidTestApkListingFileRedirect
+  dongminyu_segway-ble-manager:createDebugVariantModel
+  dongminyu_segway-ble-manager:createFullJarDebug
+  dongminyu_segway-ble-manager:createFullJarRelease
+  dongminyu_segway-ble-manager:createMockableJar
+  dongminyu_segway-ble-manager:createReleaseVariantModel
+  dongminyu_segway-ble-manager:debugSourcesJar
+  dongminyu_segway-ble-manager:desugarDebugAndroidTestFileDependencies
+  dongminyu_segway-ble-manager:dexBuilderDebugAndroidTest
+  dongminyu_segway-ble-manager:exportDebugConsumerProguardFiles
+  dongminyu_segway-ble-manager:exportReleaseConsumerProguardFiles
+  dongminyu_segway-ble-manager:extractDeepLinksDebug
+  dongminyu_segway-ble-manager:extractDeepLinksForAarDebug
+  dongminyu_segway-ble-manager:extractDeepLinksForAarRelease
+  dongminyu_segway-ble-manager:extractDeepLinksRelease
+  dongminyu_segway-ble-manager:extractProguardFiles
+  dongminyu_segway-ble-manager:generateCodegenArtifactsFromSchema
+  dongminyu_segway-ble-manager:generateCodegenSchemaFromJavaScript
+  dongminyu_segway-ble-manager:generateDebugAndroidTestAssets
+  dongminyu_segway-ble-manager:generateDebugAndroidTestBuildConfig
+  dongminyu_segway-ble-manager:generateDebugAndroidTestResValues
+  dongminyu_segway-ble-manager:generateDebugAndroidTestResources
+  dongminyu_segway-ble-manager:generateDebugAndroidTestSources
+  dongminyu_segway-ble-manager:generateDebugAssets
+  dongminyu_segway-ble-manager:generateDebugBuildConfig
+  dongminyu_segway-ble-manager:generateDebugExternalPublicTxt
+  dongminyu_segway-ble-manager:generateDebugLintModel
+  dongminyu_segway-ble-manager:generateDebugRFile
+  dongminyu_segway-ble-manager:generateDebugResValues
+  dongminyu_segway-ble-manager:generateDebugResources
+  dongminyu_segway-ble-manager:generateDebugSources
+  dongminyu_segway-ble-manager:generateDebugUnitTestAssets
+  dongminyu_segway-ble-manager:generateDebugUnitTestResources
+  dongminyu_segway-ble-manager:generateDebugUnitTestSources
+  dongminyu_segway-ble-manager:generateDebugUnitTestStubRFile
+  dongminyu_segway-ble-manager:generateReleaseAssets
+  dongminyu_segway-ble-manager:generateReleaseBuildConfig
+  dongminyu_segway-ble-manager:generateReleaseExternalPublicTxt
+  dongminyu_segway-ble-manager:generateReleaseLintModel
+  dongminyu_segway-ble-manager:generateReleaseRFile
+  dongminyu_segway-ble-manager:generateReleaseResValues
+  dongminyu_segway-ble-manager:generateReleaseResources
+  dongminyu_segway-ble-manager:generateReleaseSources
+  dongminyu_segway-ble-manager:generateReleaseUnitTestAssets
+  dongminyu_segway-ble-manager:generateReleaseUnitTestResources
+  dongminyu_segway-ble-manager:generateReleaseUnitTestSources
+  dongminyu_segway-ble-manager:generateReleaseUnitTestStubRFile
+  dongminyu_segway-ble-manager:javaPreCompileDebug
+  dongminyu_segway-ble-manager:javaPreCompileDebugAndroidTest
+  dongminyu_segway-ble-manager:javaPreCompileDebugUnitTest
+  dongminyu_segway-ble-manager:javaPreCompileRelease
+  dongminyu_segway-ble-manager:javaPreCompileReleaseUnitTest
+  dongminyu_segway-ble-manager:mapDebugAndroidTestSourceSetPaths
+  dongminyu_segway-ble-manager:mapDebugSourceSetPaths
+  dongminyu_segway-ble-manager:mapReleaseSourceSetPaths
+  dongminyu_segway-ble-manager:mergeDebugAndroidTestAssets
+  dongminyu_segway-ble-manager:mergeDebugAndroidTestGeneratedProguardFiles
+  dongminyu_segway-ble-manager:mergeDebugAndroidTestJavaResource
+  dongminyu_segway-ble-manager:mergeDebugAndroidTestJniLibFolders
+  dongminyu_segway-ble-manager:mergeDebugAndroidTestNativeLibs
+  dongminyu_segway-ble-manager:mergeDebugAndroidTestResources
+  dongminyu_segway-ble-manager:mergeDebugAndroidTestShaders
+  dongminyu_segway-ble-manager:mergeDebugAssets
+  dongminyu_segway-ble-manager:mergeDebugConsumerProguardFiles
+  dongminyu_segway-ble-manager:mergeDebugGeneratedProguardFiles
+  dongminyu_segway-ble-manager:mergeDebugJavaResource
+  dongminyu_segway-ble-manager:mergeDebugJniLibFolders
+  dongminyu_segway-ble-manager:mergeDebugNativeLibs
+  dongminyu_segway-ble-manager:mergeDebugResources
+  dongminyu_segway-ble-manager:mergeDebugShaders
+  dongminyu_segway-ble-manager:mergeExtDexDebugAndroidTest
+  dongminyu_segway-ble-manager:mergeLibDexDebugAndroidTest
+  dongminyu_segway-ble-manager:mergeProjectDexDebugAndroidTest
+  dongminyu_segway-ble-manager:mergeReleaseAssets
+  dongminyu_segway-ble-manager:mergeReleaseConsumerProguardFiles
+  dongminyu_segway-ble-manager:mergeReleaseGeneratedProguardFiles
+  dongminyu_segway-ble-manager:mergeReleaseJavaResource
+  dongminyu_segway-ble-manager:mergeReleaseJniLibFolders
+  dongminyu_segway-ble-manager:mergeReleaseNativeLibs
+  dongminyu_segway-ble-manager:mergeReleaseResources
+  dongminyu_segway-ble-manager:mergeReleaseShaders
+  dongminyu_segway-ble-manager:packageDebugAndroidTest
+  dongminyu_segway-ble-manager:packageDebugAssets
+  dongminyu_segway-ble-manager:packageDebugRenderscript
+  dongminyu_segway-ble-manager:packageDebugResources
+  dongminyu_segway-ble-manager:packageReleaseAssets
+  dongminyu_segway-ble-manager:packageReleaseRenderscript
+  dongminyu_segway-ble-manager:packageReleaseResources
+  dongminyu_segway-ble-manager:parseDebugLocalResources
+  dongminyu_segway-ble-manager:parseReleaseLocalResources
+  dongminyu_segway-ble-manager:preBuild
+  dongminyu_segway-ble-manager:preDebugAndroidTestBuild
+  dongminyu_segway-ble-manager:preDebugBuild
+  dongminyu_segway-ble-manager:preDebugUnitTestBuild
+  dongminyu_segway-ble-manager:preReleaseBuild
+  dongminyu_segway-ble-manager:preReleaseUnitTestBuild
+  dongminyu_segway-ble-manager:prepareDebugAndroidTestArtProfile
+  dongminyu_segway-ble-manager:prepareDebugArtProfile
+  dongminyu_segway-ble-manager:prepareDebugUnitTestArtProfile
+  dongminyu_segway-ble-manager:prepareLintJarForPublish
+  dongminyu_segway-ble-manager:prepareReleaseArtProfile
+  dongminyu_segway-ble-manager:prepareReleaseUnitTestArtProfile
+  dongminyu_segway-ble-manager:processDebugAndroidTestJavaRes
+  dongminyu_segway-ble-manager:processDebugAndroidTestManifest
+  dongminyu_segway-ble-manager:processDebugAndroidTestResources
+  dongminyu_segway-ble-manager:processDebugJavaRes
+  dongminyu_segway-ble-manager:processDebugManifest
+  dongminyu_segway-ble-manager:processDebugUnitTestJavaRes
+  dongminyu_segway-ble-manager:processReleaseJavaRes
+  dongminyu_segway-ble-manager:processReleaseManifest
+  dongminyu_segway-ble-manager:processReleaseUnitTestJavaRes
+  dongminyu_segway-ble-manager:releaseSourcesJar
+  dongminyu_segway-ble-manager:resolveConfigAttr
+  dongminyu_segway-ble-manager:signingConfigWriterDebugAndroidTest
+  dongminyu_segway-ble-manager:stripDebugDebugSymbols
+  dongminyu_segway-ble-manager:stripReleaseDebugSymbols
+  dongminyu_segway-ble-manager:syncDebugLibJars
+  dongminyu_segway-ble-manager:syncReleaseLibJars
+  dongminyu_segway-ble-manager:validateSigningDebugAndroidTest
+  dongminyu_segway-ble-manager:verifyReleaseResources
+  dongminyu_segway-ble-manager:writeDebugAarMetadata
+  dongminyu_segway-ble-manager:writeDebugAndroidTestSigningConfigVersions
+  dongminyu_segway-ble-manager:writeDebugLintModelMetadata
+  dongminyu_segway-ble-manager:writeReleaseAarMetadata
+  dongminyu_segway-ble-manager:writeReleaseLintModelMetadata
+  prepareKotlinBuildScriptModel
