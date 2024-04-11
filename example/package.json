@@ -1,22 +1,13 @@
 {
-  "name": "andrew-segway-ble-manager",
+  "name": "@dongminyu/segway-ble-manager-example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "run-android": "react-native run-android --mode=Debug",
-    "build-android": "react-native build-android --mode=Release",
-    "ios": "react-native run-ios --scheme SegwayBleManagerExample",
-    "run-ios": "yarn ios --mode Debug",
-    "build-ios": "yarn ios --mode Release",
-    "clear": "react-native clean --include android,metro,watchman,yarn",
-    "clear:all": "react-native clean --include android,cocoapods,metro,npm,watchman,yarn",
-    "doctor": "react-native doctor --fix",
-    "gradle": "(cd android && ./gradlew prebuild)",
-    "pods": "(cd ios && pod install --no-repo-update)",
-    "postpods": "node node_modules/react-native/scripts/generate-codegen-artifacts.js -p . -o ios",
-    "postinstall": "react-native setup-ios-permissions",
-    "start": "react-native start --reset-cache",
-    "watch": "tsc --noEmit --watch"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "build:android": "cd android && ./gradlew assembleDebug --no-daemon --console=plain -PreactNativeArchitectures=arm64-v8a",
+    "build:ios": "cd ios && xcodebuild -workspace SegwayBleManagerExample.xcworkspace -scheme SegwayBleManagerExample -configuration Debug -sdk iphonesimulator CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ GCC_OPTIMIZATION_LEVEL=0 GCC_PRECOMPILE_PREFIX_HEADER=YES ASSETCATALOG_COMPILER_OPTIMIZATION=time DEBUG_INFORMATION_FORMAT=dwarf COMPILER_INDEX_STORE_ENABLE=NO",
+    "start": "react-native start --reset-cache"
   },
   "dependencies": {
     "react": "18.2.0",
@@ -28,20 +19,19 @@
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
     "@babel/runtime": "^7.24.4",
-    "@react-native-community/eslint-config": "^3.2.0",
+    "@react-native/babel-preset": "0.75.0-main",
+    "@react-native/eslint-config": "0.75.0-main",
+    "@react-native/metro-config": "0.75.0-main",
+    "@react-native/typescript-config": "0.75.0-main",
     "@rnx-kit/align-deps": "^2.4.2",
-    "@types/escape-string-regexp": "^2.0.1",
-    "@types/metro-config": "^0.76.3",
-    "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.0",
     "eslint": "^9.0.0",
     "jest": "^29.7.0",
     "metro-react-native-babel-preset": "^0.77.0",
     "react-test-renderer": "18.2.0"
   },
-  "types": "./types/env.d.ts",
-  "jest": {
-    "preset": "react-native"
+  "engines": {
+    "node": ">=18"
   },
   "reactNativePermissionsIOS": [
     "BluetoothPeripheral",
