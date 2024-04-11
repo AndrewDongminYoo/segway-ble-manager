@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>BleModule.js - Postman Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/ionicons.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css" />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+    <label for="nav-trigger" class="navicon-button x">
+      <div class="navicon"></div>
+    </label>
+
+    <label for="nav-trigger" class="overlay"></label>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#BLEProvider">BLEProvider</a></li>
+        <li><a href="global.html#EventContext">EventContext</a></li>
+        <li><a href="global.html#SegwayBleManagerModule">SegwayBleManagerModule</a></li>
+        <li><a href="global.html#Spec">Spec</a></li>
+        <li><a href="global.html#eventReceiver">eventReceiver</a></li>
+        <li><a href="global.html#initialize">initialize</a></li>
+        <li><a href="global.html#ioTConnect">ioTConnect</a></li>
+        <li><a href="global.html#ioTDisconnect">ioTDisconnect</a></li>
+        <li><a href="global.html#lockScooter">lockScooter</a></li>
+        <li><a href="global.html#logger">logger</a></li>
+        <li><a href="global.html#openBatteryCover">openBatteryCover</a></li>
+        <li><a href="global.html#openSaddle">openSaddle</a></li>
+        <li><a href="global.html#openTailBox">openTailBox</a></li>
+        <li><a href="global.html#queryIoTInfo">queryIoTInfo</a></li>
+        <li><a href="global.html#queryVehicleInfo">queryVehicleInfo</a></li>
+        <li><a href="global.html#registerListener">registerListener</a></li>
+        <li><a href="global.html#unLockScooter">unLockScooter</a></li>
+        <li><a href="global.html#validateKeyCode">validateKeyCode</a></li>
+        <li><a href="global.html#validateRegex">validateRegex</a></li>
+        <li><a href="global.html#validateScooter">validateScooter</a></li>
+      </ul>
+    </nav>
+
+    <div id="main">
+      <h1 class="page-title">BleModule.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import { NativeEventEmitter, NativeModules } from 'react-native';
+import TurboBleManager from './NativeSegwayBleManager';
+import { EventType } from './BleResType';
+import LINKING_ERROR from './LinkingError';
+// @ts-expect-error
+export const isTurboModuleEnabled = global.__turboModuleProxy != null;
+/**
+ * This is very important part.
+ * If new architecture is enabled, we should use the turbo module.
+ * Otherwise, we should get the module from NativeModules.
+ *
+ * @see [NativeModule](../example/node_modules/react-native/Libraries/EventEmitter/NativeEventEmitter.d.ts)
+ */
+export const SegwayBleManagerModule = isTurboModuleEnabled
+    ? require('./NativeSegwayBleManager').default
+    : NativeModules.SegwayBleManager;
+/**
+ * @description This is a proxy that throws an error when SegwayBleManagerModule is accessed.
+ * This is used to prevent SegwayBleManagerModule from being accessed in a
+ * context where it is not defined, such as during static analysis.
+ * @throws Linking Error when accessed without import module.
+ */
+export const Spec = (SegwayBleManagerModule
+    ? SegwayBleManagerModule
+    : new Proxy({}, {
+        get() {
+            throw new Error(LINKING_ERROR);
+        },
+    }));
+/**
+ * @description The event emitter of the module.
+ */
+export const eventReceiver = new NativeEventEmitter(Spec);
+/**
+ * @description The enumeration values of supported event names.
+ * @typedef {EventType[]} SupportedEvents
+ */
+export const SubEventList = Object.values(EventType);
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <br class="clear" />
+
+    <footer>Documentation generated at Thu Apr 11 2024 14:31:26 GMT+0900 (Korean Standard Time)</footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

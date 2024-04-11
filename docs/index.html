@@ -53,6 +53,14 @@
         <article>
           <h1>@dongminyu/segway-ble-manager</h1>
           <p>
+            <a
+              href="https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager?ref=badge_shield"
+              ><img
+                src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager.svg?type=shield"
+                alt="FOSSA Status"
+            /></a>
+          </p>
+          <p>
             <code>react-native-segway-ble-manager</code> is a React Native library for managing Bluetooth Low Energy
             (BLE) connections with Segway devices. <code>react-native-segway-ble-manager</code> provides an easy-to-use
             API for connecting to and communicating with Segway devices over BLE. The library supports both Android and
@@ -134,25 +142,36 @@ const BLE_INIT_OPERATION_CODE = 'MY_OPERATOR_CODE';
 const deviceMac = 'DEVICE_MAC_ADDRESS';
 const deviceKey = 'DEVICE_KEY';
 const iotImei = 'IOT_IMEI';
-
 React.useEffect(() => {
-  init(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
+  initialize(BLE_INIT_SECRET_KEY, BLE_INIT_OPERATION_CODE, true);
   // get required permissions
   getRequiredPermissions();
 }, []);
 
-React.useEffect(() => {
-  let intervalId: number;
-  if (timer > 0) {
-    intervalId = setInterval(() => {
-      setTimer(timer - 1);
-    }, 1000);
+function connectWithDevice() {
+  if (timer > 0 || loading) {
+    return;
+  } else {
+    setTimer(60);
+    setLoading(true);
+    const { deviceKey, deviceMac, iotImei } = scooter;
+    ioTConnect(deviceMac, deviceKey, iotImei);
   }
-  return () => {
-    setLoading(false);
-    return clearInterval(intervalId);
-  };
-}, [timer]);
+}
+
+function getVehicleInformation() {
+  queryVehicleInfo((info) => {
+    setVehicleInfo(info);
+    console.log(JSON.stringify(info));
+  });
+}
+
+function getIoTInformation() {
+  queryIoTInfo((info) => {
+    setIoTInformation(info);
+    console.log(JSON.stringify(info));
+  });
+}
 </code></pre>
           <p>
             In this example, we first import the necessary modules, including the <code>Spec</code> interface from the
@@ -397,13 +416,21 @@ const SegwayBleManagerModule = isTurboModuleEnabled
           <p>
             Made with <a href="https://github.com/callstack/react-native-builder-bob">create-react-native-library</a>
           </p>
+          <p>
+            <a
+              href="https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager?ref=badge_large"
+              ><img
+                src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewDongminYoo%2Fsegway-ble-manager.svg?type=large"
+                alt="FOSSA Status"
+            /></a>
+          </p>
         </article>
       </section>
     </div>
 
     <br class="clear" />
 
-    <footer>Documentation generated at Wed Apr 12 2023 15:56:58 GMT+0900 (Korean Standard Time)</footer>
+    <footer>Documentation generated at Thu Apr 11 2024 14:31:26 GMT+0900 (Korean Standard Time)</footer>
 
     <script>
       prettyPrint();

@@ -1,0 +1,1312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Global - Postman Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/ionicons.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css" />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+    <label for="nav-trigger" class="navicon-button x">
+      <div class="navicon"></div>
+    </label>
+
+    <label for="nav-trigger" class="overlay"></label>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#BLEProvider">BLEProvider</a></li>
+        <li><a href="global.html#EventContext">EventContext</a></li>
+        <li><a href="global.html#SegwayBleManagerModule">SegwayBleManagerModule</a></li>
+        <li><a href="global.html#Spec">Spec</a></li>
+        <li><a href="global.html#eventReceiver">eventReceiver</a></li>
+        <li><a href="global.html#initialize">initialize</a></li>
+        <li><a href="global.html#ioTConnect">ioTConnect</a></li>
+        <li><a href="global.html#ioTDisconnect">ioTDisconnect</a></li>
+        <li><a href="global.html#lockScooter">lockScooter</a></li>
+        <li><a href="global.html#logger">logger</a></li>
+        <li><a href="global.html#openBatteryCover">openBatteryCover</a></li>
+        <li><a href="global.html#openSaddle">openSaddle</a></li>
+        <li><a href="global.html#openTailBox">openTailBox</a></li>
+        <li><a href="global.html#queryIoTInfo">queryIoTInfo</a></li>
+        <li><a href="global.html#queryVehicleInfo">queryVehicleInfo</a></li>
+        <li><a href="global.html#registerListener">registerListener</a></li>
+        <li><a href="global.html#unLockScooter">unLockScooter</a></li>
+        <li><a href="global.html#validateKeyCode">validateKeyCode</a></li>
+        <li><a href="global.html#validateRegex">validateRegex</a></li>
+        <li><a href="global.html#validateScooter">validateScooter</a></li>
+      </ul>
+    </nav>
+
+    <div id="main">
+      <h1 class="page-title">Global</h1>
+
+      <section>
+        <header>
+          <h2></h2>
+        </header>
+
+        <article>
+          <div class="container-overview">
+            <dl class="details"></dl>
+          </div>
+
+          <h3 class="subsection-title">Members</h3>
+
+          <h4 class="name" id="EventContext">
+            <span class="type-signature">(constant) </span>EventContext<span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              The <code>React Context</code> that is used to pass data from the App component to the children
+              components. The <code>EventContext</code> is used to provide the <code>Scooter</code>,
+              <code>IoTInformation</code>, and <code>VehicleInfo</code> objects to the event component. The event
+              component uses these objects to display the current status of the scooter.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="BleContext.js.html">BleContext.js</a>, <a href="BleContext.js.html#line24">line 24</a></li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>import React, { useContext } from 'react';
+import { View, Text } from 'react-native';
+import { EventContext } from './ContextProvider';
+
+function ScooterInfo() {
+  const { scooter, ioTInformation, vehicleInformation } = useContext(EventContext);
+  return (
+    &lt;View>
+      &lt;Text>Scooter Info&lt;/Text>
+      &lt;Text>ScooterNumber {scooter.number}&lt;/Text>
+      &lt;Text>IoT Device is Locked {ioTInformation.isLocked}&lt;/Text>
+      &lt;Text>Vehicle Battery Level {vehicleInformation.powerPercent}&lt;/Text>
+    &lt;/View>
+  );
+}</code></pre>
+
+          <h4 class="name" id="SegwayBleManagerModule">
+            <span class="type-signature">(constant) </span>SegwayBleManagerModule<span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              This is very important part. If new architecture is enabled, we should use the turbo module. Otherwise, we
+              should get the module from NativeModules.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="BleModule.js.html">BleModule.js</a>, <a href="BleModule.js.html#line14">line 14</a></li>
+              </ul>
+            </dd>
+
+            <dt class="tag-see">See:</dt>
+            <dd class="tag-see">
+              <ul>
+                <li>
+                  <p>
+                    <a href="../example/node_modules/react-native/Libraries/EventEmitter/NativeEventEmitter.d.ts"
+                      >NativeModule</a
+                    >
+                  </p>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h4 class="name" id="Spec">
+            <span class="type-signature">(constant) </span>Spec<span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              This is a proxy that throws an error when SegwayBleManagerModule is accessed. This is used to prevent
+              SegwayBleManagerModule from being accessed in a context where it is not defined, such as during static
+              analysis.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="BleModule.js.html">BleModule.js</a>, <a href="BleModule.js.html#line23">line 23</a></li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h4 class="name" id="eventReceiver">
+            <span class="type-signature">(constant) </span>eventReceiver<span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>The event emitter of the module.</p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="BleModule.js.html">BleModule.js</a>, <a href="BleModule.js.html#line33">line 33</a></li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h4 class="name" id="logger">
+            <span class="type-signature">(constant) </span>logger<span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              React native applications do not support secondary logging such as assert, timestamp, and so on, rather
+              than just logging levels such as error, warn, info, etc. On the console. So I've only implemented some
+              extensions for easy debugging.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="utils.js.html">utils.js</a>, <a href="utils.js.html#line17">line 17</a></li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h3 class="subsection-title">Methods</h3>
+
+          <h4 class="name" id="BLEProvider">
+            <span class="type-signature"></span>BLEProvider<span class="signature">(props)</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that connects to a scooter and stores the connection information in the scooter state. This
+              returns a provider that will be contains context when the connection is established It also listens for
+              specific events and updates the context when those events are triggered.
+            </p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>props</code></td>
+
+                <td class="type">
+                  <span class="param-type">ProviderExoticComponent.&lt;ProviderProps.&lt;T>></span>
+                </td>
+
+                <td class="description last">
+                  <p>The props are used to pass the children to the provider.</p>
+                  <h6>Properties</h6>
+
+                  <table class="params">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+
+                        <th>Type</th>
+
+                        <th class="last">Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td class="name"><code>children</code></td>
+
+                        <td class="type">
+                          <span class="param-type">ReactElement</span>
+                        </td>
+
+                        <td class="description last">
+                          <p>
+                            The children are the components that will be rendered when the connection is established.
+                          </p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h5 class="subsection-title">Properties:</h5>
+
+          <table class="props">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>emitter</code></td>
+
+                <td class="type"></td>
+
+                <td class="description last"><p>The event emitter is used to communicate with the native code.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>mEvents</code></td>
+
+                <td class="type"></td>
+
+                <td class="description last">
+                  <p>The list of events is used to update the context when those events are triggered.</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>BLEContext</code></td>
+
+                <td class="type"></td>
+
+                <td class="description last">
+                  <p>The context is used to store information that is shared between components.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="BleProvider.js.html">BleProvider.js</a>, <a href="BleProvider.js.html#line32">line 32</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>import React from 'react';
+import { View, Text } from 'react-native';
+import { BLEProvider } from './ContextProvider';
+
+export default function App() {
+  return (
+    &lt;BLEProvider>
+      &lt;View>
+        &lt;Text>Hello, world!&lt;/Text>
+        &lt;ScooterInfo />
+      &lt;/View>
+    &lt;/BLEProvider>
+  );
+}</code></pre>
+
+          <h4 class="name" id="initialize">
+            <span class="type-signature"></span>initialize<span class="signature"
+              >(secretKey, operatorCode, isDebug)</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the initializing method named <code>SegwayBleManagerModule.init</code> and then calls
+              the <code>registerListener</code> function with the <code>EventType.INITIALIZE</code> parameter.
+            </p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>secretKey</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The secret key you received from the Spec.ai team.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>operatorCode</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The operator code you received from the Spec team.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>isDebug</code></td>
+
+                <td class="type">
+                  <span class="param-type">boolean</span>
+                </td>
+
+                <td class="description last"><p>If true, the SDK will log all the events to the console.</p></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line35">line 35</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>init(e0382c1944874be7a1ed7f4546e0f412, B40006, true);</code></pre>
+
+          <h4 class="name" id="ioTConnect">
+            <span class="type-signature"></span>ioTConnect<span class="signature">(deviceMac, deviceKey, iotImei)</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.connect</code> function and then calls the
+              <code>registerListener</code> function with the <code>EventType.CONNECT</code> parameter.
+            </p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>deviceMac</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The MAC address of the scooter.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>deviceKey</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last">
+                  <p>The device key is a unique identifier for the scooter. It is a 16-character string.</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>iotImei</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The IMEI number of the scooter.</p></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line52">line 52</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h4 class="name" id="ioTDisconnect">
+            <span class="type-signature"></span>ioTDisconnect<span class="signature">()</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.disconnect</code> function and then calls the
+              <code>registerListener</code> function with the <code>EventType.DISCONNECT</code> parameter.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line67">line 67</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>registerListener();</code></pre>
+
+          <h4 class="name" id="lockScooter">
+            <span class="type-signature"></span>lockScooter<span class="signature">()</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.lock</code> function and then calls the
+              <code>registerListener</code> function with the <code>EventType.LOCK</code> parameter.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line95">line 95</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>lockScooter();</code></pre>
+
+          <h4 class="name" id="openBatteryCover">
+            <span class="type-signature"></span>openBatteryCover<span class="signature">()</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.openBatteryCover</code> function and then calls the
+              <code>registerListener</code> function with the <code>EventType.OPEN_COVER</code> parameter.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line109">line 109</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>onBatteryCover();</code></pre>
+
+          <h4 class="name" id="openSaddle">
+            <span class="type-signature"></span>openSaddle<span class="signature">()</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.openSaddle</code> function and then calls the
+              <code>registerListener</code> function with the <code>EventType.OPEN_SADDLE</code> parameter.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line123">line 123</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>openSaddle();</code></pre>
+
+          <h4 class="name" id="openTailBox">
+            <span class="type-signature"></span>openTailBox<span class="signature">()</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.openTailBox</code> function and then calls the
+              <code>registerListener</code> function with the <code>EventType.OPEN_TAIL_BOX</code> parameter.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line137">line 137</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>openTailBox();</code></pre>
+
+          <h4 class="name" id="queryIoTInfo">
+            <span class="type-signature"></span>queryIoTInfo<span class="signature">(listener)</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.queryIoTInformation</code> function and then calls
+              the <code>registerListener</code> function with the <code>EventType.IOT_INFO</code> parameter.
+            </p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>listener</code></td>
+
+                <td class="type">
+                  <span class="param-type">EventListener.&lt;EventType.IOT_INFO></span>
+                </td>
+
+                <td class="description last"><p>The function to be called when the event is emitted.</p></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line164">line 164</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>queryIoTInfo((data) => console.debug(data));</code></pre>
+
+          <h4 class="name" id="queryVehicleInfo">
+            <span class="type-signature"></span>queryVehicleInfo<span class="signature">(listener)</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.queryVehicleInformation</code> function and then
+              calls the <code>registerListener</code> function with the <code>EventType.VEHICLE_INFO</code> parameter.
+            </p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>listener</code></td>
+
+                <td class="type">
+                  <span class="param-type">EventListener.&lt;EventType.VEHICLE_INFO></span>
+                </td>
+
+                <td class="description last"><p>The function to be called when the event is emitted.</p></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line152">line 152</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>queryVehicleInfo((data) => console.debug(data));</code></pre>
+
+          <h4 class="name" id="registerListener">
+            <span class="type-signature"></span>registerListener<span class="signature">(eventType, listener)</span
+            ><span class="type-signature"> &rarr; {EmitterSubscription}</span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that takes an event type and a listener, check the listener count to have only single
+              subscription, and returns a event emitter subscription.
+            </p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>eventType</code></td>
+
+                <td class="type">
+                  <span class="param-type"><a href="global.html#EventType">EventType</a></span>
+                </td>
+
+                <td class="description last"><p>The event type to listen for.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>listener</code></td>
+
+                <td class="type">
+                  <span class="param-type">EventListener.&lt;<a href="global.html#EventType">EventType</a>></span>
+                </td>
+
+                <td class="description last"><p>The function to be called when the event is emitted.</p></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line19">line 19</a>
+                </li>
+              </ul>
+            </dd>
+
+            <dt class="tag-see">See:</dt>
+            <dd class="tag-see">
+              <ul>
+                <li>
+                  EmitterSubscription
+                  <a href="https://reactnative.dev/docs/emittersubscription"
+                    >https://reactnative.dev/docs/emittersubscription</a
+                  >
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Returns:</h5>
+
+          <div class="param-desc">
+            <p>A function that takes a single argument of type T and returns void.</p>
+          </div>
+
+          <dl class="param-type">
+            <dt>Type</dt>
+            <dd>
+              <span class="param-type">EmitterSubscription</span>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>registerListener(EventType.INITIALIZE, (data) => {
+       console.debug(data)
+    })</code></pre>
+
+          <h4 class="name" id="unLockScooter">
+            <span class="type-signature"></span>unLockScooter<span class="signature">()</span
+            ><span class="type-signature"></span>
+          </h4>
+
+          <div class="description">
+            <p>
+              Function that calls the <code>SegwayBleManagerModule.unLock</code> function and then calls the
+              <code>registerListener</code> function with the <code>EventType.UNLOCK</code> parameter.
+            </p>
+          </div>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li>
+                  <a href="MethodChannel.js.html">MethodChannel.js</a>,
+                  <a href="MethodChannel.js.html#line81">line 81</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>registerListener();</code></pre>
+
+          <h4 class="name" id="validateKeyCode">
+            <span class="type-signature"></span>validateKeyCode<span class="signature"
+              >(operatorCode, secretKey, isDebug)</span
+            ><span class="type-signature"> &rarr; {boolean}</span>
+          </h4>
+
+          <div class="description">
+            <p>Validate operator code and secret key.</p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>operatorCode</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>Operator Code.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>secretKey</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>Secret Key.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>isDebug</code></td>
+
+                <td class="type">
+                  <span class="param-type">boolean</span>
+                </td>
+
+                <td class="description last"><p>Debug mode.</p></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="utils.js.html">utils.js</a>, <a href="utils.js.html#line95">line 95</a></li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Returns:</h5>
+
+          <div class="param-desc">
+            <ul>
+              <li>True if all strings are valid, otherwise false.</li>
+            </ul>
+          </div>
+
+          <dl class="param-type">
+            <dt>Type</dt>
+            <dd>
+              <span class="param-type">boolean</span>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>const operatorCode = '830201';
+const secretKey = 'f5e5c6cf34214936b2b309c4077a949d'; // trunk-ignore(gitleaks/generic-api-key)
+const isDebug = true;
+validateKeyCode(operatorCode, secretKey, isDebug); // will return true;</code></pre>
+
+          <h4 class="name" id="validateRegex">
+            <span class="type-signature"></span>validateRegex<span class="signature">(target, type)</span
+            ><span class="type-signature"> &rarr; {boolean}</span>
+          </h4>
+
+          <div class="description">
+            <p>Validate a string with a regex.</p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>target</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>String to validate.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>type</code></td>
+
+                <td class="type">
+                  <span class="param-type">ValidationType</span>
+                </td>
+
+                <td class="description last"><p>Type of validation.</p></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="utils.js.html">utils.js</a>, <a href="utils.js.html#line55">line 55</a></li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Returns:</h5>
+
+          <div class="param-desc">
+            <ul>
+              <li>True if string is valid, otherwise false.</li>
+            </ul>
+          </div>
+
+          <dl class="param-type">
+            <dt>Type</dt>
+            <dd>
+              <span class="param-type">boolean</span>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>validateRegex('00:11:22:33:44:55', 'mac-address');</code></pre>
+
+          <h4 class="name" id="validateScooter">
+            <span class="type-signature"></span>validateScooter<span class="signature"
+              >(MAC_ADDRESS, DEV_BLE_KEY, IOT_IMEI)</span
+            ><span class="type-signature"> &rarr; {boolean}</span>
+          </h4>
+
+          <div class="description">
+            <p>Validate scooter's mac address, device ble key and IoT's IMEI code.</p>
+          </div>
+
+          <h5>Parameters:</h5>
+
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>MAC_ADDRESS</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>Mac address of scooter.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>DEV_BLE_KEY</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>Device's BLE Key.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>IOT_IMEI</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>IoT's IMEI Code.</p></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="utils.js.html">utils.js</a>, <a href="utils.js.html#line73">line 73</a></li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h5>Returns:</h5>
+
+          <div class="param-desc">
+            <ul>
+              <li>True if all strings are valid, otherwise false.</li>
+            </ul>
+          </div>
+
+          <dl class="param-type">
+            <dt>Type</dt>
+            <dd>
+              <span class="param-type">boolean</span>
+            </dd>
+          </dl>
+
+          <h5>Example</h5>
+
+          <pre class="prettyprint"><code>const MAC_ADDRESS = '00:00:00:00:00:00';
+const DEV_BLE_KEY = '00000000000000000000000000000000';
+const IOT_IMEI = '000000000000000';
+validateScooter(MAC_ADDRESS, DEV_BLE_KEY, IOT_IMEI); // will return true.</code></pre>
+
+          <h3 class="subsection-title">Type Definitions</h3>
+
+          <h4 class="name" id="EventType">EventType</h4>
+
+          <div class="description">
+            <p>
+              The enumeration values of supported event names. NOTE: It has to be same with native module's event names.
+            </p>
+          </div>
+
+          <h5>Type:</h5>
+          <ul>
+            <li>
+              <span class="param-type">Record.&lt;string, string></span>
+            </li>
+          </ul>
+
+          <h5 class="subsection-title">Properties:</h5>
+
+          <table class="props">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Type</th>
+
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="name"><code>name</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>CONNECT</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The event that returns whether the scooter is connected.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>DISCONNECT</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The event that returns whether the scooter is disconnected.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>INITIALIZE</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The event that returns whether the scooter is initialized.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>IOT_INFO</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last">
+                  <p>The event that contains condition about the scooter's IoT information.</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>VEHICLE_INFO</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last">
+                  <p>The event that contains condition about the scooter's vehicle information.</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>LOCK</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The event that returns whether the scooter is locked.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>UNLOCK</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The event that returns whether the scooter is unlocked.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>OPEN_COVER</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The event that returns whether the scooter's cover is opened.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>OPEN_SADDLE</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last"><p>The event that returns whether the scooter's saddle is opened.</p></td>
+              </tr>
+
+              <tr>
+                <td class="name"><code>OPEN_TAIL_BOX</code></td>
+
+                <td class="type">
+                  <span class="param-type">string</span>
+                </td>
+
+                <td class="description last">
+                  <p>The event that returns whether the scooter's tail box is opened.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="BleResType.js.html">BleResType.js</a>, <a href="BleResType.js.html#line1">line 1</a></li>
+              </ul>
+            </dd>
+
+            <dt class="tag-see">See:</dt>
+            <dd class="tag-see">
+              <ul>
+                <li>
+                  <p><a href="https://reactnative.dev/docs/native-modules-ios#exporting-constants">getConstants</a></p>
+                </li>
+
+                <li>
+                  <p>
+                    <a href="https://reactnative.dev/docs/native-modules-ios#sending-events-to-javascript"
+                      >Sending Events to JavaScript</a
+                    >
+                  </p>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+
+          <h4 class="name" id="SupportedEvents">SupportedEvents</h4>
+
+          <div class="description">
+            <p>The enumeration values of supported event names.</p>
+          </div>
+
+          <h5>Type:</h5>
+          <ul>
+            <li>
+              <span class="param-type">Array.&lt;<a href="global.html#EventType">EventType</a>></span>
+            </li>
+          </ul>
+
+          <dl class="details">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+              <ul class="dummy">
+                <li><a href="BleModule.js.html">BleModule.js</a>, <a href="BleModule.js.html#line34">line 34</a></li>
+              </ul>
+            </dd>
+          </dl>
+        </article>
+      </section>
+    </div>
+
+    <br class="clear" />
+
+    <footer>Documentation generated at Thu Apr 11 2024 14:31:26 GMT+0900 (Korean Standard Time)</footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>
