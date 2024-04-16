@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>module/BleContext.js - Postman Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/ionicons.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css" />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+    <label for="nav-trigger" class="navicon-button x">
+      <div class="navicon"></div>
+    </label>
+
+    <label for="nav-trigger" class="overlay"></label>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#BLEProvider">BLEProvider</a></li>
+        <li><a href="global.html#EventContext">EventContext</a></li>
+        <li><a href="global.html#SegwayBleManagerModule">SegwayBleManagerModule</a></li>
+        <li><a href="global.html#Spec">Spec</a></li>
+        <li><a href="global.html#eventReceiver">eventReceiver</a></li>
+        <li><a href="global.html#initialize">initialize</a></li>
+        <li><a href="global.html#ioTConnect">ioTConnect</a></li>
+        <li><a href="global.html#ioTDisconnect">ioTDisconnect</a></li>
+        <li><a href="global.html#lockScooter">lockScooter</a></li>
+        <li><a href="global.html#logger">logger</a></li>
+        <li><a href="global.html#openBatteryCover">openBatteryCover</a></li>
+        <li><a href="global.html#openSaddle">openSaddle</a></li>
+        <li><a href="global.html#openTailBox">openTailBox</a></li>
+        <li><a href="global.html#queryIoTInfo">queryIoTInfo</a></li>
+        <li><a href="global.html#queryVehicleInfo">queryVehicleInfo</a></li>
+        <li><a href="global.html#registerListener">registerListener</a></li>
+        <li><a href="global.html#unLockScooter">unLockScooter</a></li>
+        <li><a href="global.html#validateKeyCode">validateKeyCode</a></li>
+        <li><a href="global.html#validateRegex">validateRegex</a></li>
+        <li><a href="global.html#validateScooter">validateScooter</a></li>
+      </ul>
+    </nav>
+
+    <div id="main">
+      <h1 class="page-title">module/BleContext.js</h1>
+
+      <section>
+        <article>
+          <pre class="prettyprint source linenums"><code>import { createContext } from 'react';
+/**
+ * @description The `React Context` that is used to pass data from the App component
+ * to the children components. The `EventContext` is used to provide the `Scooter`,
+ * `IoTInformation`, and `VehicleInfo` objects to the event component. The event component
+ * uses these objects to display the current status of the scooter.
+ * @example
+ * import React, { useContext } from 'react';
+ * import { View, Text } from 'react-native';
+ * import { EventContext } from './ContextProvider';
+ *
+ * function ScooterInfo() {
+ *   const { scooter, ioTInformation, vehicleInformation } = useContext(EventContext);
+ *   return (
+ *     &lt;View>
+ *       &lt;Text>Scooter Info&lt;/Text>
+ *       &lt;Text>ScooterNumber {scooter.number}&lt;/Text>
+ *       &lt;Text>IoT Device is Locked {ioTInformation.isLocked}&lt;/Text>
+ *       &lt;Text>Vehicle Battery Level {vehicleInformation.powerPercent}&lt;/Text>
+ *     &lt;/View>
+ *   );
+ * }
+ */
+export const EventContext = /*#__PURE__*/createContext({
+  scooter: {},
+  ioTInformation: {},
+  vehicleInformation: {}
+});
+//# sourceMappingURL=BleContext.js.map</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <br class="clear" />
+
+    <footer>Documentation generated at Wed Apr 12 2023 15:56:58 GMT+0900 (Korean Standard Time)</footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>
